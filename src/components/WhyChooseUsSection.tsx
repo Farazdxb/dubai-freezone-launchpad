@@ -1,5 +1,10 @@
 import { Shield, Clock, DollarSign, Users, Building2, Globe } from "lucide-react";
 import { motion } from "framer-motion";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 
 const testimonials = [
   {
@@ -105,8 +110,8 @@ export function WhyChooseUsSection() {
           </div>
         </motion.div>
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6">
+        {/* Features Grid - Desktop */}
+        <div className="hidden md:grid md:grid-cols-3 gap-4 lg:gap-6">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
@@ -127,6 +132,44 @@ export function WhyChooseUsSection() {
               </p>
             </motion.div>
           ))}
+        </div>
+
+        {/* Features Carousel - Mobile */}
+        <div className="md:hidden">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-2">
+              {features.map((feature, index) => (
+                <CarouselItem key={feature.title} className="pl-2 basis-[80%]">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.05 }}
+                    className={`bg-gradient-to-br ${feature.gradient} rounded-xl p-5 shadow-lg`}
+                  >
+                    <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center mb-3">
+                      <feature.icon className="w-5 h-5 text-white" />
+                    </div>
+                    <h4 className="font-semibold text-white text-sm mb-1">
+                      {feature.title}
+                    </h4>
+                    <p className="text-white/80 text-xs leading-relaxed">
+                      {feature.description}
+                    </p>
+                  </motion.div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+          <p className="text-center text-xs text-muted-foreground mt-3">
+            Swipe to see more →
+          </p>
         </div>
       </div>
     </section>
