@@ -21,31 +21,37 @@ const features = [
     icon: DollarSign,
     title: "Zero Consultancy Fee",
     description: "No agent commissions. Pay only the actual Freezone charges — nothing more.",
+    gradient: "from-primary via-primary/80 to-primary/60",
   },
   {
     icon: Clock,
     title: "Fast Processing",
     description: "Get your UAE business license in 3-7 working days with our streamlined process.",
+    gradient: "from-[hsl(200,80%,50%)] via-[hsl(210,70%,55%)] to-primary",
   },
   {
     icon: Shield,
     title: "100% Transparent",
     description: "See complete pricing breakdown before you pay. No hidden fees or surprises.",
+    gradient: "from-[hsl(180,60%,45%)] via-[hsl(190,65%,50%)] to-[hsl(200,70%,55%)]",
   },
   {
     icon: Users,
     title: "Self-Service Portal",
     description: "Track your application, upload documents, and chat with support — all online.",
+    gradient: "from-[hsl(220,70%,55%)] via-primary to-[hsl(200,65%,50%)]",
   },
   {
     icon: Building2,
     title: "15+ Freezones",
     description: "Compare IFZA, RAKEZ, DMCC, Meydan, SHAMS and more in one place.",
+    gradient: "from-primary/90 via-[hsl(210,75%,50%)] to-[hsl(220,70%,55%)]",
   },
   {
     icon: Globe,
     title: "100% Foreign Ownership",
     description: "Full ownership with no local sponsor required in any UAE Freezone.",
+    gradient: "from-[hsl(195,75%,48%)] via-primary to-primary/70",
   },
 ];
 
@@ -108,15 +114,15 @@ export function WhyChooseUsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
-              className="bg-card border border-border rounded-xl p-5 hover:border-primary/20 hover:shadow-md transition-all duration-300"
+              className={`bg-gradient-to-br ${feature.gradient} rounded-xl p-5 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300`}
             >
-              <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
-                <feature.icon className="w-5 h-5 text-primary" />
+              <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center mb-3">
+                <feature.icon className="w-5 h-5 text-white" />
               </div>
-              <h4 className="font-semibold text-foreground text-sm mb-1">
+              <h4 className="font-semibold text-white text-sm mb-1">
                 {feature.title}
               </h4>
-              <p className="text-muted-foreground text-xs leading-relaxed">
+              <p className="text-white/80 text-xs leading-relaxed">
                 {feature.description}
               </p>
             </motion.div>
