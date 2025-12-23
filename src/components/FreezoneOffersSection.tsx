@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 const freezonePackages = [{
-  name: "Free",
+  name: "Ecommerce License",
   freezone: "SHAMS",
   price: "AED 5,750",
   period: "/ year",
