@@ -1,56 +1,61 @@
-import { ArrowRight, Star, Zap } from "lucide-react";
+import { ArrowRight, Check, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const freezonePackages = [
   {
-    name: "IFZA",
-    location: "Dubai",
-    startingPrice: "AED 11,900",
-    features: ["1 Visa Included", "Flexi-Desk", "1 Activity"],
+    name: "Free",
+    freezone: "SHAMS",
+    price: "AED 5,750",
+    period: "/ year",
+    description: "Perfect for solo entrepreneurs starting small",
+    features: [
+      "Virtual office included",
+      "1 business activity",
+      "No visa allocation",
+      "Basic support",
+    ],
+    popular: false,
+    buttonText: "Choose This Plan",
+    buttonVariant: "outline" as const,
+  },
+  {
+    name: "Premium",
+    freezone: "IFZA",
+    price: "AED 11,900",
+    period: "/ year",
+    description: "Most popular choice for growing businesses",
+    features: [
+      "Flexi-desk included",
+      "Multiple activities",
+      "1 visa allocation",
+      "Priority support",
+      "Bank account assistance",
+      "Free consultation",
+    ],
     popular: true,
-    tag: "Most Popular",
+    tag: "Billed annually",
+    buttonText: "Choose This Plan",
+    buttonVariant: "default" as const,
   },
   {
-    name: "RAKEZ",
-    location: "Ras Al Khaimah",
-    startingPrice: "AED 7,500",
-    features: ["0 Visa Included", "Virtual Office", "3 Activities"],
+    name: "Enterprise",
+    freezone: "DMCC",
+    price: "AED 18,000",
+    period: "/ year",
+    description: "For established businesses needing premium setup",
+    features: [
+      "Physical office options",
+      "Unlimited activities",
+      "Multiple visa allocations",
+      "Dedicated account manager",
+      "Premium banking support",
+      "Legal consultation",
+    ],
     popular: false,
-    tag: "Best Value",
-  },
-  {
-    name: "Meydan",
-    location: "Dubai",
-    startingPrice: "AED 14,500",
-    features: ["2 Visas Included", "Flexi-Desk", "5 Activities"],
-    popular: false,
-    tag: null,
-  },
-  {
-    name: "DMCC",
-    location: "Dubai",
-    startingPrice: "AED 18,000",
-    features: ["1 Visa Included", "Flexi-Desk", "1 Activity"],
-    popular: false,
-    tag: "Premium",
-  },
-  {
-    name: "SHAMS",
-    location: "Sharjah",
-    startingPrice: "AED 5,750",
-    features: ["0 Visa Included", "Virtual Office", "1 Activity"],
-    popular: false,
-    tag: "Budget Friendly",
-  },
-  {
-    name: "AJMAN",
-    location: "Ajman",
-    startingPrice: "AED 8,200",
-    features: ["1 Visa Included", "Flexi-Desk", "3 Activities"],
-    popular: false,
-    tag: null,
+    buttonText: "Choose This Plan",
+    buttonVariant: "outline" as const,
   },
 ];
 
@@ -64,22 +69,21 @@ export function FreezoneOffersSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="text-center mb-4"
         >
-          <span className="inline-block px-4 py-1.5 bg-accent text-accent-foreground text-sm font-medium rounded-full mb-4">
-            <Zap className="inline w-4 h-4 mr-1" />
-            Latest Offers
+          <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full mb-4">
+            PRICING
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-foreground mb-4">
-            Freezone Packages
+            Start free. Upgrade<br />when you're ready.
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Compare packages from top UAE Freezones. All prices are transparent with no hidden fees.
+          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+            No pressure, no lock-in—just tools that grow with your biz
           </p>
         </motion.div>
 
         {/* Packages Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto mt-12">
           {freezonePackages.map((pkg, index) => (
             <motion.div
               key={pkg.name}
@@ -87,89 +91,77 @@ export function FreezoneOffersSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`card-elevated p-6 relative ${
-                pkg.popular ? "ring-2 ring-primary" : ""
-              }`}
+              className={`relative bg-card rounded-2xl border ${
+                pkg.popular 
+                  ? "border-primary shadow-lg shadow-primary/10" 
+                  : "border-border"
+              } p-6 lg:p-8 flex flex-col`}
             >
-              {/* Tag */}
+              {/* Popular Badge */}
               {pkg.tag && (
-                <span
-                  className={`absolute -top-3 left-6 px-3 py-1 text-xs font-semibold rounded-full ${
-                    pkg.popular
-                      ? "bg-gradient-cta text-primary-foreground"
-                      : "bg-secondary text-secondary-foreground"
-                  }`}
-                >
-                  {pkg.popular && <Star className="inline w-3 h-3 mr-1" />}
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-primary text-primary-foreground text-xs font-medium rounded-full whitespace-nowrap">
                   {pkg.tag}
                 </span>
               )}
 
-              {/* Header */}
-              <div className="mb-4 pt-2">
-                <h3 className="text-xl font-display font-bold text-foreground">
+              {/* Plan Name */}
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold text-foreground mb-1">
                   {pkg.name}
                 </h3>
-                <p className="text-sm text-muted-foreground">{pkg.location}</p>
+                <p className="text-sm text-muted-foreground">{pkg.freezone}</p>
               </div>
 
               {/* Price */}
               <div className="mb-6">
-                <span className="text-sm text-muted-foreground">Starting from</span>
-                <div className="text-3xl font-display font-bold text-foreground">
-                  {pkg.startingPrice}
+                <div className="flex items-baseline gap-1">
+                  <span className="text-4xl font-display font-bold text-foreground">
+                    {pkg.price}
+                  </span>
+                  <span className="text-muted-foreground">{pkg.period}</span>
                 </div>
+                <p className="text-sm text-muted-foreground mt-2">
+                  {pkg.description}
+                </p>
               </div>
 
               {/* Features */}
-              <ul className="space-y-3 mb-6">
+              <ul className="space-y-3 mb-8 flex-grow">
                 {pkg.features.map((feature) => (
-                  <li key={feature} className="flex items-center gap-3 text-sm">
-                    <svg
-                      className="w-5 h-5 text-success flex-shrink-0"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                  <li key={feature} className="flex items-start gap-3 text-sm">
+                    <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
                     <span className="text-foreground">{feature}</span>
                   </li>
                 ))}
               </ul>
 
               {/* CTA */}
-              <Link to="/search-activity">
+              <Link to="/search-activity" className="mt-auto">
                 <Button
-                  variant={pkg.popular ? "hero" : "outline"}
-                  className="w-full"
+                  variant={pkg.buttonVariant}
+                  className={`w-full rounded-lg ${
+                    pkg.popular 
+                      ? "bg-primary hover:bg-primary-hover" 
+                      : ""
+                  }`}
                 >
-                  Request Pre-Approval
-                  <ArrowRight className="w-4 h-4" />
+                  {pkg.buttonText}
                 </Button>
               </Link>
             </motion.div>
           ))}
         </div>
 
-        {/* View All */}
-        <motion.div
+        {/* Bottom Note */}
+        <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-center mt-10"
+          className="text-center text-sm text-muted-foreground mt-10"
         >
-          <Link to="/search-activity">
-            <Button variant="secondary" size="lg">
-              View All Freezones
-              <ArrowRight className="w-4 h-4" />
-            </Button>
-          </Link>
-        </motion.div>
+          All plans include: License registration • Document processing • Government fees • Basic support
+        </motion.p>
       </div>
     </section>
   );
