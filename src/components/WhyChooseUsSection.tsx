@@ -82,8 +82,8 @@ export function WhyChooseUsSection() {
             Traditional business setup consultants charge AED 5,000-20,000 in fees. We connect you directly with Freezones — at their actual rates.
           </p>
 
-          {/* Testimonial Cards */}
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-8">
+          {/* Testimonial Cards - Desktop */}
+          <div className="hidden md:grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-8">
             {testimonials.map((testimonial, index) => (
               <motion.div
                 key={index}
@@ -107,6 +107,47 @@ export function WhyChooseUsSection() {
                 </div>
               </motion.div>
             ))}
+          </div>
+
+          {/* Testimonial Cards - Mobile Carousel */}
+          <div className="md:hidden mb-8">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-2">
+                {testimonials.map((testimonial, index) => (
+                  <CarouselItem key={index} className="pl-2 basis-[85%]">
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="bg-card border border-border rounded-xl p-6 text-left h-full"
+                    >
+                      <p className="text-foreground mb-4 leading-relaxed text-sm">
+                        "{testimonial.quote}"
+                      </p>
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-medium text-sm">
+                          {testimonial.avatar}
+                        </div>
+                        <div>
+                          <p className="font-medium text-foreground text-sm">{testimonial.author}</p>
+                          <p className="text-muted-foreground text-xs">{testimonial.role}</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
+            <p className="text-center text-xs text-muted-foreground mt-3">
+              Swipe to see more →
+            </p>
           </div>
         </motion.div>
 
