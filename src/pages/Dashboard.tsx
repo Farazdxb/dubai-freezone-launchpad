@@ -22,6 +22,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { ChatBot } from "@/components/ChatBot";
 import { motion, AnimatePresence } from "framer-motion";
+import { NewCompanySetupForm } from "@/components/NewCompanySetupForm";
 
 const sidebarItems = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
@@ -313,13 +314,15 @@ export default function Dashboard() {
           Start New Service Request
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {serviceCards.map((card, index) => (
-            <Link key={card.title} to={card.href}>
+          {serviceCards.map((card, index) => {
+            const isNewCompany = card.title === "Start New Freezone Company";
+            
+            const cardContent = (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 + index * 0.05 }}
-                className="card-elevated p-5 h-full group"
+                className="card-elevated p-5 h-full group cursor-pointer"
               >
                 <div
                   className={`w-12 h-12 ${card.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}
@@ -337,8 +340,23 @@ export default function Dashboard() {
                   <ChevronRight className="w-4 h-4" />
                 </span>
               </motion.div>
-            </Link>
-          ))}
+            );
+
+            if (isNewCompany) {
+              return (
+                <NewCompanySetupForm
+                  key={card.title}
+                  trigger={cardContent}
+                />
+              );
+            }
+
+            return (
+              <Link key={card.title} to={card.href}>
+                {cardContent}
+              </Link>
+            );
+          })}
         </div>
       </motion.div>
     </DashboardLayout>
