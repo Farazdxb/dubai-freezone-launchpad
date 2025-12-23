@@ -13,7 +13,7 @@ const freezonePackages = [{
   buttonText: "Choose This Plan",
   buttonVariant: "outline" as const
 }, {
-  name: "Premium",
+  name: "License with Visa",
   freezone: "IFZA",
   price: "AED 11,900",
   period: "/ year",
