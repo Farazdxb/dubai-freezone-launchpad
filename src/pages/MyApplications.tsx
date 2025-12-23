@@ -172,31 +172,33 @@ export default function MyApplications() {
               </div>
 
               {/* Right Info */}
-              <div className="flex items-center gap-4 lg:gap-6">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 lg:gap-6 w-full lg:w-auto">
                 <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
                   <Clock className="w-4 h-4" />
                   {app.lastUpdated}
                 </div>
 
-                {app.paymentPending && (
-                  <Button variant="hero" size="sm">
-                    Pay Now
-                  </Button>
-                )}
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto">
+                  {app.paymentPending && (
+                    <Button variant="hero" size="sm" className="flex-1 sm:flex-none">
+                      Pay Now
+                    </Button>
+                  )}
 
-                <Link to={`/dashboard/applications/${app.id}`}>
-                  <Button variant="outline" size="sm">
-                    <Eye className="w-4 h-4" />
-                    View Ticket
-                  </Button>
-                </Link>
+                  <Link to={`/dashboard/applications/${app.id}`} className="flex-1 sm:flex-none">
+                    <Button variant="outline" size="sm" className="w-full">
+                      <Eye className="w-4 h-4" />
+                      View Ticket
+                    </Button>
+                  </Link>
 
-                {app.status === "Completed" && (
-                  <Button variant="secondary" size="sm">
-                    <Download className="w-4 h-4" />
-                    Download
-                  </Button>
-                )}
+                  {app.status === "Completed" && (
+                    <Button variant="secondary" size="sm" className="flex-1 sm:flex-none">
+                      <Download className="w-4 h-4" />
+                      Download
+                    </Button>
+                  )}
+                </div>
               </div>
             </div>
           </motion.div>
