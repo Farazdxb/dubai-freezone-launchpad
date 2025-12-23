@@ -72,7 +72,7 @@ export function FreezoneOffersSection() {
           className="text-center mb-4"
         >
           <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full mb-4">
-            PRICING
+            Latest Freezone Offers
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-foreground mb-4">
             Start free. Upgrade<br />when you're ready.
