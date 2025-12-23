@@ -124,7 +124,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen bg-secondary/30 flex">
+    <div className="min-h-screen bg-secondary/30 flex max-w-full overflow-x-hidden">
       {/* Sidebar */}
       <aside
         className={`fixed lg:sticky top-0 left-0 z-40 h-screen w-64 bg-card border-r border-border transition-transform duration-300 ${
@@ -255,7 +255,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
         </header>
 
         {/* Page Content */}
-        <main className="flex-1 p-4 lg:p-8">{children}</main>
+        <main className="flex-1 p-4 lg:p-8 max-w-full overflow-x-hidden">{children}</main>
       </div>
 
       <ChatBot />
