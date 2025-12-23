@@ -20,7 +20,7 @@ const freezonePackages = [{
   description: "Most popular choice for growing businesses",
   features: ["Flexi-desk included", "Multiple activities", "1 visa allocation", "Priority support", "Bank account assistance", "Free consultation"],
   popular: true,
-  tag: "Billed annually",
+  tag: "Popular Freezones",
   buttonText: "Choose This Plan",
   buttonVariant: "default" as const
 }, {
