@@ -90,21 +90,21 @@ export default function MyApplications() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="flex flex-col gap-3 sm:gap-4 mb-6"
+        className="flex flex-col gap-3 sm:gap-4 mb-6 min-w-0 overflow-x-hidden"
       >
         {/* Search Input */}
-        <div className="relative w-full">
+        <div className="relative w-full min-w-0">
           <Search className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
             placeholder="Search by Ticket ID or title..."
-            className="w-full pl-9 sm:pl-10 pr-3 sm:pr-4 py-2.5 bg-card border border-border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+            className="w-full min-w-0 pl-9 sm:pl-10 pr-3 sm:pr-4 py-2.5 bg-card border border-border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
           />
         </div>
-        
-        {/* Filter Tabs - Horizontal scroll on mobile */}
-        <div className="w-full overflow-x-auto scrollbar-hide">
-          <div className="flex w-max min-w-full gap-2 pb-2">
+
+        {/* Filter Tabs - Horizontal scroll only */}
+        <div className="w-full max-w-full min-w-0 overflow-x-auto scrollbar-hide">
+          <div className="inline-flex gap-2 pb-2 pr-2">
             {filters.map((filter, index) => (
               <button
                 key={filter}
@@ -158,25 +158,34 @@ export default function MyApplications() {
                   <h3 className="font-semibold text-foreground mb-1 text-sm sm:text-base truncate">
                     {app.title}
                   </h3>
-                  <div className="text-xs sm:text-sm text-muted-foreground">
-                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                  <div className="text-xs sm:text-sm text-muted-foreground min-w-0">
+                    {/* Desktop/tablet: single line with separators */}
+                    <div className="hidden sm:flex flex-wrap items-center gap-x-2 gap-y-1 min-w-0">
                       <span>{app.type}</span>
                       {app.freezone && (
                         <>
-                          <span className="hidden sm:inline">•</span>
+                          <span>•</span>
                           <span>{app.freezone}</span>
                         </>
                       )}
                       {app.activity && (
                         <>
-                          <span className="hidden sm:inline">•</span>
-                          <span className="hidden sm:inline truncate">{app.activity}</span>
+                          <span>•</span>
+                          <span className="truncate">{app.activity}</span>
                         </>
                       )}
                     </div>
-                    {app.activity && (
-                      <div className="sm:hidden mt-0.5 truncate">{app.activity}</div>
-                    )}
+
+                    {/* Mobile: 2-line layout */}
+                    <div className="sm:hidden min-w-0">
+                      <div className="truncate">
+                        {app.type}
+                        {app.freezone ? ` • ${app.freezone}` : ""}
+                      </div>
+                      {app.activity && (
+                        <div className="mt-0.5 truncate">{app.activity}</div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -188,22 +197,34 @@ export default function MyApplications() {
                   {app.lastUpdated}
                 </div>
 
-                <div className="grid grid-cols-2 sm:flex sm:flex-row gap-2">
+                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 sm:justify-end min-w-0 w-full sm:w-auto">
                   {app.paymentPending && (
-                    <Button variant="hero" size="sm" className="text-xs sm:text-sm">
+                    <Button
+                      variant="hero"
+                      size="sm"
+                      className="w-full sm:w-auto text-xs sm:text-sm"
+                    >
                       Pay Now
                     </Button>
                   )}
 
-                  <Link to={`/dashboard/applications/${app.id}`} className="col-span-1">
-                    <Button variant="outline" size="sm" className="w-full text-xs sm:text-sm">
+                  <Link to={`/dashboard/applications/${app.id}`} className="w-full sm:w-auto">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full text-xs sm:text-sm"
+                    >
                       <Eye className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                      <span className="hidden xs:inline">View</span> Ticket
+                      <span className="hidden sm:inline">View </span>Ticket
                     </Button>
                   </Link>
 
                   {app.status === "Completed" && (
-                    <Button variant="secondary" size="sm" className="col-span-1 text-xs sm:text-sm">
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      className="w-full sm:w-auto text-xs sm:text-sm"
+                    >
                       <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                       Download
                     </Button>
