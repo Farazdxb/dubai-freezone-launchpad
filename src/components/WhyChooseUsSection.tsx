@@ -1,5 +1,14 @@
-import { Shield, Clock, DollarSign, Users, Building2, Globe } from "lucide-react";
+import { Shield, Clock, DollarSign, Users, Building2, Globe, Quote } from "lucide-react";
 import { motion } from "framer-motion";
+
+const testimonials = [
+  {
+    quote: "As a founder, I wear too many hats. This tool took financial tracking off my plate and gave me instant clarity I didn't know I needed.",
+    author: "Ricky Charlie",
+    role: "Founder at Vento",
+    avatar: "RC",
+  },
+];
 
 const features = [
   {
@@ -38,84 +47,98 @@ export function WhyChooseUsSection() {
   return (
     <section className="section-padding bg-secondary/30">
       <div className="container-wide">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <span className="inline-block px-4 py-1.5 bg-accent text-accent-foreground text-sm font-medium rounded-full mb-4">
-              Why CSPzone
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-foreground mb-6">
-              The Smarter Way to Start Your Business in Dubai
-            </h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              Skip the traditional consultancy route. Our platform gives you direct access to Freezone pricing, instant comparisons, and a self-service portal that puts you in control.
-            </p>
+        {/* Testimonials Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full mb-4">
+            TESTIMONIALS
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-display font-bold text-foreground mb-4">
+            Discover what makes CSPzone<br />different
+          </h2>
+          <p className="text-muted-foreground mb-8">
+            See how CSPzone is changing the way entrepreneurs launch in Dubai
+          </p>
 
-            <div className="space-y-4">
-              <div className="flex items-start gap-4">
-                <div className="w-6 h-6 bg-success/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <svg className="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-foreground">No Consultancy Fees</h4>
-                  <p className="text-muted-foreground text-sm">Save thousands on consultancy charges</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="w-6 h-6 bg-success/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <svg className="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-foreground">Real-Time Tracking</h4>
-                  <p className="text-muted-foreground text-sm">Monitor your application status 24/7</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="w-6 h-6 bg-success/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <svg className="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-foreground">Self-Service Portal</h4>
-                  <p className="text-muted-foreground text-sm">Complete everything online at your pace</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right Grid */}
-          <div className="grid grid-cols-2 gap-4">
-            {features.map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="card-elevated p-5"
+          {/* Avatar Stack */}
+          <div className="flex items-center justify-center gap-1 mb-8">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div
+                key={i}
+                className={`w-10 h-10 rounded-full border-2 border-background bg-gradient-to-br from-primary/60 to-primary flex items-center justify-center text-primary-foreground text-xs font-medium ${
+                  i > 1 ? "-ml-3" : ""
+                }`}
               >
-                <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center mb-3">
-                  <feature.icon className="w-5 h-5 text-primary" />
-                </div>
-                <h4 className="font-semibold text-foreground text-sm mb-1">
-                  {feature.title}
-                </h4>
-                <p className="text-muted-foreground text-xs leading-relaxed">
-                  {feature.description}
+                {String.fromCharCode(64 + i)}
+              </div>
+            ))}
+          </div>
+
+          {/* Testimonial Card */}
+          <div className="max-w-2xl mx-auto">
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="relative"
+              >
+                <p className="text-xl md:text-2xl text-foreground font-medium leading-relaxed mb-6">
+                  "{testimonial.quote}"
                 </p>
+                <div className="flex items-center justify-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-medium">
+                    {testimonial.avatar}
+                  </div>
+                  <div className="text-left">
+                    <p className="font-medium text-foreground text-sm">{testimonial.author}</p>
+                    <p className="text-muted-foreground text-sm">{testimonial.role}</p>
+                  </div>
+                </div>
+
+                {/* Navigation Arrows */}
+                <div className="flex items-center justify-center gap-4 mt-8">
+                  <button className="text-muted-foreground hover:text-foreground transition-colors">
+                    ← Prev
+                  </button>
+                  <button className="text-muted-foreground hover:text-foreground transition-colors">
+                    Next →
+                  </button>
+                </div>
               </motion.div>
             ))}
           </div>
+        </motion.div>
+
+        {/* Features Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6">
+          {features.map((feature, index) => (
+            <motion.div
+              key={feature.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.05 }}
+              className="bg-card border border-border rounded-xl p-5 hover:border-primary/20 hover:shadow-md transition-all duration-300"
+            >
+              <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
+                <feature.icon className="w-5 h-5 text-primary" />
+              </div>
+              <h4 className="font-semibold text-foreground text-sm mb-1">
+                {feature.title}
+              </h4>
+              <p className="text-muted-foreground text-xs leading-relaxed">
+                {feature.description}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
