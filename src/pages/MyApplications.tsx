@@ -191,42 +191,41 @@ export default function MyApplications() {
               </div>
 
               {/* Bottom Section - Time and Actions */}
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 pt-3 border-t border-border/50">
+              <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3 pt-3 border-t border-border/50">
                 <div className="flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground">
                   <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   {app.lastUpdated}
                 </div>
 
-                <div className="grid grid-cols-1 gap-2 md:flex md:flex-row md:flex-wrap md:justify-end min-w-0 w-full md:w-auto">
+                <div className="grid grid-cols-1 gap-2 lg:flex lg:flex-row lg:flex-wrap lg:justify-end min-w-0 w-full lg:w-auto">
                   {app.paymentPending && (
                     <Button
                       variant="hero"
                       size="sm"
-                      className="w-full md:w-auto text-xs sm:text-sm whitespace-nowrap"
+                      className="w-full lg:w-auto text-xs sm:text-sm whitespace-nowrap"
                     >
                       Pay Now
                     </Button>
                   )}
 
-                  <Link
-                    to={`/dashboard/applications/${app.id}`}
-                    className="block w-full md:w-auto"
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="sm"
+                    className="w-full lg:w-auto text-xs sm:text-sm whitespace-nowrap"
                   >
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="w-full md:w-auto text-xs sm:text-sm whitespace-nowrap"
-                    >
+                    <Link to={`/dashboard/applications/${app.id}`} className="w-full lg:w-auto">
                       <Eye className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                       <span className="hidden sm:inline">View </span>Ticket
-                    </Button>
-                  </Link>
+                    </Link>
+                  </Button>
+
 
                   {app.status === "Completed" && (
                     <Button
                       variant="secondary"
                       size="sm"
-                      className="w-full md:w-auto text-xs sm:text-sm whitespace-nowrap"
+                      className="w-full lg:w-auto text-xs sm:text-sm whitespace-nowrap"
                     >
                       <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                       Download
