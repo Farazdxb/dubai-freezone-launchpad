@@ -134,12 +134,12 @@ export function HeroSection() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="relative max-w-2xl mx-auto mb-6"
           >
-            <div className="flex items-center gap-2 bg-card border border-border rounded-full px-2 py-2 shadow-xl shadow-primary/5">
-              <div className="flex items-center flex-1 pl-4">
+            <div className="flex flex-col sm:flex-row items-center gap-3 bg-card border border-border rounded-2xl sm:rounded-full px-4 sm:px-2 py-3 sm:py-2 shadow-xl shadow-primary/5">
+              <div className="flex items-center flex-1 w-full sm:w-auto pl-0 sm:pl-4">
                 <Search className="w-5 h-5 text-muted-foreground mr-3" />
                 <input
                   type="text"
-                  placeholder="Search your business activity (e.g. IT Services, Trading...)"
+                  placeholder="Search your business activity..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleSearch()}
@@ -148,7 +148,7 @@ export function HeroSection() {
               </div>
               <Button
                 onClick={handleSearch}
-                className="rounded-full px-6 py-2.5 font-medium"
+                className="rounded-full px-6 py-2.5 font-medium w-full sm:w-auto"
               >
                 Search Activities
               </Button>
