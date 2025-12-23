@@ -103,8 +103,8 @@ export default function MyApplications() {
         </div>
 
         {/* Filter Tabs - Horizontal scroll only */}
-        <div className="w-full max-w-full min-w-0 overflow-x-auto scrollbar-hide">
-          <div className="inline-flex gap-2 pb-2 pr-2">
+        <div className="w-full max-w-full min-w-0 overflow-x-auto scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0">
+          <div className="inline-flex gap-2 pb-2 pr-4">
             {filters.map((filter, index) => (
               <button
                 key={filter}
@@ -134,7 +134,7 @@ export default function MyApplications() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 + index * 0.05 }}
-            className="card-elevated p-4 sm:p-5"
+            className="card-elevated p-4 sm:p-5 overflow-hidden"
           >
             <div className="flex flex-col gap-4">
               {/* Top Section - Icon, Title, Status */}
@@ -197,22 +197,25 @@ export default function MyApplications() {
                   {app.lastUpdated}
                 </div>
 
-                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 sm:justify-end min-w-0 w-full sm:w-auto">
+                <div className="grid grid-cols-1 gap-2 sm:flex sm:flex-row sm:flex-wrap sm:justify-end min-w-0 w-full sm:w-auto">
                   {app.paymentPending && (
                     <Button
                       variant="hero"
                       size="sm"
-                      className="w-full sm:w-auto text-xs sm:text-sm"
+                      className="w-full sm:w-auto text-xs sm:text-sm whitespace-nowrap"
                     >
                       Pay Now
                     </Button>
                   )}
 
-                  <Link to={`/dashboard/applications/${app.id}`} className="w-full sm:w-auto">
+                  <Link
+                    to={`/dashboard/applications/${app.id}`}
+                    className="block w-full sm:w-auto"
+                  >
                     <Button
                       variant="outline"
                       size="sm"
-                      className="w-full text-xs sm:text-sm"
+                      className="w-full sm:w-auto text-xs sm:text-sm whitespace-nowrap"
                     >
                       <Eye className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                       <span className="hidden sm:inline">View </span>Ticket
@@ -223,7 +226,7 @@ export default function MyApplications() {
                     <Button
                       variant="secondary"
                       size="sm"
-                      className="w-full sm:w-auto text-xs sm:text-sm"
+                      className="w-full sm:w-auto text-xs sm:text-sm whitespace-nowrap"
                     >
                       <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                       Download
