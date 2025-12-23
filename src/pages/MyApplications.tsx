@@ -191,18 +191,18 @@ export default function MyApplications() {
               </div>
 
               {/* Bottom Section - Time and Actions */}
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-3 border-t border-border/50">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 pt-3 border-t border-border/50">
                 <div className="flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground">
                   <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   {app.lastUpdated}
                 </div>
 
-                <div className="grid grid-cols-1 gap-2 sm:flex sm:flex-row sm:flex-wrap sm:justify-end min-w-0 w-full sm:w-auto">
+                <div className="grid grid-cols-1 gap-2 md:flex md:flex-row md:flex-wrap md:justify-end min-w-0 w-full md:w-auto">
                   {app.paymentPending && (
                     <Button
                       variant="hero"
                       size="sm"
-                      className="w-full sm:w-auto text-xs sm:text-sm whitespace-nowrap"
+                      className="w-full md:w-auto text-xs sm:text-sm whitespace-nowrap"
                     >
                       Pay Now
                     </Button>
@@ -210,12 +210,12 @@ export default function MyApplications() {
 
                   <Link
                     to={`/dashboard/applications/${app.id}`}
-                    className="block w-full sm:w-auto"
+                    className="block w-full md:w-auto"
                   >
                     <Button
                       variant="outline"
                       size="sm"
-                      className="w-full sm:w-auto text-xs sm:text-sm whitespace-nowrap"
+                      className="w-full md:w-auto text-xs sm:text-sm whitespace-nowrap"
                     >
                       <Eye className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                       <span className="hidden sm:inline">View </span>Ticket
@@ -226,7 +226,7 @@ export default function MyApplications() {
                     <Button
                       variant="secondary"
                       size="sm"
-                      className="w-full sm:w-auto text-xs sm:text-sm whitespace-nowrap"
+                      className="w-full md:w-auto text-xs sm:text-sm whitespace-nowrap"
                     >
                       <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                       Download
