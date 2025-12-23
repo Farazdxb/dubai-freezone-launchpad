@@ -1,7 +1,7 @@
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { ChatBot } from "@/components/ChatBot";
-import { Clock, User, ArrowLeft, Share2, Bookmark, Linkedin } from "lucide-react";
+import { Clock, User, ArrowLeft, Share2, Bookmark, Linkedin, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -30,6 +30,33 @@ const tableOfContents = [
   "Required Documents",
   "Cost Breakdown",
   "Common Mistakes to Avoid",
+];
+
+const relatedPosts = [
+  {
+    id: 2,
+    title: "IFZA vs RAKEZ: Which Freezone is Right for Your Business?",
+    excerpt: "A detailed comparison of two popular UAE freezones to help you make the right choice.",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80",
+    category: "Comparison",
+    readTime: "6 min read",
+  },
+  {
+    id: 3,
+    title: "Top 10 Business Activities for Freelancers in UAE Freezones",
+    excerpt: "Discover the most popular freelance activities and which freezones support them.",
+    image: "https://images.unsplash.com/photo-1553484771-371a605b060b?w=600&q=80",
+    category: "Freelance",
+    readTime: "5 min read",
+  },
+  {
+    id: 4,
+    title: "Understanding UAE Freezone Visa Requirements in 2024",
+    excerpt: "Everything you need to know about residency visas through freezone companies.",
+    image: "https://images.unsplash.com/photo-1569974507005-6dc61f97fb5c?w=600&q=80",
+    category: "Visa",
+    readTime: "7 min read",
+  },
 ];
 
 export default function BlogPost() {
@@ -298,6 +325,82 @@ export default function BlogPost() {
               </div>
             </motion.article>
           </div>
+
+          {/* Related Posts Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mt-20"
+          >
+            <div className="flex items-center justify-between mb-8">
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-display font-bold text-foreground">
+                  Related Articles
+                </h2>
+                <p className="text-muted-foreground mt-1">
+                  Continue exploring freezone business insights
+                </p>
+              </div>
+              <Link to="/blog">
+                <Button variant="outline" className="hidden sm:flex">
+                  View All Articles
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              {relatedPosts.map((post, index) => (
+                <motion.div
+                  key={post.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <Link to={`/blog/${post.id}`}>
+                    <div className="group bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl hover:border-primary/20 transition-all duration-300">
+                      <div className="relative h-48 overflow-hidden">
+                        <img
+                          src={post.image}
+                          alt={post.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <div className="absolute top-3 left-3">
+                          <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-foreground text-xs font-medium rounded-full">
+                            {post.category}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="p-5">
+                        <h3 className="font-display font-semibold text-foreground mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                          {post.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                          {post.excerpt}
+                        </p>
+                        <div className="flex items-center text-xs text-muted-foreground">
+                          <Clock className="w-3.5 h-3.5 mr-1" />
+                          {post.readTime}
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="mt-6 sm:hidden">
+              <Link to="/blog">
+                <Button variant="outline" className="w-full">
+                  View All Articles
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </main>
 
