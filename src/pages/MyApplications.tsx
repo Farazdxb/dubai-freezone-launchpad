@@ -103,8 +103,8 @@ export default function MyApplications() {
         </div>
         
         {/* Filter Tabs - Horizontal scroll on mobile */}
-        <div className="-mx-4 sm:mx-0 px-4 sm:px-0">
-          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+        <div className="w-full overflow-x-auto scrollbar-hide">
+          <div className="flex w-max min-w-full gap-2 pb-2">
             {filters.map((filter, index) => (
               <button
                 key={filter}
@@ -158,19 +158,24 @@ export default function MyApplications() {
                   <h3 className="font-semibold text-foreground mb-1 text-sm sm:text-base truncate">
                     {app.title}
                   </h3>
-                  <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-muted-foreground">
-                    <span>{app.type}</span>
-                    {app.freezone && (
-                      <>
-                        <span>•</span>
-                        <span>{app.freezone}</span>
-                      </>
-                    )}
+                  <div className="text-xs sm:text-sm text-muted-foreground">
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                      <span>{app.type}</span>
+                      {app.freezone && (
+                        <>
+                          <span className="hidden sm:inline">•</span>
+                          <span>{app.freezone}</span>
+                        </>
+                      )}
+                      {app.activity && (
+                        <>
+                          <span className="hidden sm:inline">•</span>
+                          <span className="hidden sm:inline truncate">{app.activity}</span>
+                        </>
+                      )}
+                    </div>
                     {app.activity && (
-                      <>
-                        <span>•</span>
-                        <span className="truncate">{app.activity}</span>
-                      </>
+                      <div className="sm:hidden mt-0.5 truncate">{app.activity}</div>
                     )}
                   </div>
                 </div>
