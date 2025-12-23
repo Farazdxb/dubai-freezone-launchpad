@@ -1,7 +1,7 @@
-import { ArrowRight, Check, Star } from "lucide-react";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { NewCompanySetupForm } from "@/components/NewCompanySetupForm";
 
 const freezonePackages = [
   {
@@ -17,7 +17,7 @@ const freezonePackages = [
       "Basic support",
     ],
     popular: false,
-    buttonText: "Choose This Plan",
+    buttonText: "Submit Preapproval Request",
     buttonVariant: "outline" as const,
   },
   {
@@ -36,7 +36,7 @@ const freezonePackages = [
     ],
     popular: true,
     tag: "Billed annually",
-    buttonText: "Choose This Plan",
+    buttonText: "Submit Preapproval Request",
     buttonVariant: "default" as const,
   },
   {
@@ -54,7 +54,7 @@ const freezonePackages = [
       "Legal consultation",
     ],
     popular: false,
-    buttonText: "Choose This Plan",
+    buttonText: "Submit Preapproval Request",
     buttonVariant: "outline" as const,
   },
 ];
@@ -136,18 +136,22 @@ export function FreezoneOffersSection() {
               </ul>
 
               {/* CTA */}
-              <Link to="/search-activity" className="mt-auto">
-                <Button
-                  variant={pkg.buttonVariant}
-                  className={`w-full rounded-lg ${
-                    pkg.popular 
-                      ? "bg-primary hover:bg-primary-hover" 
-                      : ""
-                  }`}
-                >
-                  {pkg.buttonText}
-                </Button>
-              </Link>
+              <div className="mt-auto">
+                <NewCompanySetupForm
+                  trigger={
+                    <Button
+                      variant={pkg.buttonVariant}
+                      className={`w-full rounded-lg ${
+                        pkg.popular 
+                          ? "bg-primary hover:bg-primary-hover" 
+                          : ""
+                      }`}
+                    >
+                      {pkg.buttonText}
+                    </Button>
+                  }
+                />
+              </div>
             </motion.div>
           ))}
         </div>
