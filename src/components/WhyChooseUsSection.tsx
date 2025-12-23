@@ -114,7 +114,7 @@ export function WhyChooseUsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
-              className={`bg-gradient-to-br ${feature.gradient} rounded-xl p-5 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300`}
+              className={`bg-gradient-to-br ${feature.gradient} rounded-xl p-5 shadow-lg hover:shadow-[0_20px_40px_-10px_hsl(var(--primary)/0.4)] hover:scale-105 transition-all duration-300 cursor-pointer`}
             >
               <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center mb-3">
                 <feature.icon className="w-5 h-5 text-white" />
