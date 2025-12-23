@@ -273,7 +273,7 @@ export default function Dashboard() {
         className="mb-8"
       >
         <h1 className="text-2xl sm:text-3xl font-display font-bold text-foreground mb-2">
-          Welcome back, John! 👋
+          Welcome back, Faraz! 👋
         </h1>
         <p className="text-muted-foreground">
           Manage all your business setup requests from here.
