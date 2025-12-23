@@ -1,45 +1,51 @@
-import { Shield, Clock, DollarSign, Users, Building2, Globe, Quote } from "lucide-react";
+import { Shield, Clock, DollarSign, Users, Building2, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 
 const testimonials = [
   {
-    quote: "As a founder, I wear too many hats. This tool took financial tracking off my plate and gave me instant clarity I didn't know I needed.",
-    author: "Ricky Charlie",
-    role: "Founder at Vento",
-    avatar: "RC",
+    quote: "I saved over AED 15,000 in consultancy fees! The entire process was transparent — I could see exactly what I was paying for. Got my trading license in just 5 days.",
+    author: "Ahmed Hassan",
+    role: "Founder, TechVentures Dubai",
+    avatar: "AH",
+  },
+  {
+    quote: "As a first-time entrepreneur in Dubai, I was worried about hidden charges. CSPzone showed me upfront pricing and helped me choose the right Freezone for my IT business.",
+    author: "Sarah Chen",
+    role: "CEO, Digital Solutions FZE",
+    avatar: "SC",
   },
 ];
 
 const features = [
   {
-    icon: Shield,
-    title: "100% Transparent",
-    description: "No hidden fees or surprise charges. See exact pricing upfront.",
+    icon: DollarSign,
+    title: "Zero Consultancy Fee",
+    description: "No agent commissions. Pay only the actual Freezone charges — nothing more.",
   },
   {
     icon: Clock,
     title: "Fast Processing",
-    description: "Get your license in 3-7 working days with our streamlined process.",
+    description: "Get your UAE business license in 3-7 working days with our streamlined process.",
   },
   {
-    icon: DollarSign,
-    title: "Best Prices",
-    description: "Direct Freezone rates without middleman commissions.",
+    icon: Shield,
+    title: "100% Transparent",
+    description: "See complete pricing breakdown before you pay. No hidden fees or surprises.",
   },
   {
     icon: Users,
-    title: "Expert Support",
-    description: "AI-powered chatbot and dedicated team to guide you.",
+    title: "Self-Service Portal",
+    description: "Track your application, upload documents, and chat with support — all online.",
   },
   {
     icon: Building2,
-    title: "Multiple Freezones",
-    description: "Compare 15+ Freezones and choose the best fit for your business.",
+    title: "15+ Freezones",
+    description: "Compare IFZA, RAKEZ, DMCC, Meydan, SHAMS and more in one place.",
   },
   {
     icon: Globe,
-    title: "Full Ownership",
-    description: "100% foreign ownership with no local sponsor required.",
+    title: "100% Foreign Ownership",
+    description: "Full ownership with no local sponsor required in any UAE Freezone.",
   },
 ];
 
@@ -56,61 +62,37 @@ export function WhyChooseUsSection() {
           className="text-center mb-16"
         >
           <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full mb-4">
-            TESTIMONIALS
+            WHY CSPZONE
           </span>
           <h2 className="text-3xl sm:text-4xl font-display font-bold text-foreground mb-4">
-            Discover what makes CSPzone<br />different
+            Skip the Middlemen.<br />Setup Directly.
           </h2>
-          <p className="text-muted-foreground mb-8">
-            See how CSPzone is changing the way entrepreneurs launch in Dubai
+          <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
+            Traditional business setup consultants charge AED 5,000-20,000 in fees. We connect you directly with Freezones — at their actual rates.
           </p>
 
-          {/* Avatar Stack */}
-          <div className="flex items-center justify-center gap-1 mb-8">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <div
-                key={i}
-                className={`w-10 h-10 rounded-full border-2 border-background bg-gradient-to-br from-primary/60 to-primary flex items-center justify-center text-primary-foreground text-xs font-medium ${
-                  i > 1 ? "-ml-3" : ""
-                }`}
-              >
-                {String.fromCharCode(64 + i)}
-              </div>
-            ))}
-          </div>
-
-          {/* Testimonial Card */}
-          <div className="max-w-2xl mx-auto">
+          {/* Testimonial Cards */}
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-8">
             {testimonials.map((testimonial, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="relative"
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-card border border-border rounded-xl p-6 text-left"
               >
-                <p className="text-xl md:text-2xl text-foreground font-medium leading-relaxed mb-6">
+                <p className="text-foreground mb-4 leading-relaxed">
                   "{testimonial.quote}"
                 </p>
-                <div className="flex items-center justify-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-medium">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-medium text-sm">
                     {testimonial.avatar}
                   </div>
-                  <div className="text-left">
+                  <div>
                     <p className="font-medium text-foreground text-sm">{testimonial.author}</p>
-                    <p className="text-muted-foreground text-sm">{testimonial.role}</p>
+                    <p className="text-muted-foreground text-xs">{testimonial.role}</p>
                   </div>
-                </div>
-
-                {/* Navigation Arrows */}
-                <div className="flex items-center justify-center gap-4 mt-8">
-                  <button className="text-muted-foreground hover:text-foreground transition-colors">
-                    ← Prev
-                  </button>
-                  <button className="text-muted-foreground hover:text-foreground transition-colors">
-                    Next →
-                  </button>
                 </div>
               </motion.div>
             ))}
