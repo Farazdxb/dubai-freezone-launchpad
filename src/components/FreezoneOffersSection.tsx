@@ -1,7 +1,7 @@
-import { ArrowRight, Check, Star } from "lucide-react";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { NewCompanySetupForm } from "@/components/NewCompanySetupForm";
 const freezonePackages = [{
   name: "Ecommerce License",
   freezone: "SHAMS",
@@ -109,11 +109,16 @@ export function FreezoneOffersSection() {
               </ul>
 
               {/* CTA */}
-              <Link to="/search-activity" className="mt-auto">
-                <Button variant={pkg.buttonVariant} className={`w-full rounded-lg ${pkg.popular ? "bg-primary hover:bg-primary-hover" : ""}`}>
-                  {pkg.buttonText}
-                </Button>
-              </Link>
+              <div className="mt-auto text-center">
+                <NewCompanySetupForm
+                  trigger={
+                    <Button variant={pkg.buttonVariant} className={`w-full rounded-lg ${pkg.popular ? "bg-primary hover:bg-primary-hover" : ""}`}>
+                      Submit Preapproval Request
+                    </Button>
+                  }
+                />
+                <p className="text-xs text-muted-foreground mt-2">no payment required</p>
+              </div>
             </motion.div>)}
         </div>
 
