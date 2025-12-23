@@ -1,7 +1,7 @@
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { ChatBot } from "@/components/ChatBot";
-import { Clock, User, ArrowLeft, Share2, Bookmark } from "lucide-react";
+import { Clock, User, ArrowLeft, Share2, Bookmark, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -17,6 +17,8 @@ const blogPost = {
     name: "Sarah Ahmed",
     role: "Business Setup Expert",
     avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80",
+    bio: "Sarah is a seasoned business setup consultant with over 10 years of experience helping entrepreneurs establish their companies in the UAE. She has assisted 500+ businesses across various industries and is passionate about simplifying the company formation process.",
+    linkedin: "https://linkedin.com/in/sarah-ahmed",
   },
 };
 
@@ -231,6 +233,68 @@ export default function BlogPost() {
                     </div>
                   </div>
                 </section>
+
+                {/* Author Card */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="mt-16 p-8 bg-gradient-to-br from-white via-white to-primary/5 rounded-3xl border border-white/50 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.1)] backdrop-blur-sm relative overflow-hidden"
+                >
+                  {/* Glossy overlay effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/80 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white to-transparent" />
+                  
+                  <div className="relative flex flex-col sm:flex-row items-center sm:items-start gap-6">
+                    {/* Author Avatar */}
+                    <div className="relative shrink-0">
+                      <div className="w-24 h-24 rounded-2xl overflow-hidden ring-4 ring-white shadow-xl">
+                        <img
+                          src={blogPost.author.avatar}
+                          alt={blogPost.author.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      {/* Verified badge */}
+                      <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-lg">
+                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                    </div>
+
+                    {/* Author Info */}
+                    <div className="flex-1 text-center sm:text-left">
+                      <p className="text-xs font-medium text-primary uppercase tracking-wider mb-1">
+                        Written by
+                      </p>
+                      <h3 className="text-xl font-display font-bold text-foreground mb-1">
+                        {blogPost.author.name}
+                      </h3>
+                      <p className="text-sm text-primary font-medium mb-3">
+                        {blogPost.author.role}
+                      </p>
+                      <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                        {blogPost.author.bio}
+                      </p>
+                      <a
+                        href={blogPost.author.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Button 
+                          variant="outline" 
+                          size="sm"
+                          className="bg-white hover:bg-[#0077B5] hover:text-white hover:border-[#0077B5] transition-all duration-300 shadow-sm"
+                        >
+                          <Linkedin className="w-4 h-4 mr-2" />
+                          Connect on LinkedIn
+                        </Button>
+                      </a>
+                    </div>
+                  </div>
+                </motion.div>
               </div>
             </motion.article>
           </div>
