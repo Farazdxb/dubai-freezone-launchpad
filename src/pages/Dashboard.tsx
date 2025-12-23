@@ -90,24 +90,28 @@ const quickAccessCards = [
     title: "My Applications",
     count: 3,
     href: "/dashboard/applications",
+    gradient: "from-primary via-primary/80 to-primary/60",
   },
   {
     icon: Search,
     title: "Search Activity",
     count: null,
     href: "/search-activity",
+    gradient: "from-[hsl(200,80%,50%)] via-[hsl(210,70%,55%)] to-primary",
   },
   {
     icon: FileText,
     title: "My Documents",
     count: 5,
     href: "/dashboard/documents",
+    gradient: "from-[hsl(180,60%,45%)] via-[hsl(190,65%,50%)] to-[hsl(200,70%,55%)]",
   },
   {
     icon: Award,
     title: "Issued Licenses",
     count: 1,
     href: "/dashboard/licenses",
+    gradient: "from-[hsl(220,70%,55%)] via-primary to-[hsl(200,65%,50%)]",
   },
 ];
 
@@ -285,18 +289,18 @@ export default function Dashboard() {
       >
         {quickAccessCards.map((card, index) => (
           <Link key={card.title} to={card.href}>
-            <div className="card-elevated p-5 h-full">
+            <div className={`bg-gradient-to-br ${card.gradient} p-5 h-full rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}>
               <div className="flex items-center justify-between mb-3">
-                <div className="w-10 h-10 bg-accent rounded-xl flex items-center justify-center">
-                  <card.icon className="w-5 h-5 text-primary" />
+                <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                  <card.icon className="w-5 h-5 text-white" />
                 </div>
                 {card.count !== null && (
-                  <span className="px-2.5 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full">
+                  <span className="px-2.5 py-1 bg-white/20 backdrop-blur-sm text-white text-xs font-semibold rounded-full">
                     {card.count}
                   </span>
                 )}
               </div>
-              <h3 className="font-medium text-foreground text-sm">
+              <h3 className="font-medium text-white text-sm">
                 {card.title}
               </h3>
             </div>
@@ -335,10 +339,10 @@ export default function Dashboard() {
                 <p className="text-sm text-muted-foreground mb-4">
                   {card.description}
                 </p>
-                <span className="text-primary text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
-                  Create Request
-                  <ChevronRight className="w-4 h-4" />
-                </span>
+                <Button size="sm" className="w-full">
+                  Submit Request
+                  <ChevronRight className="w-4 h-4 ml-1" />
+                </Button>
               </motion.div>
             );
 
@@ -359,6 +363,13 @@ export default function Dashboard() {
           })}
         </div>
       </motion.div>
+
+      {/* Footer Spacer */}
+      <div className="mt-12 mb-4 py-8 px-6 rounded-2xl bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 border border-primary/10">
+        <p className="text-center text-sm text-muted-foreground">
+          Need help? Contact our support team for assistance with your business setup.
+        </p>
+      </div>
     </DashboardLayout>
   );
 }
