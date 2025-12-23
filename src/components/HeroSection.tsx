@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import { Search, Check, TrendingUp, Users, FileText, Building2, Activity } from "lucide-react";
+import { Search, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import heroDashboard from "@/assets/hero-dashboard.png";
 
 const businessActivities = [
   "Marketing Consultancy",
@@ -23,14 +24,16 @@ const businessActivities = [
 ];
 
 const freezoneLogos = [
-  { name: "IFZA", color: "hsl(var(--primary))" },
-  { name: "RAKEZ", color: "hsl(var(--primary))" },
-  { name: "Meydan", color: "hsl(var(--primary))" },
-  { name: "DMCC", color: "hsl(var(--primary))" },
-  { name: "SHAMS", color: "hsl(var(--primary))" },
-  { name: "AJMAN", color: "hsl(var(--primary))" },
-  { name: "JAFZA", color: "hsl(var(--primary))" },
-  { name: "DWC", color: "hsl(var(--primary))" },
+  { name: "IFZA" },
+  { name: "RAKEZ" },
+  { name: "Meydan" },
+  { name: "DMCC" },
+  { name: "SHAMS" },
+  { name: "AJMAN" },
+  { name: "JAFZA" },
+  { name: "DWC" },
+  { name: "DAFZA" },
+  { name: "SPC" },
 ];
 
 export function HeroSection() {
@@ -74,37 +77,53 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative pt-32 pb-0 overflow-hidden bg-background">
-      {/* Subtle gradient background */}
+    <section className="relative pt-28 pb-0 overflow-hidden bg-background">
+      {/* Gradient background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[800px] bg-gradient-to-b from-primary/8 via-primary/3 to-transparent rounded-full blur-3xl" />
       </div>
 
       <div className="container-wide relative z-10">
         {/* Centered Content */}
         <div className="text-center max-w-4xl mx-auto">
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-6"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            </span>
+            <span className="text-sm font-medium text-foreground">Zero Consultancy Fee — Direct Freezone Rates</span>
+          </motion.div>
+
           {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-foreground leading-[1.15] mb-6"
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-foreground leading-[1.1] mb-6"
           >
-            Start Your Business in Dubai.
+            Setup Your UAE Freezone
             <br />
-            <span className="text-primary">No Hidden Fees.</span>
+            <span className="bg-gradient-to-r from-primary via-primary to-primary/70 bg-clip-text text-transparent">
+              Business in Minutes
+            </span>
           </motion.h1>
 
           {/* Subheading */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto"
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto"
           >
-            One search. One dashboard. Everything you need to compare
+            Self-service portal for Dubai & UAE Freezone company formation.
             <br className="hidden sm:block" />
-            Freezones, get instant pricing, and launch your company.
+            <span className="font-semibold text-foreground">No agents. No hidden fees. 100% transparent pricing.</span>
           </motion.p>
 
           {/* Search Bar */}
@@ -112,15 +131,15 @@ export function HeroSection() {
             ref={searchRef}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
             className="relative max-w-2xl mx-auto mb-6"
           >
-            <div className="flex items-center gap-2 bg-card border border-border rounded-full px-2 py-2 shadow-lg shadow-primary/10">
+            <div className="flex items-center gap-2 bg-card border border-border rounded-full px-2 py-2 shadow-xl shadow-primary/5">
               <div className="flex items-center flex-1 pl-4">
                 <Search className="w-5 h-5 text-muted-foreground mr-3" />
                 <input
                   type="text"
-                  placeholder="Search business activities..."
+                  placeholder="Search your business activity (e.g. IT Services, Trading...)"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleSearch()}
@@ -144,7 +163,7 @@ export function HeroSection() {
                   exit={{ opacity: 0, y: -10 }}
                   className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-2xl shadow-xl overflow-hidden z-50"
                 >
-                  {suggestions.map((activity, index) => (
+                  {suggestions.map((activity) => (
                     <button
                       key={activity}
                       onClick={() => handleSuggestionClick(activity)}
@@ -163,166 +182,55 @@ export function HeroSection() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground mb-16"
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground mb-12"
           >
             <div className="flex items-center gap-2">
-              <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center">
-                <Check className="w-3 h-3 text-primary" />
+              <div className="w-5 h-5 rounded-full bg-success/20 flex items-center justify-center">
+                <Check className="w-3 h-3 text-success" />
               </div>
               <span>No consultancy charges</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center">
-                <Check className="w-3 h-3 text-primary" />
+              <div className="w-5 h-5 rounded-full bg-success/20 flex items-center justify-center">
+                <Check className="w-3 h-3 text-success" />
               </div>
-              <span>Transparent pricing</span>
+              <span>100% transparent pricing</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center">
-                <Check className="w-3 h-3 text-primary" />
+              <div className="w-5 h-5 rounded-full bg-success/20 flex items-center justify-center">
+                <Check className="w-3 h-3 text-success" />
               </div>
-              <span>Direct Freezone rates</span>
+              <span>15+ UAE Freezones</span>
             </div>
           </motion.div>
         </div>
 
-        {/* Dashboard Mockup - Overlapping into next section */}
+        {/* Dashboard Image - Overlapping into next section */}
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
           className="relative max-w-5xl mx-auto"
         >
-          {/* Glow effect behind dashboard */}
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-primary/5 to-transparent rounded-t-3xl blur-2xl -z-10" />
+          {/* Glow effect behind image */}
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-primary/10 to-transparent rounded-3xl blur-3xl -z-10 scale-95" />
           
-          {/* Main Dashboard Card */}
-          <div className="relative bg-card border border-border/50 rounded-t-2xl shadow-2xl overflow-hidden">
-            {/* Browser Header */}
-            <div className="flex items-center gap-2 px-4 py-3 bg-secondary/50 border-b border-border/50">
-              <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-destructive/60" />
-                <div className="w-3 h-3 rounded-full bg-warning/60" />
-                <div className="w-3 h-3 rounded-full bg-success/60" />
-              </div>
-              <div className="flex-1 flex justify-center">
-                <div className="bg-background/50 rounded-full px-4 py-1 text-xs text-muted-foreground flex items-center gap-2">
-                  <Search className="w-3 h-3" />
-                  app.cspzone.com/dashboard
-                </div>
-              </div>
-            </div>
-
-            {/* Dashboard Content */}
-            <div className="p-6 flex gap-6">
-              {/* Sidebar */}
-              <div className="w-48 shrink-0 hidden lg:block">
-                <div className="flex items-center gap-2 mb-6">
-                  <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                    <Building2 className="w-4 h-4 text-primary-foreground" />
-                  </div>
-                  <span className="font-semibold text-sm text-foreground">CSPzone</span>
-                </div>
-                <nav className="space-y-1">
-                  {["Overview", "Applications", "Documents", "Licenses"].map((item, i) => (
-                    <div
-                      key={item}
-                      className={`px-3 py-2 rounded-lg text-sm ${
-                        i === 0
-                          ? "bg-primary text-primary-foreground"
-                          : "text-muted-foreground hover:bg-secondary/50"
-                      }`}
-                    >
-                      {item}
-                    </div>
-                  ))}
-                </nav>
-              </div>
-
-              {/* Main Content */}
-              <div className="flex-1 space-y-6">
-                {/* Header */}
-                <div className="flex items-center justify-between">
-                  <h3 className="font-semibold text-foreground">Dashboard Overview</h3>
-                  <Button size="sm" variant="outline" className="text-xs">
-                    Export
-                  </Button>
-                </div>
-
-                {/* Stats Cards */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                  {[
-                    { label: "Applications", value: "12", icon: FileText, trend: "+2 this week" },
-                    { label: "Approved", value: "8", icon: Check, trend: "67% rate" },
-                    { label: "Processing", value: "3", icon: Activity, trend: "Est. 5 days" },
-                    { label: "Licenses", value: "5", icon: Building2, trend: "Active" },
-                  ].map((stat, i) => (
-                    <motion.div
-                      key={stat.label}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.6 + i * 0.1 }}
-                      className="bg-secondary/30 rounded-xl p-4"
-                    >
-                      <div className="flex items-center gap-2 mb-2">
-                        <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
-                          <stat.icon className="w-4 h-4 text-primary" />
-                        </div>
-                      </div>
-                      <p className="text-2xl font-bold text-foreground">{stat.value}</p>
-                      <p className="text-xs text-muted-foreground">{stat.label}</p>
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Chart */}
-                <div className="bg-secondary/20 rounded-xl p-4">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-sm font-medium text-foreground">Monthly Activity</span>
-                  </div>
-                  <div className="flex items-end gap-2 h-20">
-                    {[30, 50, 40, 70, 55, 80, 65, 90, 75, 85, 60, 95].map((height, i) => (
-                      <motion.div
-                        key={i}
-                        className="flex-1 rounded-t bg-gradient-to-t from-primary/50 to-primary"
-                        initial={{ height: 0 }}
-                        animate={{ height: `${height}%` }}
-                        transition={{ duration: 0.6, delay: 0.8 + i * 0.05 }}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Sidebar */}
-              <div className="w-48 shrink-0 space-y-4 hidden xl:block">
-                <div className="bg-secondary/30 rounded-xl p-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-8 h-8 bg-success/10 rounded-full flex items-center justify-center">
-                      <TrendingUp className="w-4 h-4 text-success" />
-                    </div>
-                    <span className="text-xs text-muted-foreground">Success Rate</span>
-                  </div>
-                  <p className="text-xl font-bold text-foreground">98.5%</p>
-                </div>
-                <div className="bg-secondary/30 rounded-xl p-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-                      <Users className="w-4 h-4 text-primary" />
-                    </div>
-                    <span className="text-xs text-muted-foreground">Active Clients</span>
-                  </div>
-                  <p className="text-xl font-bold text-foreground">2,400+</p>
-                </div>
-              </div>
-            </div>
+          {/* Main Dashboard Image */}
+          <div className="relative rounded-t-2xl overflow-hidden border border-border/30 shadow-2xl shadow-primary/10">
+            <img
+              src={heroDashboard}
+              alt="CSPzone Freezone Business Registration Dashboard - Analytics, License Status, Company Formation Progress"
+              className="w-full h-auto"
+            />
+            {/* Gradient fade at bottom */}
+            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
           </div>
         </motion.div>
       </div>
 
-      {/* Freezone Logo Slider - Positioned to overlap */}
-      <div className="relative bg-background pt-24 pb-16 -mt-8">
+      {/* Freezone Logo Slider */}
+      <div className="relative bg-background pt-16 pb-12 -mt-8">
         <div className="container-wide">
           <motion.p
             initial={{ opacity: 0 }}
@@ -330,22 +238,22 @@ export function HeroSection() {
             transition={{ delay: 0.6 }}
             className="text-center text-sm text-muted-foreground mb-8"
           >
-            Helping <span className="font-semibold text-foreground">2,400+</span> companies launch their business in Dubai
+            Trusted by <span className="font-semibold text-foreground">2,400+</span> entrepreneurs across <span className="font-semibold text-foreground">15+ UAE Freezones</span>
           </motion.p>
 
           {/* Animated Logo Slider */}
           <div className="relative overflow-hidden">
-            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
-            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
             
             <motion.div
-              className="flex gap-12 items-center"
-              animate={{ x: [0, -800] }}
+              className="flex gap-8 items-center"
+              animate={{ x: [0, -600] }}
               transition={{
                 x: {
                   repeat: Infinity,
                   repeatType: "loop",
-                  duration: 20,
+                  duration: 25,
                   ease: "linear",
                 },
               }}
@@ -353,9 +261,9 @@ export function HeroSection() {
               {[...freezoneLogos, ...freezoneLogos, ...freezoneLogos].map((logo, i) => (
                 <div
                   key={i}
-                  className="shrink-0 flex items-center justify-center px-6 py-3 bg-secondary/30 rounded-xl border border-border/50"
+                  className="shrink-0 flex items-center justify-center px-8 py-3 bg-card border border-border/50 rounded-xl hover:border-primary/30 transition-colors"
                 >
-                  <span className="text-lg font-display font-semibold text-muted-foreground whitespace-nowrap">
+                  <span className="text-base font-display font-semibold text-muted-foreground whitespace-nowrap">
                     {logo.name}
                   </span>
                 </div>

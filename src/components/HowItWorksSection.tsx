@@ -1,21 +1,21 @@
-import { Search, FileCheck, LayoutDashboard, Award, Zap, Eye, BarChart3 } from "lucide-react";
+import { Search, FileCheck, LayoutDashboard, Award, DollarSign, Clock, Shield } from "lucide-react";
 import { motion } from "framer-motion";
 
 const benefits = [
   {
-    icon: Zap,
-    title: "Save 10+ Hours",
-    description: "Automate tracking and matching so you can focus on growing your business.",
+    icon: DollarSign,
+    title: "Zero Consultancy Fee",
+    description: "Pay only Freezone charges. No agent commissions or hidden service fees.",
   },
   {
-    icon: Eye,
-    title: "Spot Hidden Risks",
-    description: "Visualize cash flow clearly and catch problems before they impact your business.",
+    icon: Clock,
+    title: "License in 3-7 Days",
+    description: "Fast-track your business setup with our streamlined digital process.",
   },
   {
-    icon: BarChart3,
-    title: "Decide With Data",
-    description: "Use real-time insights and forecasts to make confident business decisions.",
+    icon: Shield,
+    title: "100% Transparent",
+    description: "See exact pricing upfront. Compare Freezones and choose what fits your budget.",
   },
 ];
 
@@ -23,25 +23,25 @@ const steps = [
   {
     icon: Search,
     title: "Search Activity",
-    description: "Find your business activity and compare Freezone prices instantly",
+    description: "Find your business activity and compare pricing across 15+ UAE Freezones instantly",
     step: "01",
   },
   {
     icon: FileCheck,
     title: "Submit Pre-Approval",
-    description: "Fill a simple form and upload your documents securely",
+    description: "Fill a simple form, upload passport & documents. No paperwork hassle.",
     step: "02",
   },
   {
     icon: LayoutDashboard,
     title: "Track via Dashboard",
-    description: "Monitor progress, chat with admin, and manage everything in one place",
+    description: "Monitor progress, chat with support, manage payments — all in one place",
     step: "03",
   },
   {
     icon: Award,
-    title: "License Issued",
-    description: "Receive your business license and start operating in Dubai",
+    title: "Get Your License",
+    description: "Receive your UAE Freezone business license and start operating legally",
     step: "04",
   },
 ];
@@ -68,8 +68,8 @@ export function HowItWorksSection() {
               className="text-center"
             >
               <div className="inline-flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
-                  <benefit.icon className="w-4 h-4 text-primary" />
+                <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
+                  <benefit.icon className="w-5 h-5 text-primary" />
                 </div>
                 <h3 className="font-semibold text-foreground">{benefit.title}</h3>
               </div>
@@ -89,13 +89,13 @@ export function HowItWorksSection() {
           className="text-center mb-12"
         >
           <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full mb-4">
-            WHY CHOOSE US
+            HOW IT WORKS
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-foreground mb-4">
-            Run your business,<br />not your spreadsheets
+            From Search to License<br />in 4 Simple Steps
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-            Track, predict, and report your business setup—without touching Excel
+            Self-service Freezone company setup — no agents, no confusion, no surprises
           </p>
         </motion.div>
 

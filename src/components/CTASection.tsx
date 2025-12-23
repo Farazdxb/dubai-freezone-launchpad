@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, DollarSign, Clock, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -16,15 +16,31 @@ export function CTASection() {
         >
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/20 to-transparent" />
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/30 to-transparent" />
           </div>
 
-          <div className="relative z-10 text-center max-w-2xl mx-auto">
+          <div className="relative z-10 text-center max-w-3xl mx-auto">
+            {/* Selling Points */}
+            <div className="flex flex-wrap items-center justify-center gap-6 mb-8">
+              <div className="flex items-center gap-2 text-background/80 text-sm">
+                <DollarSign className="w-4 h-4 text-primary" />
+                <span>Zero Consultancy Fee</span>
+              </div>
+              <div className="flex items-center gap-2 text-background/80 text-sm">
+                <Clock className="w-4 h-4 text-primary" />
+                <span>License in 3-7 Days</span>
+              </div>
+              <div className="flex items-center gap-2 text-background/80 text-sm">
+                <Shield className="w-4 h-4 text-primary" />
+                <span>15+ UAE Freezones</span>
+              </div>
+            </div>
+
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-background mb-4">
-              All your business insights,<br />beautifully organized in one tool.
+              Ready to Start Your<br />UAE Freezone Business?
             </h2>
-            <p className="text-background/70 mb-8">
-              Track cash flow, forecast growth, and share reports—all in one simple dashboard.
+            <p className="text-background/70 mb-8 max-w-xl mx-auto">
+              Join 2,400+ entrepreneurs who saved thousands in consultancy fees. Get direct Freezone rates with full transparency.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Link to="/search-activity">
@@ -32,16 +48,17 @@ export function CTASection() {
                   size="lg" 
                   className="rounded-full px-8 bg-primary hover:bg-primary-hover text-primary-foreground"
                 >
-                  Start Managing
+                  Search Business Activities
+                  <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </Link>
-              <Link to="/dashboard">
+              <Link to="/login">
                 <Button 
                   variant="outline" 
                   size="lg" 
                   className="rounded-full px-8 border-background/20 text-background hover:bg-background/10"
                 >
-                  Try Demo
+                  View Pricing
                 </Button>
               </Link>
             </div>
