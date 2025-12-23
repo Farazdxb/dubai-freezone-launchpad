@@ -129,31 +129,31 @@ export default function MyApplications() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 + index * 0.05 }}
-            className="card-elevated p-5"
+            className="card-elevated p-4 sm:p-5"
           >
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-              {/* Left Info */}
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-accent rounded-xl flex items-center justify-center flex-shrink-0">
+            <div className="flex flex-col gap-4">
+              {/* Top Section - Icon, Title, Status */}
+              <div className="flex items-start gap-3 sm:gap-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-accent rounded-xl flex items-center justify-center flex-shrink-0">
                   {app.type === "Freezone Setup" ? (
-                    <Building2 className="w-6 h-6 text-primary" />
+                    <Building2 className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                   ) : (
-                    <FileText className="w-6 h-6 text-primary" />
+                    <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                   )}
                 </div>
-                <div>
-                  <div className="flex items-center gap-3 mb-1">
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-wrap items-center gap-2 mb-1">
                     <span className="text-xs text-muted-foreground font-mono">
                       {app.id}
                     </span>
-                    <span className={`px-2.5 py-0.5 text-xs font-medium rounded-full ${app.statusColor}`}>
+                    <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${app.statusColor}`}>
                       {app.status}
                     </span>
                   </div>
-                  <h3 className="font-semibold text-foreground mb-1">
+                  <h3 className="font-semibold text-foreground mb-1 text-sm sm:text-base truncate">
                     {app.title}
                   </h3>
-                  <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                  <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-muted-foreground">
                     <span>{app.type}</span>
                     {app.freezone && (
                       <>
@@ -164,37 +164,37 @@ export default function MyApplications() {
                     {app.activity && (
                       <>
                         <span>•</span>
-                        <span>{app.activity}</span>
+                        <span className="truncate">{app.activity}</span>
                       </>
                     )}
                   </div>
                 </div>
               </div>
 
-              {/* Right Info */}
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 lg:gap-6 w-full lg:w-auto">
-                <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                  <Clock className="w-4 h-4" />
+              {/* Bottom Section - Time and Actions */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-3 border-t border-border/50">
+                <div className="flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground">
+                  <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   {app.lastUpdated}
                 </div>
 
-                <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto">
+                <div className="grid grid-cols-2 sm:flex sm:flex-row gap-2">
                   {app.paymentPending && (
-                    <Button variant="hero" size="sm" className="flex-1 sm:flex-none">
+                    <Button variant="hero" size="sm" className="text-xs sm:text-sm">
                       Pay Now
                     </Button>
                   )}
 
-                  <Link to={`/dashboard/applications/${app.id}`} className="flex-1 sm:flex-none">
-                    <Button variant="outline" size="sm" className="w-full">
-                      <Eye className="w-4 h-4" />
-                      View Ticket
+                  <Link to={`/dashboard/applications/${app.id}`} className="col-span-1">
+                    <Button variant="outline" size="sm" className="w-full text-xs sm:text-sm">
+                      <Eye className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                      <span className="hidden xs:inline">View</span> Ticket
                     </Button>
                   </Link>
 
                   {app.status === "Completed" && (
-                    <Button variant="secondary" size="sm" className="flex-1 sm:flex-none">
-                      <Download className="w-4 h-4" />
+                    <Button variant="secondary" size="sm" className="col-span-1 text-xs sm:text-sm">
+                      <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                       Download
                     </Button>
                   )}
