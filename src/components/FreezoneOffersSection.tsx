@@ -24,7 +24,7 @@ const freezonePackages = [{
   buttonText: "Choose This Plan",
   buttonVariant: "default" as const
 }, {
-  name: "Enterprise",
+  name: "Industrial License",
   freezone: "DMCC",
   price: "AED 18,000",
   period: "/ year",
