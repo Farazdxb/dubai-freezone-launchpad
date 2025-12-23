@@ -50,10 +50,10 @@ export function FreezoneOffersSection() {
         duration: 0.5
       }} className="text-center mb-4">
           <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full mb-4">
-            PRICING
+            TRENDING  
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-foreground mb-4">
-            Start free. Upgrade<br />when you're ready.
+            Grab best Freezone    <br />package today! 
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto">
             ​Low Cost Freezone License Offers from all across the UAE           
@@ -110,13 +110,9 @@ export function FreezoneOffersSection() {
 
               {/* CTA */}
               <div className="mt-auto text-center">
-                <NewCompanySetupForm
-                  trigger={
-                    <Button variant={pkg.buttonVariant} className={`w-full rounded-lg ${pkg.popular ? "bg-primary hover:bg-primary-hover" : ""}`}>
+                <NewCompanySetupForm trigger={<Button variant={pkg.buttonVariant} className={`w-full rounded-lg ${pkg.popular ? "bg-primary hover:bg-primary-hover" : ""}`}>
                       Submit Preapproval Request
-                    </Button>
-                  }
-                />
+                    </Button>} />
                 <p className="text-xs text-muted-foreground mt-2">no payment required</p>
               </div>
             </motion.div>)}
