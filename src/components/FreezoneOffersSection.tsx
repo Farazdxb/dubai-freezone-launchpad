@@ -75,7 +75,7 @@ export function FreezoneOffersSection() {
             Latest Freezone Offers
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-foreground mb-4">
-            Start free. Upgrade<br />when you're ready.
+            Grab the Latest Freezone<br />Company Setup Offers
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto">
             No pressure, no lock-in—just tools that grow with your biz
