@@ -24,6 +24,12 @@ import AdminUsers from "./pages/admin/AdminUsers";
 import AdminStaff from "./pages/admin/AdminStaff";
 import AdminSettings from "./pages/admin/AdminSettings";
 
+// Staff Pages
+import StaffLogin from "./pages/staff/StaffLogin";
+import StaffDashboard from "./pages/staff/StaffDashboard";
+import StaffTickets from "./pages/staff/StaffTickets";
+import StaffTicketView from "./pages/staff/StaffTicketView";
+import StaffLicenses from "./pages/staff/StaffLicenses";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -53,6 +59,13 @@ const App = () => (
           <Route path="/admin/users" element={<AdminUsers />} />
           <Route path="/admin/staff" element={<AdminStaff />} />
           <Route path="/admin/settings" element={<AdminSettings />} />
+          
+          {/* Staff Routes */}
+          <Route path="/staff/login" element={<StaffLogin />} />
+          <Route path="/staff" element={<StaffDashboard />} />
+          <Route path="/staff/tickets" element={<StaffTickets />} />
+          <Route path="/staff/tickets/:id" element={<StaffTicketView />} />
+          <Route path="/staff/licenses" element={<StaffLicenses />} />
           
           <Route path="*" element={<NotFound />} />
         </Routes>
