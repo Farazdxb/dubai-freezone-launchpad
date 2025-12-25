@@ -10,6 +10,9 @@ import {
   Building2,
   Calendar,
   Clock,
+  UserPlus,
+  RefreshCw,
+  Check,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { AdminLayout } from "@/components/admin/AdminLayout";
@@ -38,6 +41,34 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useToast } from "@/hooks/use-toast";
+
+// Mock staff data
+const staffMembers = [
+  { id: "1", name: "Sarah Admin", email: "sarah@company.com", role: "Super Admin", avatar: "" },
+  { id: "2", name: "Mike Staff", email: "mike@company.com", role: "Operations", avatar: "" },
+  { id: "3", name: "John Admin", email: "john@company.com", role: "Support", avatar: "" },
+  { id: "4", name: "Emily Wilson", email: "emily@company.com", role: "Finance", avatar: "" },
+  { id: "5", name: "David Lee", email: "david@company.com", role: "Operations", avatar: "" },
+];
+
+const ticketStatusOptions = [
+  { value: "Under Processing", label: "Under Processing", color: "bg-blue-500" },
+  { value: "Documents Requested", label: "Documents Requested", color: "bg-amber-500" },
+  { value: "Payment Pending", label: "Payment Pending", color: "bg-orange-500" },
+  { value: "Completed", label: "Completed", color: "bg-green-500" },
+];
 
 const applications = [
   {
@@ -158,6 +189,46 @@ export default function AdminApplications() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [serviceFilter, setServiceFilter] = useState("all");
   const [freezoneFilter, setFreezoneFilter] = useState("all");
+  
+  // Dialog states
+  const [assignDialogOpen, setAssignDialogOpen] = useState(false);
+  const [statusDialogOpen, setStatusDialogOpen] = useState(false);
+  const [selectedTicket, setSelectedTicket] = useState<typeof applications[0] | null>(null);
+  const [selectedStaff, setSelectedStaff] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("");
+  
+  const { toast } = useToast();
+
+  const handleOpenAssignDialog = (app: typeof applications[0]) => {
+    setSelectedTicket(app);
+    setSelectedStaff("");
+    setAssignDialogOpen(true);
+  };
+
+  const handleOpenStatusDialog = (app: typeof applications[0]) => {
+    setSelectedTicket(app);
+    setSelectedStatus(app.status);
+    setStatusDialogOpen(true);
+  };
+
+  const handleAssignStaff = () => {
+    if (!selectedStaff) return;
+    const staff = staffMembers.find(s => s.id === selectedStaff);
+    toast({
+      title: "Staff Assigned",
+      description: `${selectedTicket?.id} has been assigned to ${staff?.name}.`,
+    });
+    setAssignDialogOpen(false);
+  };
+
+  const handleUpdateStatus = () => {
+    if (!selectedStatus) return;
+    toast({
+      title: "Status Updated",
+      description: `${selectedTicket?.id} status changed to "${selectedStatus}".`,
+    });
+    setStatusDialogOpen(false);
+  };
 
   return (
     <AdminLayout>
@@ -306,9 +377,15 @@ export default function AdminApplications() {
                               <MoreHorizontal className="w-4 h-4" />
                             </Button>
                           </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuItem>Assign Staff</DropdownMenuItem>
-                            <DropdownMenuItem>Update Status</DropdownMenuItem>
+                          <DropdownMenuContent align="end" className="bg-background border">
+                            <DropdownMenuItem onClick={() => handleOpenAssignDialog(app)}>
+                              <UserPlus className="w-4 h-4 mr-2" />
+                              Assign Staff
+                            </DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => handleOpenStatusDialog(app)}>
+                              <RefreshCw className="w-4 h-4 mr-2" />
+                              Update Status
+                            </DropdownMenuItem>
                             <DropdownMenuItem>Add Note</DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
@@ -382,10 +459,22 @@ export default function AdminApplications() {
                   </Link>
                 </Button>
                 <div className="grid grid-cols-2 gap-2">
-                  <Button variant="outline" size="sm" className="w-full text-xs">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="w-full text-xs"
+                    onClick={() => handleOpenStatusDialog(app)}
+                  >
+                    <RefreshCw className="w-3 h-3 mr-1" />
                     Update Status
                   </Button>
-                  <Button variant="outline" size="sm" className="w-full text-xs">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="w-full text-xs"
+                    onClick={() => handleOpenAssignDialog(app)}
+                  >
+                    <UserPlus className="w-3 h-3 mr-1" />
                     Assign Staff
                   </Button>
                 </div>
@@ -394,6 +483,108 @@ export default function AdminApplications() {
           </Card>
         ))}
       </motion.div>
+
+      {/* Assign Staff Dialog */}
+      <Dialog open={assignDialogOpen} onOpenChange={setAssignDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Assign Staff Member</DialogTitle>
+            <DialogDescription>
+              Select a staff member to assign to ticket {selectedTicket?.id}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="py-4">
+            <RadioGroup value={selectedStaff} onValueChange={setSelectedStaff}>
+              <div className="space-y-3">
+                {staffMembers.map((staff) => (
+                  <div
+                    key={staff.id}
+                    className={`flex items-center space-x-3 p-3 rounded-lg border cursor-pointer transition-colors ${
+                      selectedStaff === staff.id
+                        ? "border-primary bg-primary/5"
+                        : "border-border hover:bg-accent/50"
+                    }`}
+                    onClick={() => setSelectedStaff(staff.id)}
+                  >
+                    <RadioGroupItem value={staff.id} id={staff.id} />
+                    <Avatar className="h-10 w-10">
+                      <AvatarImage src={staff.avatar} />
+                      <AvatarFallback className="bg-primary/10 text-primary">
+                        {staff.name.split(" ").map(n => n[0]).join("")}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1 min-w-0">
+                      <Label htmlFor={staff.id} className="font-medium cursor-pointer">
+                        {staff.name}
+                      </Label>
+                      <p className="text-xs text-muted-foreground">{staff.role}</p>
+                    </div>
+                    {selectedTicket?.assignedTo === staff.name && (
+                      <Badge variant="outline" className="text-xs">Current</Badge>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </RadioGroup>
+          </div>
+          <DialogFooter className="flex-col sm:flex-row gap-2">
+            <Button variant="outline" onClick={() => setAssignDialogOpen(false)} className="w-full sm:w-auto">
+              Cancel
+            </Button>
+            <Button onClick={handleAssignStaff} disabled={!selectedStaff} className="w-full sm:w-auto">
+              <Check className="w-4 h-4 mr-2" />
+              Assign Staff
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Update Status Dialog */}
+      <Dialog open={statusDialogOpen} onOpenChange={setStatusDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Update Ticket Status</DialogTitle>
+            <DialogDescription>
+              Change the status of ticket {selectedTicket?.id}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="py-4">
+            <RadioGroup value={selectedStatus} onValueChange={setSelectedStatus}>
+              <div className="space-y-3">
+                {ticketStatusOptions.map((status) => (
+                  <div
+                    key={status.value}
+                    className={`flex items-center space-x-3 p-3 rounded-lg border cursor-pointer transition-colors ${
+                      selectedStatus === status.value
+                        ? "border-primary bg-primary/5"
+                        : "border-border hover:bg-accent/50"
+                    }`}
+                    onClick={() => setSelectedStatus(status.value)}
+                  >
+                    <RadioGroupItem value={status.value} id={status.value} />
+                    <div className={`w-3 h-3 rounded-full ${status.color}`} />
+                    <Label htmlFor={status.value} className="flex-1 cursor-pointer">
+                      {status.label}
+                    </Label>
+                    {selectedTicket?.status === status.value && (
+                      <Badge variant="outline" className="text-xs">Current</Badge>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </RadioGroup>
+          </div>
+          <DialogFooter className="flex-col sm:flex-row gap-2">
+            <Button variant="outline" onClick={() => setStatusDialogOpen(false)} className="w-full sm:w-auto">
+              Cancel
+            </Button>
+            <Button onClick={handleUpdateStatus} disabled={!selectedStatus} className="w-full sm:w-auto">
+              <Check className="w-4 h-4 mr-2" />
+              Update Status
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </AdminLayout>
   );
 }
