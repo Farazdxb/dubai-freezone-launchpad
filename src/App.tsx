@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import MyApplications from "./pages/MyApplications";
 import MyDocuments from "./pages/MyDocuments";
 import TicketView from "./pages/TicketView";
+import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
@@ -46,6 +47,7 @@ const App = () => (
           <Route path="/dashboard/applications/:id" element={<TicketView />} />
           <Route path="/dashboard/documents" element={<MyDocuments />} />
           <Route path="/dashboard/licenses" element={<MyDocuments />} />
+          <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogPost />} />
           <Route path="/login" element={<Login />} />
           
