@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, LucideIcon } from "lucide-react";
+import { ArrowRight, CheckCircle2, LucideIcon, LogIn, FileUp, CheckCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
@@ -261,45 +261,45 @@ export function ServicePageTemplate({ data }: ServicePageTemplateProps) {
             <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
               {[
                 {
-                  step: "01",
+                  icon: LogIn,
                   title: "Login to the Portal",
-                  description: "Create your account or login to the CSPzone portal using the login button above."
+                  description: "Create your account or login to the CSPzone portal using the login button above.",
+                  gradient: "from-[hsl(217,91%,60%)] to-[hsl(230,80%,55%)]"
                 },
                 {
-                  step: "02",
+                  icon: FileUp,
                   title: "Submit Documents",
-                  description: "Upload the required documents through your dashboard. Our team will review them promptly."
+                  description: "Upload the required documents through your dashboard. Our team will review them promptly.",
+                  gradient: "from-[hsl(220,80%,55%)] to-[hsl(200,70%,50%)]"
                 },
                 {
-                  step: "03",
+                  icon: CheckCheck,
                   title: "Finalise & Done",
-                  description: "Complete the agreement, make payment, and receive your completed service deliverables."
+                  description: "Complete the agreement, make payment, and receive your completed service deliverables.",
+                  gradient: "from-[hsl(190,70%,50%)] to-[hsl(175,60%,55%)]"
                 }
               ].map((item, index) => (
                 <motion.div
-                  key={item.step}
+                  key={item.title}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.15 }}
                   className="relative group"
                 >
-                  <div className="bg-card rounded-xl border border-border p-6 h-full hover:shadow-lg hover:border-primary/20 transition-all duration-300">
-                    <span className="text-5xl font-display font-bold text-secondary mb-4 block group-hover:text-primary/20 transition-colors">
-                      {item.step}
-                    </span>
-                    <h3 className="text-lg font-semibold text-foreground mb-2">
+                  <div className={`bg-gradient-to-br ${item.gradient} rounded-2xl p-6 lg:p-8 h-full transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-1`}>
+                    {/* Icon Container */}
+                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mb-6">
+                      <item.icon className="w-6 h-6 text-white" />
+                    </div>
+                    
+                    <h3 className="text-xl font-semibold text-white mb-3">
                       {item.title}
                     </h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
+                    <p className="text-white/80 text-sm leading-relaxed">
                       {item.description}
                     </p>
                   </div>
-                  
-                  {/* Connector Line (hidden on mobile) */}
-                  {index < 2 && (
-                    <div className="hidden md:block absolute top-1/2 -right-4 lg:-right-5 w-8 lg:w-10 h-0.5 bg-border" />
-                  )}
                 </motion.div>
               ))}
             </div>
