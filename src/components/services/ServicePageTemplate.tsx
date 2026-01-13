@@ -162,12 +162,18 @@ export function ServicePageTemplate({ data }: ServicePageTemplateProps) {
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
                 Key Benefits
               </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                Discover the advantages of choosing our professional service
+              <p className="text-muted-foreground max-w-3xl mx-auto mb-6">
+                Our service is designed to provide you with a seamless, stress-free experience from start to finish. 
+                We understand the complexities involved in setting up and managing business operations in the UAE, 
+                which is why we've crafted our solutions to address your specific needs with precision and care.
+              </p>
+              <p className="text-muted-foreground max-w-3xl mx-auto">
+                With years of expertise and a commitment to excellence, we ensure that every aspect of your requirements 
+                is handled professionally, saving you valuable time and resources while delivering outstanding results.
               </p>
             </motion.div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
               {data.benefits.map((benefit, index) => (
                 <motion.div
                   key={benefit.title}
