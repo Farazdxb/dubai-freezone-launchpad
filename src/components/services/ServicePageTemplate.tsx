@@ -49,9 +49,15 @@ export function ServicePageTemplate({ data }: ServicePageTemplateProps) {
       
       <main className="pt-16 lg:pt-18">
         {/* Hero Section */}
-        <section className="bg-gradient-hero section-padding">
-          <div className="container-wide">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <section className="relative pt-28 pb-0 overflow-hidden bg-background">
+          {/* Gradient background */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[800px] bg-gradient-to-b from-primary/8 via-primary/3 to-transparent rounded-full blur-3xl" />
+          </div>
+
+          <div className="container-wide relative z-10">
+            {/* Content Grid */}
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-12 lg:mb-16">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -72,6 +78,7 @@ export function ServicePageTemplate({ data }: ServicePageTemplateProps) {
                 </Link>
               </motion.div>
               
+              {/* Hero Image - Desktop Side View */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -86,6 +93,28 @@ export function ServicePageTemplate({ data }: ServicePageTemplateProps) {
                 />
               </motion.div>
             </div>
+
+            {/* Dashboard Image - Full Width (Mobile & Tablet) */}
+            <motion.div
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="relative max-w-5xl mx-auto lg:hidden"
+            >
+              {/* Glow effect behind image */}
+              <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-primary/10 to-transparent rounded-3xl blur-3xl -z-10 scale-95" />
+              
+              {/* Main Dashboard Image */}
+              <div className="relative rounded-t-2xl overflow-hidden border border-border/30 shadow-2xl shadow-primary/10">
+                <img
+                  src={heroImage}
+                  alt={`${data.title} Dashboard`}
+                  className="w-full h-auto"
+                />
+                {/* Gradient fade at bottom */}
+                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
+              </div>
+            </motion.div>
           </div>
         </section>
 
