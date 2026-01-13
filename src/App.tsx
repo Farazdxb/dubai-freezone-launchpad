@@ -14,6 +14,7 @@ import BlogPost from "./pages/BlogPost";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import ServicePage from "./pages/ServicePage";
+import Services from "./pages/Services";
 
 // Admin Pages
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -51,6 +52,7 @@ const App = () => (
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogPost />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/services" element={<Services />} />
           
           {/* Service Pages */}
           <Route path="/dubai/:slug" element={<ServicePage />} />
