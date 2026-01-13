@@ -56,18 +56,17 @@ export function ServicePageTemplate({ data }: ServicePageTemplateProps) {
           </div>
 
           <div className="container-wide relative z-10">
-            {/* Content Grid */}
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-12 lg:mb-16">
+            {/* Centered Content */}
+            <div className="text-center max-w-4xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-center lg:text-left"
               >
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6 leading-tight">
                   {data.title}
                 </h1>
-                <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-xl mx-auto lg:mx-0">
+                <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
                   {data.shortDescription}
                 </p>
                 <Link to="/login">
@@ -77,29 +76,14 @@ export function ServicePageTemplate({ data }: ServicePageTemplateProps) {
                   </Button>
                 </Link>
               </motion.div>
-              
-              {/* Hero Image - Desktop Side View */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="relative hidden lg:block"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/5 rounded-3xl blur-3xl" />
-                <img
-                  src={heroImage}
-                  alt={data.title}
-                  className="relative rounded-2xl shadow-xl border border-border/50"
-                />
-              </motion.div>
             </div>
 
-            {/* Dashboard Image - Full Width (Mobile & Tablet) */}
+            {/* Dashboard Image - Full Width Below Content */}
             <motion.div
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="relative max-w-5xl mx-auto lg:hidden"
+              className="relative max-w-5xl mx-auto mt-12"
             >
               {/* Glow effect behind image */}
               <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-primary/10 to-transparent rounded-3xl blur-3xl -z-10 scale-95" />
