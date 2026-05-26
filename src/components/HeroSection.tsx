@@ -82,35 +82,37 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.25 }}
-              className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3"
+              className="mt-8 flex items-center justify-center"
             >
               <Link to="/dashboard" className="w-full sm:w-auto">
                 <Button size="lg" className="rounded-full px-8 w-full sm:w-auto font-semibold shadow-lg shadow-primary/25">
                   Get my license
                 </Button>
               </Link>
-              <Link to="#pricing" className="w-full sm:w-auto">
-                <Button size="lg" variant="outline" className="rounded-full px-8 w-full sm:w-auto font-semibold border-border bg-background">
-                  View pricing
-                </Button>
-              </Link>
             </motion.div>
 
-            <motion.div
+            <motion.a
+              href="https://www.trustpilot.com/review/cspzone.com"
+              target="_blank"
+              rel="nofollow noopener noreferrer"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="mt-7 inline-flex items-center gap-2 text-sm text-muted-foreground"
+              className="mt-7 inline-flex items-center gap-2 text-sm hover:opacity-80 transition-opacity"
             >
-              <div className="flex items-center gap-0.5 text-primary">
+              <span className="font-semibold text-foreground underline underline-offset-2">Great</span>
+              <span className="flex items-center gap-0.5">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                  <span key={i} className="w-4 h-4 bg-[#00B67A] flex items-center justify-center">
+                    <Star className="w-2.5 h-2.5 text-white fill-current" />
+                  </span>
                 ))}
-              </div>
-              <span className="font-medium text-foreground">4.9</span>
-              <span>·</span>
-              <span>2,000+ businesses launched</span>
-            </motion.div>
+              </span>
+              <span className="flex items-center gap-1 text-foreground font-medium">
+                <Star className="w-3.5 h-3.5 text-[#00B67A] fill-current" />
+                Trustpilot
+              </span>
+            </motion.a>
           </div>
 
           {/* Right floating photo */}
@@ -149,9 +151,9 @@ export function HeroSection() {
           className="mt-16 lg:mt-24 max-w-3xl mx-auto bg-background border border-border rounded-2xl px-4 sm:px-8 py-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 shadow-sm"
         >
           {[
-            { icon: CheckCircle2, label: "100% accuracy guaranteed" },
+            { icon: CheckCircle2, label: "No Consultancy Fee" },
             { icon: Bell, label: "Deadline reminders built-in" },
-            { icon: Sparkles, label: "FTA & Freezone approved" },
+            { icon: Sparkles, label: "Monthly Instalment Subscription" },
           ].map(({ icon: Icon, label }) => (
             <div key={label} className="flex items-center gap-2 text-sm">
               <Icon className="w-4 h-4 text-primary" />
