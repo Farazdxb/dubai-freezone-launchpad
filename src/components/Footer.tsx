@@ -54,15 +54,6 @@ export function Footer() {
           <p className="text-xs text-white/50">All rights reserved.</p>
         </div>
 
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row gap-3 items-center justify-between">
-          <p className="text-xs text-white/50">© {new Date().getFullYear()} CSPzone. All rights reserved.</p>
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-white/50">
-            <span>DED registered</span><span>·</span>
-            <span>IFZA approved</span><span>·</span>
-            <span>FTA tax agent</span><span>·</span>
-            <span>ISO certified</span>
-          </div>
-        </div>
       </div>
     </footer>
   );
