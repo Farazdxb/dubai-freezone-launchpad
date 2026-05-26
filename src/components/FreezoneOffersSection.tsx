@@ -1,7 +1,9 @@
 import { Check, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { NewCompanySetupForm } from "@/components/NewCompanySetupForm";
+
 
 const licensePackages = [
   {
