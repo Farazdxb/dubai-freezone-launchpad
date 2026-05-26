@@ -123,10 +123,10 @@ export function FreezoneOffersSection() {
                 )}
                 <h3 className={`text-lg font-semibold mb-2 ${pkg.featured ? "text-white" : ""}`}>{pkg.name}</h3>
                 <div className="mb-1">
-                  <span className={`serif-display text-5xl ${pkg.featured ? "text-white" : "text-foreground"}`}>{pkg.price}</span>
+                  <span className={`serif-display text-5xl ${pkg.featured ? "text-white" : "text-foreground"}`}>{plan.price}</span>
                 </div>
-                <p className={`text-sm mb-1 ${pkg.featured ? "text-white/85" : "text-muted-foreground"}`}>{pkg.period}</p>
-                <p className={`text-xs font-medium mb-5 ${pkg.featured ? "text-white/70" : "text-muted-foreground"}`}>{pkg.total}</p>
+                <p className={`text-sm mb-1 ${pkg.featured ? "text-white/85" : "text-muted-foreground"}`}>{plan.period}</p>
+                <p className={`text-xs font-medium mb-5 ${pkg.featured ? "text-white/70" : "text-muted-foreground"}`}>{plan.total}</p>
                 <p className={`text-sm mb-6 ${pkg.featured ? "text-white/85" : "text-muted-foreground"}`}>{pkg.description}</p>
                 <ul className="space-y-3 mb-8 flex-grow">
                   {pkg.features.map((f) => (
@@ -149,8 +149,10 @@ export function FreezoneOffersSection() {
                   }
                 />
               </motion.div>
-            ))}
+              );
+            })}
           </div>
+
 
           <p className="text-center text-xs text-white/40 mt-10">
             All prices in AED. Government fees included. No hidden charges.
