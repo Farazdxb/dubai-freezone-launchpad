@@ -53,7 +53,32 @@ export function SocialProof() {
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        {/* Mobile: swipeable carousel | Desktop: grid */}
+        <div className="md:hidden -mx-4 px-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory">
+          <div className="flex gap-4 pb-2">
+            {testimonials.map((t) => (
+              <div
+                key={t.name}
+                className="snap-center shrink-0 w-[85%] bg-card rounded-3xl border border-border p-7"
+              >
+                <p className="serif-display text-2xl text-foreground leading-snug mb-6">
+                  &ldquo;{t.q}&rdquo;
+                </p>
+                <div className="flex items-center gap-3 pt-5 border-t border-border">
+                  <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
+                    {t.name.split(" ").map((n) => n[0]).join("")}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground text-sm">{t.name}</p>
+                    <p className="text-muted-foreground text-xs">{t.role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="hidden md:grid md:grid-cols-3 gap-6">
           {testimonials.map((t, i) => (
             <motion.div
               key={t.name}
@@ -64,7 +89,7 @@ export function SocialProof() {
               className="bg-card rounded-3xl border border-border p-7 hover:shadow-lg transition-all"
             >
               <p className="serif-display text-2xl text-foreground leading-snug mb-6">
-                “{t.q}”
+                &ldquo;{t.q}&rdquo;
               </p>
               <div className="flex items-center gap-3 pt-5 border-t border-border">
                 <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
