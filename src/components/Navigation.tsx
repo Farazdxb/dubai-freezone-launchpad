@@ -3,107 +3,139 @@ import { Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import { TopPromoBar } from "@/components/TopPromoBar";
+
+const services = {
+  "Start a Business": ["Mainland License", "Freezone License", "Offshore", "Visa Services"],
+  Compliance: ["VAT Registration", "VAT Filing", "Corporate Tax", "ESR", "UBO"],
+  Manage: ["Accounting", "Bookkeeping", "PRO Services", "Bank Account Opening"],
+};
 
 const navItems = [
-  { label: "Features", href: "#how-it-works" },
   { label: "Pricing", href: "#pricing" },
-  { label: "Freezones", href: "/search-activity" },
-  { label: "Blog", href: "/blog" },
+  { label: "Resources", href: "/blog" },
+  { label: "About", href: "#about" },
 ];
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/40">
-      <nav className="container-wide">
-        <div className="flex items-center justify-between h-16 lg:h-18">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5">
-            <div className="w-9 h-9 bg-primary rounded-xl flex items-center justify-center">
-              <svg className="w-5 h-5 text-primary-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <span className="font-display font-bold text-xl text-foreground">
-              CSPzone
-            </span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1">
-            {navItems.map((item) => (
-              <Link
-                key={item.label}
-                to={item.href}
-                className="px-4 py-2 text-muted-foreground hover:text-foreground transition-colors text-sm font-medium rounded-lg hover:bg-secondary/50"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-
-          {/* Desktop CTA */}
-          <div className="hidden lg:flex items-center gap-3">
-            <Link to="/login">
-              <Button variant="ghost" size="sm" className="font-medium">
-                Log in
-              </Button>
-            </Link>
-            <Link to="/dashboard">
-              <Button size="sm" className="rounded-full px-5 font-medium">
-                Get Started
-              </Button>
-            </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden p-2 text-foreground hover:bg-secondary/50 rounded-lg transition-colors"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2 }}
-              className="lg:hidden overflow-hidden"
-            >
-              <div className="py-4 space-y-1 border-t border-border/40">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.label}
-                    to={item.href}
-                    className="block px-3 py-2.5 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-colors text-sm font-medium"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-                <div className="pt-4 flex flex-col gap-2">
-                  <Link to="/login" onClick={() => setIsOpen(false)}>
-                    <Button variant="outline" className="w-full rounded-lg">
-                      Log in
-                    </Button>
-                  </Link>
-                  <Link to="/dashboard" onClick={() => setIsOpen(false)}>
-                    <Button className="w-full rounded-full">
-                      Get Started
-                    </Button>
-                  </Link>
-                </div>
+    <header className="fixed top-0 left-0 right-0 z-50">
+      <TopPromoBar />
+      <div className="bg-background/90 backdrop-blur-xl border-b border-border/60">
+        <nav className="container-wide">
+          <div className="flex items-center justify-between h-16">
+            <Link to="/" className="flex items-center gap-2.5">
+              <div className="w-9 h-9 bg-foreground rounded-xl flex items-center justify-center">
+                <span className="text-background font-serif text-xl leading-none -mt-1">C</span>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
+              <span className="font-display font-bold text-lg tracking-tight text-foreground">
+                CSPzone
+              </span>
+            </Link>
+
+            {/* Desktop nav */}
+            <div className="hidden lg:flex items-center gap-1">
+              <div
+                className="relative"
+                onMouseEnter={() => setServicesOpen(true)}
+                onMouseLeave={() => setServicesOpen(false)}
+              >
+                <button className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground transition-colors rounded-lg">
+                  Services <ChevronDown className="w-3.5 h-3.5" />
+                </button>
+                <AnimatePresence>
+                  {servicesOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ duration: 0.18 }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[640px] bg-card border border-border rounded-2xl shadow-xl p-6 grid grid-cols-3 gap-6"
+                    >
+                      {Object.entries(services).map(([group, items]) => (
+                        <div key={group}>
+                          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+                            {group}
+                          </p>
+                          <ul className="space-y-2">
+                            {items.map((item) => (
+                              <li key={item}>
+                                <Link
+                                  to="#"
+                                  className="text-sm text-foreground/80 hover:text-primary transition-colors"
+                                >
+                                  {item}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+              {navItems.map((item) => (
+                <Link
+                  key={item.label}
+                  to={item.href}
+                  className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+
+            <div className="hidden lg:flex items-center gap-2">
+              <Link to="/login">
+                <Button variant="ghost" size="sm" className="font-medium">Login</Button>
+              </Link>
+              <Link to="/dashboard">
+                <Button size="sm" className="rounded-full px-5 font-semibold">Get Started</Button>
+              </Link>
+            </div>
+
+            <button
+              className="lg:hidden p-2 text-foreground rounded-lg"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle menu"
+            >
+              {isOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
+
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                className="lg:hidden overflow-hidden"
+              >
+                <div className="py-4 space-y-1 border-t border-border/60">
+                  {Object.keys(services).map((g) => (
+                    <Link key={g} to="#" className="block px-3 py-2 text-sm font-medium text-foreground/80">
+                      {g}
+                    </Link>
+                  ))}
+                  {navItems.map((item) => (
+                    <Link key={item.label} to={item.href} className="block px-3 py-2 text-sm font-medium text-foreground/80" onClick={() => setIsOpen(false)}>
+                      {item.label}
+                    </Link>
+                  ))}
+                  <div className="pt-3 flex flex-col gap-2">
+                    <Link to="/login"><Button variant="outline" className="w-full">Login</Button></Link>
+                    <Link to="/dashboard"><Button className="w-full rounded-full">Get Started</Button></Link>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </nav>
+      </div>
     </header>
   );
 }

@@ -1,67 +1,36 @@
-import { ArrowRight, DollarSign, Clock, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 export function CTASection() {
   return (
-    <section className="py-20">
+    <section className="py-20 bg-primary">
       <div className="container-wide">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="relative overflow-hidden bg-foreground rounded-3xl p-8 md:p-12 lg:p-16"
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto"
         >
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/30 to-transparent" />
-          </div>
-
-          <div className="relative z-10 text-center max-w-3xl mx-auto">
-            {/* Selling Points */}
-            <div className="flex flex-wrap items-center justify-center gap-6 mb-8">
-              <div className="flex items-center gap-2 text-background/80 text-sm">
-                <DollarSign className="w-4 h-4 text-primary" />
-                <span>Zero Consultancy Fee</span>
-              </div>
-              <div className="flex items-center gap-2 text-background/80 text-sm">
-                <Clock className="w-4 h-4 text-primary" />
-                <span>License in 3-7 Days</span>
-              </div>
-              <div className="flex items-center gap-2 text-background/80 text-sm">
-                <Shield className="w-4 h-4 text-primary" />
-                <span>15+ UAE Freezones</span>
-              </div>
-            </div>
-
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-background mb-4">
-              Ready to Start Your<br />UAE Freezone Business?
-            </h2>
-            <p className="text-background/70 mb-8 max-w-xl mx-auto">
-              Join 2,400+ entrepreneurs who saved thousands in consultancy fees. Get direct Freezone rates with full transparency.
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <Link to="/search-activity">
-                <Button 
-                  size="lg" 
-                  className="rounded-full px-8 bg-primary hover:bg-primary-hover text-primary-foreground"
-                >
-                  Search Business Activities
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </Link>
-              <Link to="/login">
-                <Button 
-                  variant="outline" 
-                  size="lg" 
-                  className="rounded-full px-8 border-background/20 text-background hover:bg-background/10"
-                >
-                  View Pricing
-                </Button>
-              </Link>
-            </div>
+          <h2 className="serif-display text-4xl sm:text-5xl lg:text-7xl text-white mb-6">
+            Your UAE business is<br /><em className="italic">one click away.</em>
+          </h2>
+          <p className="text-white/85 text-lg mb-9 max-w-xl mx-auto">
+            Register, stay compliant and manage everything from one elegant dashboard.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link to="/dashboard">
+              <Button size="lg" className="rounded-full px-8 bg-white text-primary hover:bg-white/90 font-semibold">
+                Get my license <ArrowRight className="w-4 h-4 ml-1" />
+              </Button>
+            </Link>
+            <Link to="#pricing">
+              <Button size="lg" variant="outline" className="rounded-full px-8 border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white font-semibold">
+                View pricing
+              </Button>
+            </Link>
           </div>
         </motion.div>
       </div>
