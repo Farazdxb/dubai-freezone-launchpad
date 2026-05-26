@@ -3,7 +3,7 @@ import { Check, X } from "lucide-react";
 
 const rows = [
   ["One platform for license, VAT, tax, accounting", "Juggle a PRO, accountant, lawyer, typing center"],
-  ["Transparent fixed pricing — no hidden fees", "Surprise charges and shifting quotes"],
+  ["Transparent fixed pricing - no hidden fees", "Surprise charges and shifting quotes"],
   ["Deadline reminders + auto-filing", "Miss a VAT deadline = AED 10,000 fine"],
   ["Dashboard access 24/7", "WhatsApp follow-ups and lost email threads"],
   ["Licensed agents + expert tax team", "Generic consultant with no tax background"],

@@ -22,7 +22,7 @@ export function Footer() {
             </Link>
 
             <p className="text-white/60 text-sm leading-relaxed">
-              The elegant way to start and run your UAE business. License, compliance, accounting — one dashboard.
+              The elegant way to start and run your UAE business. License, compliance, accounting - one dashboard.
             </p>
             <div className="flex items-center gap-3 mt-5">
               <a href="#" className="w-9 h-9 rounded-full bg-white/5 hover:bg-primary flex items-center justify-center transition-colors"><Instagram className="w-4 h-4" /></a>

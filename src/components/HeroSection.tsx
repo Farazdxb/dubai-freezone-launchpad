@@ -74,7 +74,7 @@ export function HeroSection() {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="text-base sm:text-lg text-muted-foreground mt-6 max-w-xl mx-auto leading-relaxed"
             >
-              Business license, VAT, corporate tax and accounting — handled by experts,
+              Business license, VAT, corporate tax and accounting - handled by experts,
               managed from one elegant dashboard.
             </motion.p>
 

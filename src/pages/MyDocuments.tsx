@@ -170,7 +170,7 @@ export default function MyDocuments() {
                   {doc.expiryDate ? (
                     <span className="text-foreground">{doc.expiryDate}</span>
                   ) : (
-                    <span className="text-muted-foreground">—</span>
+                    <span className="text-muted-foreground">-</span>
                   )}
                 </div>
                 <div className="flex justify-end">

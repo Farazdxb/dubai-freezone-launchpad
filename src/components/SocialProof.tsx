@@ -9,7 +9,7 @@ const stats = [
 
 const testimonials = [
   {
-    q: "CSPzone replaced our PRO, accountant and consultant. The dashboard alone is worth it — I never miss a deadline.",
+    q: "CSPzone replaced our PRO, accountant and consultant. The dashboard alone is worth it - I never miss a deadline.",
     name: "Ahmed Hassan",
     role: "Founder, TechVentures Dubai",
   },
