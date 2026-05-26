@@ -60,12 +60,14 @@ const complianceSubs = [
 ];
 
 export function FreezoneOffersSection() {
+  const [billing, setBilling] = useState<"monthly" | "yearly">("monthly");
+
   return (
     <>
       {/* License pricing on dark */}
       <section id="pricing" className="section-padding" style={{ background: "hsl(var(--neutral-950))" }}>
         <div className="container-wide">
-          <div className="text-center max-w-2xl mx-auto mb-14">
+          <div className="text-center max-w-2xl mx-auto mb-10">
             <p className="text-xs uppercase tracking-[0.2em] text-primary-glow font-semibold mb-4">Pricing</p>
             <h2 className="serif-display text-4xl sm:text-5xl lg:text-6xl text-white">
               Simple pricing for your <em className="italic text-primary-glow">UAE license</em>
@@ -73,8 +75,35 @@ export function FreezoneOffersSection() {
             <p className="text-white/60 mt-5">Choose the package that fits your stage. Cancel anytime.</p>
           </div>
 
+          {/* Billing toggle */}
+          <div className="flex justify-center mb-12">
+            <div className="inline-flex items-center bg-white/5 border border-white/10 rounded-full p-1">
+              {(["monthly", "yearly"] as const).map((opt) => (
+                <button
+                  key={opt}
+                  onClick={() => setBilling(opt)}
+                  className={`relative px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                    billing === opt
+                      ? "bg-white text-foreground shadow"
+                      : "text-white/70 hover:text-white"
+                  }`}
+                >
+                  {opt === "monthly" ? "Monthly" : "Yearly"}
+                  {opt === "yearly" && (
+                    <span className="ml-2 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-primary text-white">
+                      Save 10%
+                    </span>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {licensePackages.map((pkg, idx) => (
+            {licensePackages.map((pkg, idx) => {
+              const plan = pkg[billing];
+              return (
+
               <motion.div
                 key={pkg.name}
                 initial={{ opacity: 0, y: 24 }}
