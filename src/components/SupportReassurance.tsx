@@ -4,7 +4,7 @@ import { MessageSquare, Globe2, Clock } from "lucide-react";
 
 export function SupportReassurance() {
   return (
-    <section className="section-padding" style={{ background: "hsl(var(--neutral-300))" }}>
+    <section className="section-padding bg-[hsl(var(--neutral-300))]/30">
       <div className="container-wide">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
