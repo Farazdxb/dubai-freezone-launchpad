@@ -64,8 +64,46 @@ export function BlogSection() {
           </Link>
         </motion.div>
 
-        {/* Blog Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Mobile: swipeable | Desktop: grid */}
+        <div className="md:hidden -mx-4 px-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory">
+          <div className="flex gap-4 pb-2">
+            {blogPosts.map((post) => (
+              <article
+                key={post.id}
+                className="snap-center shrink-0 w-[85%] card-elevated overflow-hidden"
+              >
+                <div className="relative h-48 overflow-hidden">
+                  <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+                  <span className="absolute top-4 left-4 px-3 py-1 bg-background/90 backdrop-blur-sm text-foreground text-xs font-medium rounded-full">
+                    {post.category}
+                  </span>
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
+                    <span>{post.date}</span>
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3 h-3" />
+                      {post.readTime}
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-display font-semibold text-foreground mb-2 line-clamp-2">
+                    {post.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm line-clamp-2 mb-4">{post.excerpt}</p>
+                  <Link
+                    to={`/blog/${post.id}`}
+                    className="text-primary hover:text-primary-hover font-medium text-sm flex items-center gap-1 transition-colors"
+                  >
+                    Read more
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-6">
           {blogPosts.map((post, index) => (
             <motion.article
               key={post.id}

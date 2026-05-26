@@ -28,32 +28,24 @@ export function CTASection() {
           {/* Overlay for legibility */}
           <div className="absolute inset-0 bg-gradient-to-b from-foreground/70 via-foreground/55 to-foreground/75" />
 
-          <div className="relative z-10 w-full px-6 sm:px-10 lg:px-16 py-16 lg:py-24 text-center flex flex-col items-center">
-            <h2 className="serif-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-white leading-[1.05] max-w-4xl mx-auto">
-              Turn your <span className="italic">'someday'</span> goal into{" "}
-              <span className="italic">today's success</span>
+          <div className="relative z-10 w-full px-6 sm:px-10 lg:px-16 py-16 sm:py-20 lg:py-24 text-center flex flex-col items-center">
+            <h2 className="serif-display text-[36px] sm:text-5xl lg:text-6xl xl:text-7xl text-white leading-[1.05] max-w-4xl mx-auto">
+              Your UAE business is{" "}
+              <span className="italic">one click away</span>
             </h2>
 
             <p className="mt-6 text-base sm:text-lg text-white/80 max-w-2xl mx-auto">
-              Launch your UAE freezone company with zero consultancy fees — fast, transparent, and fully online.
+              Register, stay compliant, manage everything from one dashboard.
             </p>
 
-            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto">
               <Button
                 size="lg"
                 onClick={() => navigate("/dashboard")}
-                className="rounded-full h-14 px-10 bg-primary hover:bg-primary-hover text-white font-semibold text-base shadow-xl shadow-primary/30"
+                className="rounded-full h-14 px-10 w-full sm:w-auto bg-primary hover:bg-primary-hover text-white font-semibold text-base shadow-xl shadow-primary/30"
               >
-                Get started
+                Get my license
                 <ArrowRight className="ml-1 h-4 w-4" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                onClick={() => navigate("/services")}
-                className="rounded-full h-14 px-10 bg-transparent border-2 border-white/40 text-white hover:bg-white hover:text-foreground font-semibold text-base"
-              >
-                Explore services
               </Button>
             </div>
           </div>

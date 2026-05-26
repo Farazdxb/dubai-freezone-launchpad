@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Building2, Receipt, TrendingUp, ArrowUpRight } from "lucide-react";
+import { Building2, Receipt, TrendingUp } from "lucide-react";
 
 const columns = [
   {
@@ -47,9 +47,8 @@ export function ProductGrid() {
               <h3 className="font-display font-semibold text-xl text-foreground mb-5">{col.label}</h3>
               <ul className="space-y-3">
                 {col.items.map((item) => (
-                  <li key={item} className="flex items-center justify-between text-sm text-muted-foreground group/item hover:text-foreground transition-colors cursor-pointer py-1">
-                    <span>{item}</span>
-                    <ArrowUpRight className="w-4 h-4 opacity-0 group-hover/item:opacity-100 text-primary transition-opacity" />
+                  <li key={item} className="text-sm text-muted-foreground py-1">
+                    {item}
                   </li>
                 ))}
               </ul>
