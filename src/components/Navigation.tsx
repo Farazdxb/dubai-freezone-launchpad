@@ -4,6 +4,8 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { TopPromoBar } from "@/components/TopPromoBar";
+import cspLogo from "@/assets/csplogo.svg";
+
 
 const services = {
   "Start a Business": ["Mainland License", "Freezone License", "Offshore", "Visa Services"],
