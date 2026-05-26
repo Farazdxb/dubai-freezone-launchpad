@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { Instagram, Linkedin, Youtube } from "lucide-react";
+import cspLogo from "@/assets/csplogo.svg";
+
 
 const cols = {
   Services: ["Mainland License", "Freezone License", "Offshore", "VAT", "Corporate Tax", "Accounting", "PRO", "Visa"],
