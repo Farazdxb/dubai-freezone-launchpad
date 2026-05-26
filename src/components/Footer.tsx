@@ -30,8 +30,8 @@ export function Footer() {
               <a href="#" className="w-9 h-9 rounded-full bg-white/5 hover:bg-primary flex items-center justify-center transition-colors"><Youtube className="w-4 h-4" /></a>
             </div>
 
-            <div className="mt-6 flex items-center gap-3">
-              <img src={isoCertified} alt="ISO 9001 Certified" className="h-16 w-auto brightness-0 invert opacity-90" />
+            <div className="mt-6 inline-flex items-center bg-white rounded-lg p-3">
+              <img src={isoCertified} alt="ISO 9001 Certified" className="h-14 w-auto" />
             </div>
           </div>
 
