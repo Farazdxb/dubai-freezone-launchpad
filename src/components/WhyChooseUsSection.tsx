@@ -1,217 +1,53 @@
-import { Shield, Clock, DollarSign, Users, Building2, Globe } from "lucide-react";
 import { motion } from "framer-motion";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
+import { Check, X } from "lucide-react";
 
-const testimonials = [
-  {
-    quote: "I saved over AED 15,000 in consultancy fees! The entire process was transparent — I could see exactly what I was paying for. Got my trading license in just 5 days.",
-    author: "Ahmed Hassan",
-    role: "Founder, TechVentures Dubai",
-    avatar: "AH",
-  },
-  {
-    quote: "As a first-time entrepreneur in Dubai, I was worried about hidden charges. CSPzone showed me upfront pricing and helped me choose the right Freezone for my IT business.",
-    author: "Sarah Chen",
-    role: "CEO, Digital Solutions FZE",
-    avatar: "SC",
-  },
-];
-
-const features = [
-  {
-    icon: DollarSign,
-    title: "Zero Consultancy Fee",
-    description: "No agent commissions. Pay only the actual Freezone charges — nothing more.",
-    gradient: "from-primary via-primary/80 to-primary/60",
-  },
-  {
-    icon: Clock,
-    title: "Fast Processing",
-    description: "Get your UAE business license in 3-7 working days with our streamlined process.",
-    gradient: "from-[hsl(200,80%,50%)] via-[hsl(210,70%,55%)] to-primary",
-  },
-  {
-    icon: Shield,
-    title: "100% Transparent",
-    description: "See complete pricing breakdown before you pay. No hidden fees or surprises.",
-    gradient: "from-[hsl(180,60%,45%)] via-[hsl(190,65%,50%)] to-[hsl(200,70%,55%)]",
-  },
-  {
-    icon: Users,
-    title: "Self-Service Portal",
-    description: "Track your application, upload documents, and chat with support — all online.",
-    gradient: "from-[hsl(220,70%,55%)] via-primary to-[hsl(200,65%,50%)]",
-  },
-  {
-    icon: Building2,
-    title: "15+ Freezones",
-    description: "Compare IFZA, RAKEZ, DMCC, Meydan, SHAMS and more in one place.",
-    gradient: "from-primary/90 via-[hsl(210,75%,50%)] to-[hsl(220,70%,55%)]",
-  },
-  {
-    icon: Globe,
-    title: "100% Foreign Ownership",
-    description: "Full ownership with no local sponsor required in any UAE Freezone.",
-    gradient: "from-[hsl(195,75%,48%)] via-primary to-primary/70",
-  },
+const rows = [
+  ["One platform for license, VAT, tax, accounting", "Juggle a PRO, accountant, lawyer, typing center"],
+  ["Transparent fixed pricing — no hidden fees", "Surprise charges and shifting quotes"],
+  ["Deadline reminders + auto-filing", "Miss a VAT deadline = AED 10,000 fine"],
+  ["Dashboard access 24/7", "WhatsApp follow-ups and lost email threads"],
+  ["Licensed agents + expert tax team", "Generic consultant with no tax background"],
 ];
 
 export function WhyChooseUsSection() {
   return (
-    <section className="section-padding bg-secondary/30">
+    <section className="section-padding" style={{ background: "hsl(var(--neutral-950))" }}>
       <div className="container-wide">
-        {/* Testimonials Section */}
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <p className="text-xs uppercase tracking-[0.2em] text-primary-glow font-semibold mb-4">Why founders switch</p>
+          <h2 className="serif-display text-4xl sm:text-5xl lg:text-6xl text-white">
+            CSPzone vs <em className="italic text-primary-glow">the old way</em>
+          </h2>
+        </div>
+
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.6 }}
+          className="max-w-4xl mx-auto rounded-3xl overflow-hidden border border-white/10"
         >
-          <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full mb-4">
-            WHY CSPZONE
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-display font-bold text-foreground mb-4">
-            Skip the Middlemen.<br />Setup Directly.
-          </h2>
-          <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-            Traditional business setup consultants charge AED 5,000-20,000 in fees. We connect you directly with Freezones — at their actual rates.
-          </p>
-
-          {/* Testimonial Cards - Desktop */}
-          <div className="hidden md:grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-card border border-border rounded-xl p-6 text-left"
-              >
-                <p className="text-foreground mb-4 leading-relaxed">
-                  "{testimonial.quote}"
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-medium text-sm">
-                    {testimonial.avatar}
-                  </div>
-                  <div>
-                    <p className="font-medium text-foreground text-sm">{testimonial.author}</p>
-                    <p className="text-muted-foreground text-xs">{testimonial.role}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+          <div className="grid grid-cols-2 text-sm">
+            <div className="bg-primary p-5">
+              <p className="text-white font-semibold text-base">With CSPzone</p>
+            </div>
+            <div className="bg-white/[0.04] p-5">
+              <p className="text-white/70 font-medium text-base">Doing it yourself / typical consultant</p>
+            </div>
           </div>
-
-          {/* Testimonial Cards - Mobile Carousel */}
-          <div className="md:hidden mb-8">
-            <Carousel
-              opts={{
-                align: "start",
-                loop: true,
-              }}
-              className="w-full"
-            >
-              <CarouselContent className="-ml-2">
-                {testimonials.map((testimonial, index) => (
-                  <CarouselItem key={index} className="pl-2 basis-[85%]">
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="bg-card border border-border rounded-xl p-6 text-left h-full"
-                    >
-                      <p className="text-foreground mb-4 leading-relaxed text-sm">
-                        "{testimonial.quote}"
-                      </p>
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-medium text-sm">
-                          {testimonial.avatar}
-                        </div>
-                        <div>
-                          <p className="font-medium text-foreground text-sm">{testimonial.author}</p>
-                          <p className="text-muted-foreground text-xs">{testimonial.role}</p>
-                        </div>
-                      </div>
-                    </motion.div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-            </Carousel>
-            <p className="text-center text-xs text-muted-foreground mt-3">
-              Swipe to see more →
-            </p>
-          </div>
-        </motion.div>
-
-        {/* Features Grid - Desktop */}
-        <div className="hidden md:grid md:grid-cols-3 gap-4 lg:gap-6">
-          {features.map((feature, index) => (
-            <motion.div
-              key={feature.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-              className={`bg-gradient-to-br ${feature.gradient} rounded-xl p-5 shadow-lg hover:shadow-[0_20px_40px_-10px_hsl(var(--primary)/0.4)] hover:scale-105 transition-all duration-300 cursor-pointer`}
-            >
-              <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center mb-3">
-                <feature.icon className="w-5 h-5 text-white" />
+          {rows.map(([yes, no], i) => (
+            <div key={i} className="grid grid-cols-2 border-t border-white/10">
+              <div className="p-5 flex gap-3 items-start bg-primary/10">
+                <Check className="w-4 h-4 text-primary-glow mt-0.5 shrink-0" />
+                <span className="text-white text-sm">{yes}</span>
               </div>
-              <h4 className="font-semibold text-white text-sm mb-1">
-                {feature.title}
-              </h4>
-              <p className="text-white/80 text-xs leading-relaxed">
-                {feature.description}
-              </p>
-            </motion.div>
+              <div className="p-5 flex gap-3 items-start">
+                <X className="w-4 h-4 text-white/40 mt-0.5 shrink-0" />
+                <span className="text-white/60 text-sm">{no}</span>
+              </div>
+            </div>
           ))}
-        </div>
-
-        {/* Features Carousel - Mobile */}
-        <div className="md:hidden">
-          <Carousel
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-            className="w-full"
-          >
-            <CarouselContent className="-ml-2">
-              {features.map((feature, index) => (
-                <CarouselItem key={feature.title} className="pl-2 basis-[80%]">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.05 }}
-                    className={`bg-gradient-to-br ${feature.gradient} rounded-xl p-5 shadow-lg`}
-                  >
-                    <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center mb-3">
-                      <feature.icon className="w-5 h-5 text-white" />
-                    </div>
-                    <h4 className="font-semibold text-white text-sm mb-1">
-                      {feature.title}
-                    </h4>
-                    <p className="text-white/80 text-xs leading-relaxed">
-                      {feature.description}
-                    </p>
-                  </motion.div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
-          <p className="text-center text-xs text-muted-foreground mt-3">
-            Swipe to see more →
-          </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

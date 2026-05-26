@@ -1,276 +1,164 @@
-import { useState, useEffect, useRef } from "react";
-import { Search, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import heroDashboard from "@/assets/hero-dashboard.png";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { Star, Sparkles, CheckCircle2, Bell } from "lucide-react";
 
-const businessActivities = [
-  "Marketing Consultancy",
-  "E-Commerce Trading",
-  "IT Services",
-  "General Trading",
-  "Food & Beverages Trading",
-  "Management Consultancy",
-  "Real Estate Brokerage",
-  "Event Management",
-  "Media Production",
-  "Software Development",
-  "Digital Marketing",
-  "Financial Consultancy",
-  "Import & Export",
-  "Business Consultancy",
-  "Web Design Services",
-];
-
-const freezoneLogos = [
-  { name: "IFZA" },
-  { name: "RAKEZ" },
-  { name: "Meydan" },
-  { name: "DMCC" },
-  { name: "SHAMS" },
-  { name: "AJMAN" },
-  { name: "JAFZA" },
-  { name: "DWC" },
-  { name: "DAFZA" },
-  { name: "SPC" },
-];
+const heroLeft =
+  "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=900&q=80";
+const heroRight =
+  "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=900&q=80";
 
 export function HeroSection() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const searchRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (searchQuery.length > 0) {
-      const filtered = businessActivities.filter((activity) =>
-        activity.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setSuggestions(filtered.slice(0, 5));
-      setShowSuggestions(true);
-    } else {
-      setSuggestions([]);
-      setShowSuggestions(false);
-    }
-  }, [searchQuery]);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-        setShowSuggestions(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const handleSearch = () => {
-    navigate(`/search-activity?q=${encodeURIComponent(searchQuery)}`);
-  };
-
-  const handleSuggestionClick = (activity: string) => {
-    setSearchQuery(activity);
-    setShowSuggestions(false);
-    navigate(`/search-activity?q=${encodeURIComponent(activity)}`);
-  };
-
   return (
-    <section className="relative pt-28 pb-0 overflow-hidden bg-background">
-      {/* Gradient background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[800px] bg-gradient-to-b from-primary/8 via-primary/3 to-transparent rounded-full blur-3xl" />
+    <section className="relative pt-28 lg:pt-32 pb-20 lg:pb-28 overflow-hidden bg-secondary">
+      {/* Soft radial accent */}
+      <div className="pointer-events-none absolute inset-0">
+        <div
+          className="absolute top-20 left-1/2 -translate-x-1/2 w-[900px] h-[600px] rounded-full blur-3xl opacity-60"
+          style={{ background: "radial-gradient(circle, hsl(var(--primary)/0.15), transparent 70%)" }}
+        />
       </div>
 
-      <div className="container-wide relative z-10">
-        {/* Centered Content */}
-        <div className="text-center max-w-4xl mx-auto">
-          {/* Badge */}
+      <div className="container-wide relative">
+        <div className="grid lg:grid-cols-[1fr_2fr_1fr] gap-6 lg:gap-8 items-center">
+          {/* Left floating photo */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-6"
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="hidden lg:block relative"
           >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-            </span>
-            <span className="text-sm font-medium text-foreground">Zero Consultancy Fee — Direct Freezone Rates</span>
-          </motion.div>
-
-          {/* Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-foreground leading-[1.1] mb-6"
-          >
-            Setup Your UAE Freezone
-            <br />
-            <span className="bg-gradient-to-r from-primary via-primary to-primary/70 bg-clip-text text-transparent">
-              Business in Minutes
-            </span>
-          </motion.h1>
-
-          {/* Subheading */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto"
-          >
-            Self-service portal for Dubai & UAE Freezone company formation.
-            <br className="hidden sm:block" />
-            <span className="font-semibold text-foreground">No agents. No hidden fees. 100% transparent pricing.</span>
-          </motion.p>
-
-          {/* Search Bar */}
-          <motion.div
-            ref={searchRef}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="relative max-w-2xl mx-auto mb-6"
-          >
-            <div className="flex flex-col sm:flex-row items-center gap-3 bg-card border border-border rounded-2xl sm:rounded-full px-4 sm:px-2 py-3 sm:py-2 shadow-xl shadow-primary/5">
-              <div className="flex items-center flex-1 w-full sm:w-auto pl-0 sm:pl-4">
-                <Search className="w-5 h-5 text-muted-foreground mr-3" />
-                <input
-                  type="text"
-                  placeholder="Search your business activity..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                  className="flex-1 bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground text-base"
-                />
-              </div>
-              <Button
-                onClick={handleSearch}
-                className="rounded-full px-6 py-2.5 font-medium w-full sm:w-auto"
-              >
-                Search Activities
-              </Button>
+            <div className="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/5]">
+              <img src={heroLeft} alt="UAE entrepreneur with new license" className="w-full h-full object-cover" />
             </div>
-
-            {/* Suggestions Dropdown */}
-            <AnimatePresence>
-              {showSuggestions && suggestions.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-2xl shadow-xl overflow-hidden z-50"
-                >
-                  {suggestions.map((activity) => (
-                    <button
-                      key={activity}
-                      onClick={() => handleSuggestionClick(activity)}
-                      className="w-full px-6 py-3 text-left hover:bg-secondary/50 transition-colors flex items-center gap-3 text-foreground"
-                    >
-                      <Search className="w-4 h-4 text-muted-foreground" />
-                      {activity}
-                    </button>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-
-          {/* Trust Indicators */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground mb-12"
-          >
-            <div className="flex items-center gap-2">
-              <div className="w-5 h-5 rounded-full bg-success/20 flex items-center justify-center">
-                <Check className="w-3 h-3 text-success" />
-              </div>
-              <span>No consultancy charges</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-5 h-5 rounded-full bg-success/20 flex items-center justify-center">
-                <Check className="w-3 h-3 text-success" />
-              </div>
-              <span>100% transparent pricing</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-5 h-5 rounded-full bg-success/20 flex items-center justify-center">
-                <Check className="w-3 h-3 text-success" />
-              </div>
-              <span>15+ UAE Freezones</span>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Dashboard Image - Overlapping into next section */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="relative max-w-5xl mx-auto"
-        >
-          {/* Glow effect behind image */}
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-primary/10 to-transparent rounded-3xl blur-3xl -z-10 scale-95" />
-          
-          {/* Main Dashboard Image */}
-          <div className="relative rounded-t-2xl overflow-hidden border border-border/30 shadow-2xl shadow-primary/10">
-            <img
-              src={heroDashboard}
-              alt="CSPzone Freezone Business Registration Dashboard - Analytics, License Status, Company Formation Progress"
-              className="w-full h-auto"
-            />
-            {/* Gradient fade at bottom */}
-            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Freezone Logo Slider */}
-      <div className="relative bg-background pt-16 pb-12 -mt-8">
-        <div className="container-wide">
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="text-center text-sm text-muted-foreground mb-8"
-          >
-            Trusted by <span className="font-semibold text-foreground">2,400+</span> entrepreneurs across <span className="font-semibold text-foreground">15+ UAE Freezones</span>
-          </motion.p>
-
-          {/* Animated Logo Slider */}
-          <div className="relative overflow-hidden">
-            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
-            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
-            
             <motion.div
-              className="flex gap-8 items-center"
-              animate={{ x: [0, -600] }}
-              transition={{
-                x: {
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  duration: 25,
-                  ease: "linear",
-                },
-              }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="absolute -bottom-4 left-4 right-4 bg-background border border-border rounded-2xl px-4 py-3 shadow-lg flex items-center gap-2"
             >
-              {[...freezoneLogos, ...freezoneLogos, ...freezoneLogos].map((logo, i) => (
-                <div
-                  key={i}
-                  className="shrink-0 flex items-center justify-center px-8 py-3 bg-card border border-border/50 rounded-xl hover:border-primary/30 transition-colors"
-                >
-                  <span className="text-base font-display font-semibold text-muted-foreground whitespace-nowrap">
-                    {logo.name}
-                  </span>
-                </div>
-              ))}
+              <div className="w-7 h-7 bg-accent rounded-full flex items-center justify-center shrink-0">
+                <CheckCircle2 className="w-4 h-4 text-primary" />
+              </div>
+              <span className="text-xs font-medium text-foreground">
+                Your license is officially approved
+              </span>
+            </motion.div>
+          </motion.div>
+
+          {/* Center column */}
+          <div className="text-center max-w-2xl mx-auto">
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-foreground/70 mb-5"
+            >
+              Every business starts somewhere
+            </motion.p>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.05 }}
+              className="serif-display text-[44px] sm:text-6xl lg:text-7xl xl:text-[88px] text-foreground"
+            >
+              Start your UAE
+              <br />
+              business <em className="italic text-primary">here</em>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="text-base sm:text-lg text-muted-foreground mt-6 max-w-xl mx-auto leading-relaxed"
+            >
+              Business license, VAT, corporate tax and accounting — handled by experts,
+              managed from one elegant dashboard.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.25 }}
+              className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3"
+            >
+              <Link to="/dashboard" className="w-full sm:w-auto">
+                <Button size="lg" className="rounded-full px-8 w-full sm:w-auto font-semibold shadow-lg shadow-primary/25">
+                  Get my license
+                </Button>
+              </Link>
+              <Link to="#pricing" className="w-full sm:w-auto">
+                <Button size="lg" variant="outline" className="rounded-full px-8 w-full sm:w-auto font-semibold border-border bg-background">
+                  View pricing
+                </Button>
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="mt-7 inline-flex items-center gap-2 text-sm text-muted-foreground"
+            >
+              <div className="flex items-center gap-0.5 text-primary">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                ))}
+              </div>
+              <span className="font-medium text-foreground">4.9</span>
+              <span>·</span>
+              <span>2,000+ businesses launched</span>
             </motion.div>
           </div>
+
+          {/* Right floating photo */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="hidden lg:block relative"
+          >
+            <div className="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/5]">
+              <img src={heroRight} alt="Founder running her UAE business" className="w-full h-full object-cover" />
+            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="absolute -bottom-2 -left-6 right-2 bg-background border border-border rounded-2xl p-3 shadow-lg space-y-2"
+            >
+              <div className="flex items-center gap-2 bg-secondary rounded-xl px-3 py-2">
+                <div className="w-6 h-6 rounded-full bg-foreground/10 shrink-0" />
+                <span className="text-xs text-foreground">Hi, when is my VAT due?</span>
+              </div>
+              <div className="flex items-center gap-2 bg-accent rounded-xl px-3 py-2">
+                <Sparkles className="w-3.5 h-3.5 text-primary shrink-0" />
+                <span className="text-xs text-primary font-medium">Filed 12 days ahead</span>
+              </div>
+            </motion.div>
+          </motion.div>
         </div>
+
+        {/* Trust strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="mt-16 lg:mt-24 max-w-3xl mx-auto bg-background border border-border rounded-2xl px-4 sm:px-8 py-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 shadow-sm"
+        >
+          {[
+            { icon: CheckCircle2, label: "100% accuracy guaranteed" },
+            { icon: Bell, label: "Deadline reminders built-in" },
+            { icon: Sparkles, label: "FTA & Freezone approved" },
+          ].map(({ icon: Icon, label }) => (
+            <div key={label} className="flex items-center gap-2 text-sm">
+              <Icon className="w-4 h-4 text-primary" />
+              <span className="font-medium text-foreground">{label}</span>
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
