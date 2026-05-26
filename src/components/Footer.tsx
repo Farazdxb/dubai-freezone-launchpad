@@ -16,12 +16,10 @@ export function Footer() {
       <div className="container-wide py-20">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-10 mb-14">
           <div className="col-span-2 md:col-span-1">
-            <Link to="/" className="flex items-center gap-2.5 mb-5">
-              <div className="w-9 h-9 bg-white rounded-xl flex items-center justify-center">
-                <span className="text-foreground font-serif text-xl leading-none -mt-1">C</span>
-              </div>
-              <span className="font-display font-bold text-lg">CSPzone</span>
+            <Link to="/" className="flex items-center mb-5">
+              <img src={cspLogo} alt="CSPzone" className="h-10 w-auto brightness-0 invert" />
             </Link>
+
             <p className="text-white/60 text-sm leading-relaxed">
               The elegant way to start and run your UAE business. License, compliance, accounting — one dashboard.
             </p>
