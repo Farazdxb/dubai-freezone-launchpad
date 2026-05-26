@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
 const steps = [
-  { n: "01", title: "Choose your package", body: "Pick a 4-month, 1-year, or 2-year license — with or without a UAE resident visa." },
+  { n: "01", title: "Choose your package", body: "Pick a 4-month, 1-year, or 2-year license - with or without a UAE resident visa." },
   { n: "02", title: "Subscribe & complete checkout", body: "Pay monthly or upfront. Transparent pricing, no hidden fees." },
-  { n: "03", title: "Get your license", body: "Our licensed agents file your paperwork — license, MOA, Emirates ID, visa and bank intro." },
-  { n: "04", title: "Manage from your dashboard", body: "Add Compliance for VAT, corporate tax, deadlines and a Dubai address — all in one login." },
+  { n: "03", title: "Get your license", body: "Our licensed agents file your paperwork - license, MOA, Emirates ID, visa and bank intro." },
+  { n: "04", title: "Manage from your dashboard", body: "Add Compliance for VAT, corporate tax, deadlines and a Dubai address - all in one login." },
 ];
 
 export function HowItWorksSection() {
