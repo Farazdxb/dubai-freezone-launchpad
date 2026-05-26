@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Building2, Receipt, TrendingUp, ArrowUpRight } from "lucide-react";
+import { Building2, Receipt, TrendingUp } from "lucide-react";
 
 const columns = [
   {
