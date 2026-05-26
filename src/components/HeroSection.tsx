@@ -13,7 +13,10 @@ export function HeroSection() {
     <section className="relative pt-28 lg:pt-32 pb-20 lg:pb-28 overflow-hidden bg-secondary">
       {/* Soft radial accent */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-gradient-radial from-primary/8 via-transparent to-transparent rounded-full blur-3xl" />
+        <div
+          className="absolute top-20 left-1/2 -translate-x-1/2 w-[900px] h-[600px] rounded-full blur-3xl opacity-60"
+          style={{ background: "radial-gradient(circle, hsl(var(--primary)/0.15), transparent 70%)" }}
+        />
       </div>
 
       <div className="container-wide relative">
