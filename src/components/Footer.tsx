@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Instagram, Linkedin, Youtube } from "lucide-react";
 import cspLogo from "@/assets/csplogo.svg";
+import isoCertified from "@/assets/iso-certified.png";
 
 
 const cols = {
