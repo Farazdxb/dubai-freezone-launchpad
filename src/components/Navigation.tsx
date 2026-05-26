@@ -4,6 +4,8 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { TopPromoBar } from "@/components/TopPromoBar";
+import cspLogo from "@/assets/csplogo.svg";
+
 
 const services = {
   "Start a Business": ["Mainland License", "Freezone License", "Offshore", "Visa Services"],
@@ -27,14 +29,10 @@ export function Navigation() {
       <div className="bg-background/90 backdrop-blur-xl border-b border-border/60">
         <nav className="container-wide">
           <div className="flex items-center justify-between h-16">
-            <Link to="/" className="flex items-center gap-2.5">
-              <div className="w-9 h-9 bg-foreground rounded-xl flex items-center justify-center">
-                <span className="text-background font-serif text-xl leading-none -mt-1">C</span>
-              </div>
-              <span className="font-display font-bold text-lg tracking-tight text-foreground">
-                CSPzone
-              </span>
+            <Link to="/" className="flex items-center">
+              <img src={cspLogo} alt="CSPzone" className="h-9 w-auto" />
             </Link>
+
 
             {/* Desktop nav */}
             <div className="hidden lg:flex items-center gap-1">

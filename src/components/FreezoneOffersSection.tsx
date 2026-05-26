@@ -1,14 +1,15 @@
 import { Check, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { NewCompanySetupForm } from "@/components/NewCompanySetupForm";
+
 
 const licensePackages = [
   {
     name: "License Only",
-    price: "AED 1,250",
-    period: "/month × 4 months",
-    total: "Total AED 4,800",
+    monthly: { price: "AED 1,250", period: "/month × 4 months", total: "Total AED 4,800" },
+    yearly: { price: "AED 4,320", period: "/year — billed annually", total: "Save AED 480 vs monthly" },
     description: "For founders who need a UAE license without a visa.",
     features: ["UAE Business License", "License processing support", "Basic setup assistance", "Dashboard access"],
     cta: "Get License",
@@ -16,9 +17,8 @@ const licensePackages = [
   },
   {
     name: "License + Resident Visa",
-    price: "AED 2,750",
-    period: "/month × 4 months",
-    total: "Total AED 10,800",
+    monthly: { price: "AED 2,750", period: "/month × 4 months", total: "Total AED 10,800" },
+    yearly: { price: "AED 9,720", period: "/year — billed annually", total: "Save AED 1,080 vs monthly" },
     description: "The complete starter — license + UAE residency in one.",
     features: ["UAE Business License", "UAE Resident Visa", "Visa processing support", "Business setup assistance", "Dashboard access"],
     cta: "Get License + Visa",
@@ -26,15 +26,15 @@ const licensePackages = [
   },
   {
     name: "2-Year License",
-    price: "AED 7,200",
-    period: "without visa",
-    total: "AED 16,200 with visa — save AED 5,400",
+    monthly: { price: "AED 7,200", period: "without visa", total: "AED 16,200 with visa — save AED 5,400" },
+    yearly: { price: "AED 6,480", period: "/year × 2 — billed annually", total: "Save AED 1,440 over 2 years" },
     description: "For founders ready to commit and save big.",
     features: ["2-Year UAE Business License", "Long-term continuity", "Reduced renewal hassle", "Visa included (optional)", "Dashboard access"],
     cta: "Get 2-Year License",
     featured: false,
   },
 ];
+
 
 const complianceSubs = [
   {
@@ -60,12 +60,14 @@ const complianceSubs = [
 ];
 
 export function FreezoneOffersSection() {
+  const [billing, setBilling] = useState<"monthly" | "yearly">("monthly");
+
   return (
     <>
       {/* License pricing on dark */}
       <section id="pricing" className="section-padding" style={{ background: "hsl(var(--neutral-950))" }}>
         <div className="container-wide">
-          <div className="text-center max-w-2xl mx-auto mb-14">
+          <div className="text-center max-w-2xl mx-auto mb-10">
             <p className="text-xs uppercase tracking-[0.2em] text-primary-glow font-semibold mb-4">Pricing</p>
             <h2 className="serif-display text-4xl sm:text-5xl lg:text-6xl text-white">
               Simple pricing for your <em className="italic text-primary-glow">UAE license</em>
@@ -73,8 +75,35 @@ export function FreezoneOffersSection() {
             <p className="text-white/60 mt-5">Choose the package that fits your stage. Cancel anytime.</p>
           </div>
 
+          {/* Billing toggle */}
+          <div className="flex justify-center mb-12">
+            <div className="inline-flex items-center bg-white/5 border border-white/10 rounded-full p-1">
+              {(["monthly", "yearly"] as const).map((opt) => (
+                <button
+                  key={opt}
+                  onClick={() => setBilling(opt)}
+                  className={`relative px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                    billing === opt
+                      ? "bg-white text-foreground shadow"
+                      : "text-white/70 hover:text-white"
+                  }`}
+                >
+                  {opt === "monthly" ? "Monthly" : "Yearly"}
+                  {opt === "yearly" && (
+                    <span className="ml-2 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-primary text-white">
+                      Save 10%
+                    </span>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {licensePackages.map((pkg, idx) => (
+            {licensePackages.map((pkg, idx) => {
+              const plan = pkg[billing];
+              return (
+
               <motion.div
                 key={pkg.name}
                 initial={{ opacity: 0, y: 24 }}
@@ -94,10 +123,10 @@ export function FreezoneOffersSection() {
                 )}
                 <h3 className={`text-lg font-semibold mb-2 ${pkg.featured ? "text-white" : ""}`}>{pkg.name}</h3>
                 <div className="mb-1">
-                  <span className={`serif-display text-5xl ${pkg.featured ? "text-white" : "text-foreground"}`}>{pkg.price}</span>
+                  <span className={`serif-display text-5xl ${pkg.featured ? "text-white" : "text-foreground"}`}>{plan.price}</span>
                 </div>
-                <p className={`text-sm mb-1 ${pkg.featured ? "text-white/85" : "text-muted-foreground"}`}>{pkg.period}</p>
-                <p className={`text-xs font-medium mb-5 ${pkg.featured ? "text-white/70" : "text-muted-foreground"}`}>{pkg.total}</p>
+                <p className={`text-sm mb-1 ${pkg.featured ? "text-white/85" : "text-muted-foreground"}`}>{plan.period}</p>
+                <p className={`text-xs font-medium mb-5 ${pkg.featured ? "text-white/70" : "text-muted-foreground"}`}>{plan.total}</p>
                 <p className={`text-sm mb-6 ${pkg.featured ? "text-white/85" : "text-muted-foreground"}`}>{pkg.description}</p>
                 <ul className="space-y-3 mb-8 flex-grow">
                   {pkg.features.map((f) => (
@@ -120,8 +149,10 @@ export function FreezoneOffersSection() {
                   }
                 />
               </motion.div>
-            ))}
+              );
+            })}
           </div>
+
 
           <p className="text-center text-xs text-white/40 mt-10">
             All prices in AED. Government fees included. No hidden charges.
