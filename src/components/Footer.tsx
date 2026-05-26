@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Instagram, Linkedin, Youtube } from "lucide-react";
 import cspLogo from "@/assets/csplogo.svg";
+import isoCertified from "@/assets/iso-certified.png";
 
 
 const cols = {
@@ -28,6 +29,10 @@ export function Footer() {
               <a href="#" className="w-9 h-9 rounded-full bg-white/5 hover:bg-primary flex items-center justify-center transition-colors"><Linkedin className="w-4 h-4" /></a>
               <a href="#" className="w-9 h-9 rounded-full bg-white/5 hover:bg-primary flex items-center justify-center transition-colors"><Youtube className="w-4 h-4" /></a>
             </div>
+
+            <div className="mt-6 flex items-center gap-3">
+              <img src={isoCertified} alt="ISO 9001 Certified" className="h-16 w-auto brightness-0 invert opacity-90" />
+            </div>
           </div>
 
           {Object.entries(cols).map(([title, items]) => (
@@ -45,14 +50,10 @@ export function Footer() {
         </div>
 
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row gap-3 items-center justify-between">
-          <p className="text-xs text-white/50">© {new Date().getFullYear()} CSPzone. All rights reserved.</p>
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-white/50">
-            <span>DED registered</span><span>·</span>
-            <span>IFZA approved</span><span>·</span>
-            <span>FTA tax agent</span><span>·</span>
-            <span>ISO certified</span>
-          </div>
+          <p className="text-xs text-white/50">© {new Date().getFullYear()} CSPzone by RAS Corporate Advisor, Dubai, UAE</p>
+          <p className="text-xs text-white/50">All rights reserved.</p>
         </div>
+
       </div>
     </footer>
   );
