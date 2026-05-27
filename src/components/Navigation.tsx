@@ -20,15 +20,16 @@ const serviceLinks: { label: string; href: string }[] = [
 ];
 
 const navItems = [
-  { label: "Pricing", href: "#pricing" },
-  { label: "Blogs", href: "/blog" },
-  { label: "About", href: "#about" },
+  { label: "Pricing", href: "#pricing", external: false },
+  { label: "Resources", href: "https://www.cspzone.com/article", external: true },
+  { label: "About", href: "https://www.cspzone.com/about", external: true },
   { label: "Contact", href: "https://www.cspzone.com/contact", external: true },
 ];
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -65,8 +66,7 @@ export function Navigation() {
                           <li key={s.label}>
                             <a
                               href={s.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
+                              rel="noopener"
                               className="block px-3 py-2 text-sm text-foreground/80 hover:text-primary hover:bg-secondary rounded-lg transition-colors"
                             >
                               {s.label}
@@ -83,8 +83,7 @@ export function Navigation() {
                   <a
                     key={item.label}
                     href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    rel="noopener"
                     className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
                   >
                     {item.label}
@@ -128,14 +127,30 @@ export function Navigation() {
                 className="lg:hidden overflow-hidden"
               >
                 <div className="py-4 space-y-1 border-t border-border/60">
-                  {serviceLinks.map((s) => (
-                    <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="block px-3 py-2 text-sm font-medium text-foreground/80" onClick={() => setIsOpen(false)}>
-                      {s.label}
-                    </a>
-                  ))}
+                  <button
+                    onClick={() => setMobileServicesOpen((v) => !v)}
+                    className="w-full flex items-center justify-between px-3 py-2 text-sm font-medium text-foreground/80"
+                    aria-expanded={mobileServicesOpen}
+                  >
+                    <span>Services</span>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${mobileServicesOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  <div className={mobileServicesOpen ? "block pl-3 space-y-1" : "hidden"}>
+                    {serviceLinks.map((s) => (
+                      <a
+                        key={s.label}
+                        href={s.href}
+                        rel="noopener"
+                        className="block px-3 py-2 text-sm text-foreground/70"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {s.label}
+                      </a>
+                    ))}
+                  </div>
                   {navItems.map((item) =>
                     item.external ? (
-                      <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" className="block px-3 py-2 text-sm font-medium text-foreground/80" onClick={() => setIsOpen(false)}>
+                      <a key={item.label} href={item.href} rel="noopener" className="block px-3 py-2 text-sm font-medium text-foreground/80" onClick={() => setIsOpen(false)}>
                         {item.label}
                       </a>
                     ) : (
