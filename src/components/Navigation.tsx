@@ -91,7 +91,16 @@ export function Navigation() {
                 </AnimatePresence>
               </div>
               {navItems.map((item) =>
-                item.external ? (
+                item.anchor ? (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    onClick={scrollToPricing}
+                    className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+                  >
+                    {item.label}
+                  </a>
+                ) : item.external ? (
                   <a
                     key={item.label}
                     href={item.href}
