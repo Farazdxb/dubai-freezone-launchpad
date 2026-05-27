@@ -1,13 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { scrollToPricing } from "@/components/Navigation";
 
 const ctaBg =
   "https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=2000&q=80";
 
 export function CTASection() {
-  const navigate = useNavigate();
 
   return (
     <section className="py-16 lg:py-24" style={{ background: "hsl(var(--neutral-950))" }}>
@@ -41,7 +40,7 @@ export function CTASection() {
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto">
               <Button
                 size="lg"
-                onClick={() => navigate("/dashboard")}
+                onClick={() => scrollToPricing()}
                 className="rounded-full h-14 px-10 w-full sm:w-auto bg-primary hover:bg-primary-hover text-white font-semibold text-base shadow-xl shadow-primary/30"
               >
                 Get my license

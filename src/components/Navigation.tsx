@@ -20,11 +20,23 @@ const serviceLinks: { label: string; href: string }[] = [
 ];
 
 const navItems = [
-  { label: "Pricing", href: "#pricing", external: false },
+  { label: "Pricing", href: "#pricing", external: false, anchor: true },
   { label: "Resources", href: "https://www.cspzone.com/article", external: true },
   { label: "About", href: "https://www.cspzone.com/about", external: true },
   { label: "Contact", href: "https://www.cspzone.com/contact", external: true },
 ];
+
+export function scrollToPricing(e?: React.MouseEvent) {
+  if (e) e.preventDefault();
+  if (typeof window === "undefined") return;
+  if (window.location.pathname !== "/") {
+    window.location.href = "/#pricing";
+    return;
+  }
+  const el = document.getElementById("pricing");
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  history.replaceState(null, "", "/#pricing");
+}
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -79,7 +91,16 @@ export function Navigation() {
                 </AnimatePresence>
               </div>
               {navItems.map((item) =>
-                item.external ? (
+                item.anchor ? (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    onClick={scrollToPricing}
+                    className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+                  >
+                    {item.label}
+                  </a>
+                ) : item.external ? (
                   <a
                     key={item.label}
                     href={item.href}
@@ -149,7 +170,11 @@ export function Navigation() {
                     ))}
                   </div>
                   {navItems.map((item) =>
-                    item.external ? (
+                    item.anchor ? (
+                      <a key={item.label} href={item.href} className="block px-3 py-2 text-sm font-medium text-foreground/80" onClick={(e) => { scrollToPricing(e); setIsOpen(false); }}>
+                        {item.label}
+                      </a>
+                    ) : item.external ? (
                       <a key={item.label} href={item.href} rel="noopener" className="block px-3 py-2 text-sm font-medium text-foreground/80" onClick={() => setIsOpen(false)}>
                         {item.label}
                       </a>
