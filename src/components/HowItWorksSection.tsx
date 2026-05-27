@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { scrollToPricing } from "@/components/Navigation";
 
 const steps = [
   { n: "01", title: "Choose your package", body: "Pick a 4-month, 1-year, or 2-year license - with or without a UAE resident visa." },
