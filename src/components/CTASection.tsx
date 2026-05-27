@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { scrollToPricing } from "@/components/Navigation";
 
 const ctaBg =
   "https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=2000&q=80";
