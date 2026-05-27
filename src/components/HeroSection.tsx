@@ -10,7 +10,7 @@ const heroRight =
 
 export function HeroSection() {
   return (
-    <section className="relative pt-28 lg:pt-32 pb-20 lg:pb-28 overflow-hidden bg-secondary">
+    <section className="relative pt-36 lg:pt-40 pb-20 lg:pb-28 overflow-hidden bg-secondary">
       {/* Soft radial accent */}
       <div className="pointer-events-none absolute inset-0">
         <div
