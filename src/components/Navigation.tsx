@@ -144,11 +144,6 @@ export function Navigation() {
                       </Link>
                     )
                   )}
-                  {navItems.map((item) => (
-                    <Link key={item.label} to={item.href} className="block px-3 py-2 text-sm font-medium text-foreground/80" onClick={() => setIsOpen(false)}>
-                      {item.label}
-                    </Link>
-                  ))}
                   <div className="pt-3 flex flex-col gap-2">
                     <Link to="/login"><Button variant="outline" className="w-full">Login</Button></Link>
                     <Link to="/dashboard"><Button className="w-full rounded-full">Get Started</Button></Link>
