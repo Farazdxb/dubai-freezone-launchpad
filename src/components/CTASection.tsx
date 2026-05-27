@@ -7,7 +7,6 @@ const ctaBg =
   "https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=2000&q=80";
 
 export function CTASection() {
-  const navigate = useNavigate();
 
   return (
     <section className="py-16 lg:py-24" style={{ background: "hsl(var(--neutral-950))" }}>
