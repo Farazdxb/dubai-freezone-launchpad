@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-import { Landmark, CreditCard, Calculator, ScrollText } from "lucide-react";
+import { ShieldCheck, Briefcase, FolderLock, Receipt } from "lucide-react";
 
 const perks = [
-  { icon: Landmark, title: "Banking", body: "Pre-approved intros to Emirates NBD, WIO, Mashreq Neo, RAKBANK" },
-  { icon: CreditCard, title: "Payments", body: "Stripe and Telr setup credits to get you accepting payments fast" },
-  { icon: Calculator, title: "Accounting", body: "Sync with Zoho Books, QuickBooks and Xero out of the box" },
-  { icon: ScrollText, title: "Legal", body: "Discounted MOA, trademark protection and contract templates" },
+  { icon: ShieldCheck, title: "Compliance", body: "Stay updated with renewals, filings, and important deadlines through smart reminders." },
+  { icon: Briefcase, title: "Services", body: "Start and track business service requests quickly and easily." },
+  { icon: FolderLock, title: "Documents", body: "Keep all your licenses, records, and company documents in one secure place." },
+  { icon: Receipt, title: "VAT Status", body: "Track VAT progress, company status, and ongoing requests in real time." },
 ];
 
 export function PerksIntegrations() {
@@ -13,12 +13,12 @@ export function PerksIntegrations() {
     <section className="section-padding bg-background">
       <div className="container-wide">
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-4">Perks & integrations</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-4">Perks & benefits</p>
           <h2 className="serif-display text-4xl sm:text-5xl lg:text-6xl text-foreground">
             Built for the UAE <em className="italic text-primary">business ecosystem</em>
           </h2>
-          <p className="text-muted-foreground mt-5">
-            Plug straight into the tools and partners UAE founders already trust.
+          <p className="text-muted-foreground mt-5 text-sm tracking-wide">
+            business management made simple
           </p>
         </div>
 
