@@ -200,18 +200,16 @@ export default function Checkout() {
                 <div className="text-sm">
                   <p className="text-foreground">
                     I accept the{" "}
-                    <Link to="/terms" target="_blank" className="text-primary hover:underline">
+                    <a
+                      href="https://www.cspzone.com/terms"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline"
+                    >
                       Terms & Conditions
-                    </Link>{" "}
+                    </a>{" "}
                     and subscription commitment terms.
                   </p>
-                  <Link
-                    to="/terms"
-                    target="_blank"
-                    className="text-primary hover:underline text-xs mt-1 inline-block"
-                  >
-                    View Terms & Conditions
-                  </Link>
                 </div>
               </label>
             </motion.div>
