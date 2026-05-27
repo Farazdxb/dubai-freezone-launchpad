@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 import { Instagram, Linkedin, Youtube } from "lucide-react";
 import cspLogo from "@/assets/csplogo.svg";
 import isoCertified from "@/assets/iso-certified.png";
+import { scrollToPricing } from "@/components/Navigation";
 
-type FooterLink = { label: string; href: string; external?: boolean };
+type FooterLink = { label: string; href: string; external?: boolean; anchor?: boolean };
 
 const serviceLinks: FooterLink[] = [
-  { label: "Company Formation", href: "https://www.cspzone.com/dubai/company-formation", external: true },
+  { label: "Company Formation", href: "#pricing", anchor: true },
   { label: "Company Liquidation", href: "https://www.cspzone.com/dubai/company-liquidation-service", external: true },
   { label: "VAT and CT", href: "https://www.cspzone.com/dubai/vat-consultants", external: true },
   { label: "Nominee Services", href: "https://www.cspzone.com/dubai/nominee-service", external: true },
