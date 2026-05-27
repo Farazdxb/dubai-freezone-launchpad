@@ -6,15 +6,11 @@ import isoCertified from "@/assets/iso-certified.png";
 type FooterLink = { label: string; href: string; external?: boolean };
 
 const serviceLinks: FooterLink[] = [
-  { label: "Trade License Renewal Dubai", href: "https://www.cspzone.com/dubai/trade-license-renewal", external: true },
-  { label: "Company Liquidation Dubai", href: "https://www.cspzone.com/dubai/company-liquidation-service", external: true },
-  { label: "Market Research Services", href: "https://www.cspzone.com/dubai/market-research-services", external: true },
-  { label: "VAT Consultants Dubai", href: "https://www.cspzone.com/dubai/vat-consultants", external: true },
-  { label: "Corporate Tax Consultant", href: "https://www.cspzone.com/dubai/corporate-tax-consultant", external: true },
-  { label: "Legal Document Drafting", href: "https://www.cspzone.com/dubai/legal-documents-lawyer-drafting-service", external: true },
-  { label: "Trademark Registration UAE", href: "https://www.cspzone.com/dubai/trademark-registration-service", external: true },
-  { label: "Immigration Consulting", href: "https://www.cspzone.com/dubai/immigration-consulting-service", external: true },
-  { label: "Nominee Services Dubai", href: "https://www.cspzone.com/dubai/nominee-service", external: true },
+  { label: "Company Formation", href: "https://www.cspzone.com/dubai/company-formation", external: true },
+  { label: "Company Liquidation", href: "https://www.cspzone.com/dubai/company-liquidation-service", external: true },
+  { label: "VAT and CT", href: "https://www.cspzone.com/dubai/vat-consultants", external: true },
+  { label: "Nominee Services", href: "https://www.cspzone.com/dubai/nominee-service", external: true },
+  { label: "PRO Services", href: "https://www.cspzone.com/dubai/pro-services", external: true },
 ];
 
 const resourceLinks: FooterLink[] = [
