@@ -49,9 +49,9 @@ export function Navigation() {
       <div className="bg-background/90 backdrop-blur-xl border-b border-border/60">
         <nav className="container-wide">
           <div className="flex items-center justify-between h-16">
-            <Link to="/" className="flex items-center">
+            <a href="https://www.cspzone.com" className="flex items-center">
               <img src={cspLogo} alt="CSPzone" className="h-9 w-auto" />
-            </Link>
+            </a>
 
 
             {/* Desktop nav */}
