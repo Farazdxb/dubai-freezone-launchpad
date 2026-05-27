@@ -128,11 +128,22 @@ export function Navigation() {
                 className="lg:hidden overflow-hidden"
               >
                 <div className="py-4 space-y-1 border-t border-border/60">
-                  {Object.keys(services).map((g) => (
-                    <Link key={g} to="#" className="block px-3 py-2 text-sm font-medium text-foreground/80">
-                      {g}
-                    </Link>
+                  {serviceLinks.map((s) => (
+                    <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="block px-3 py-2 text-sm font-medium text-foreground/80" onClick={() => setIsOpen(false)}>
+                      {s.label}
+                    </a>
                   ))}
+                  {navItems.map((item) =>
+                    item.external ? (
+                      <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" className="block px-3 py-2 text-sm font-medium text-foreground/80" onClick={() => setIsOpen(false)}>
+                        {item.label}
+                      </a>
+                    ) : (
+                      <Link key={item.label} to={item.href} className="block px-3 py-2 text-sm font-medium text-foreground/80" onClick={() => setIsOpen(false)}>
+                        {item.label}
+                      </Link>
+                    )
+                  )}
                   {navItems.map((item) => (
                     <Link key={item.label} to={item.href} className="block px-3 py-2 text-sm font-medium text-foreground/80" onClick={() => setIsOpen(false)}>
                       {item.label}
