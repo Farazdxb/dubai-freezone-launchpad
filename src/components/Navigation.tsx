@@ -8,22 +8,22 @@ import cspLogo from "@/assets/csplogo.svg";
 
 
 const serviceLinks: { label: string; href: string }[] = [
-  { label: "Trade License Renewal Dubai", href: "https://cspzone.com/dubai/trade-license-renewal" },
-  { label: "Company Liquidation Dubai", href: "https://cspzone.com/dubai/company-liquidation-service" },
-  { label: "Market Research Services", href: "https://cspzone.com/dubai/market-research-services" },
-  { label: "VAT Consultants Dubai", href: "https://cspzone.com/dubai/vat-consultants" },
-  { label: "Corporate Tax Consultant", href: "https://cspzone.com/dubai/corporate-tax-consultant" },
-  { label: "Legal Document Drafting", href: "https://cspzone.com/dubai/legal-documents-lawyer-drafting-service" },
-  { label: "Trademark Registration UAE", href: "https://cspzone.com/dubai/trademark-registration-service" },
-  { label: "Immigration Consulting", href: "https://cspzone.com/dubai/immigration-consulting-service" },
-  { label: "Nominee Services Dubai", href: "https://cspzone.com/dubai/nominee-service" },
+  { label: "Trade License Renewal Dubai", href: "https://www.cspzone.com/dubai/trade-license-renewal" },
+  { label: "Company Liquidation Dubai", href: "https://www.cspzone.com/dubai/company-liquidation-service" },
+  { label: "Market Research Services", href: "https://www.cspzone.com/dubai/market-research-services" },
+  { label: "VAT Consultants Dubai", href: "https://www.cspzone.com/dubai/vat-consultants" },
+  { label: "Corporate Tax Consultant", href: "https://www.cspzone.com/dubai/corporate-tax-consultant" },
+  { label: "Legal Document Drafting", href: "https://www.cspzone.com/dubai/legal-documents-lawyer-drafting-service" },
+  { label: "Trademark Registration UAE", href: "https://www.cspzone.com/dubai/trademark-registration-service" },
+  { label: "Immigration Consulting", href: "https://www.cspzone.com/dubai/immigration-consulting-service" },
+  { label: "Nominee Services Dubai", href: "https://www.cspzone.com/dubai/nominee-service" },
 ];
 
 const navItems = [
   { label: "Pricing", href: "#pricing" },
   { label: "Blogs", href: "/blog" },
   { label: "About", href: "#about" },
-  { label: "Contact", href: "https://cspzone.com/contact", external: true },
+  { label: "Contact", href: "https://www.cspzone.com/contact", external: true },
 ];
 
 export function Navigation() {
