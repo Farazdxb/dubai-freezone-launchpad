@@ -63,9 +63,9 @@ export default function Checkout() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-10 gap-8">
+        <div className="grid md:grid-cols-10 gap-8">
           {/* LEFT */}
-          <div className="lg:col-span-7 space-y-6">
+          <div className="md:col-span-7 space-y-6">
             {/* Card 1 — Package Overview */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -212,8 +212,8 @@ export default function Checkout() {
           </div>
 
           {/* RIGHT — Sticky Order Summary */}
-          <aside className="lg:col-span-3">
-            <div className="lg:sticky lg:top-24">
+          <aside className="md:col-span-3">
+            <div className="md:sticky md:top-24">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -250,7 +250,13 @@ export default function Checkout() {
                 </div>
 
                 <Button
-                  disabled={!accepted}
+                  onClick={() => {
+                    if (!accepted) {
+                      toast.error("Please accept the Terms & Conditions to proceed.");
+                      return;
+                    }
+                    toast.success("Redirecting to secure payment…");
+                  }}
                   className="w-full rounded-full font-semibold h-12"
                   size="lg"
                 >
@@ -273,13 +279,19 @@ export default function Checkout() {
       </main>
 
       {/* Mobile sticky CTA */}
-      <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-background/95 backdrop-blur border-t border-border p-4">
+      <div className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-background/95 backdrop-blur border-t border-border p-4">
         <div className="flex items-center justify-between mb-3">
           <span className="text-xs text-muted-foreground">Due today</span>
           <span className="serif-display text-2xl text-primary">AED 2,750</span>
         </div>
         <Button
-          disabled={!accepted}
+          onClick={() => {
+            if (!accepted) {
+              toast.error("Please accept the Terms & Conditions to proceed.");
+              return;
+            }
+            toast.success("Redirecting to secure payment…");
+          }}
           className="w-full rounded-full font-semibold h-12"
         >
           <Lock className="w-4 h-4" />
