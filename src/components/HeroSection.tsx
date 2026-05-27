@@ -84,11 +84,11 @@ export function HeroSection() {
               transition={{ duration: 0.5, delay: 0.25 }}
               className="mt-8 flex items-center justify-center"
             >
-              <Link to="/dashboard" className="w-full sm:w-auto">
+              <a href="#pricing" onClick={scrollToPricing} className="w-full sm:w-auto">
                 <Button size="lg" className="rounded-full px-8 w-full sm:w-auto font-semibold shadow-lg shadow-primary/25">
                   Get my license
                 </Button>
-              </Link>
+              </a>
             </motion.div>
 
             <motion.a
