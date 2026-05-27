@@ -71,7 +71,11 @@ export function Footer() {
               <ul className="space-y-2.5">
                 {col.items.map((item) => (
                   <li key={item.label}>
-                    {item.external ? (
+                    {item.anchor ? (
+                      <a href={item.href} onClick={scrollToPricing} className="text-sm text-white/60 hover:text-primary transition-colors">
+                        {item.label}
+                      </a>
+                    ) : item.external ? (
                       <a href={item.href} rel="noopener" className="text-sm text-white/60 hover:text-primary transition-colors">
                         {item.label}
                       </a>
