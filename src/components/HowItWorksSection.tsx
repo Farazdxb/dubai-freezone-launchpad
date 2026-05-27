@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { scrollToPricing } from "@/components/Navigation";
 
 const steps = [
   { n: "01", title: "Choose your package", body: "Pick a 4-month, 1-year, or 2-year license - with or without a UAE resident visa." },
@@ -38,7 +39,7 @@ export function HowItWorksSection() {
 
         <div className="text-center mt-12">
           <Button size="lg" className="rounded-full px-8" asChild>
-            <a href="#pricing">Browse packages</a>
+            <a href="#pricing" onClick={scrollToPricing}>Browse packages</a>
           </Button>
         </div>
       </div>
