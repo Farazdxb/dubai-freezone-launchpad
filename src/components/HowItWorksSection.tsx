@@ -39,7 +39,7 @@ export function HowItWorksSection() {
 
         <div className="text-center mt-12">
           <Button size="lg" className="rounded-full px-8" asChild>
-            <a href="#pricing">Browse packages</a>
+            <a href="#pricing" onClick={scrollToPricing}>Browse packages</a>
           </Button>
         </div>
       </div>
