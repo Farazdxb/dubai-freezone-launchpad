@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Star, Sparkles, CheckCircle2, Bell } from "lucide-react";
+import { scrollToPricing } from "@/components/Navigation";
 
 const heroLeft =
   "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=900&q=80";
