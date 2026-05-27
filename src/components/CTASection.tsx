@@ -41,7 +41,7 @@ export function CTASection() {
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto">
               <Button
                 size="lg"
-                onClick={() => navigate("/dashboard")}
+                onClick={() => scrollToPricing()}
                 className="rounded-full h-14 px-10 w-full sm:w-auto bg-primary hover:bg-primary-hover text-white font-semibold text-base shadow-xl shadow-primary/30"
               >
                 Get my license
