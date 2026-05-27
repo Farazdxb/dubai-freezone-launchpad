@@ -15,6 +15,7 @@ import {
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 
 const included = [
   "UAE Business License",
@@ -49,7 +50,7 @@ export default function Checkout() {
     <div className="min-h-screen bg-secondary/40">
       <Navigation />
 
-      <main className="container-wide pt-28 pb-32 lg:pb-20">
+      <main className="container-wide pt-36 sm:pt-32 pb-32 lg:pb-20">
         {/* Header */}
         <div className="max-w-3xl mb-10 lg:mb-14">
           <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-4">
@@ -198,14 +199,19 @@ export default function Checkout() {
                 />
                 <div className="text-sm">
                   <p className="text-foreground">
-                    I accept the Terms & Conditions and subscription commitment terms.
+                    I accept the{" "}
+                    <Link to="/terms" target="_blank" className="text-primary hover:underline">
+                      Terms & Conditions
+                    </Link>{" "}
+                    and subscription commitment terms.
                   </p>
-                  <a
-                    href="#"
+                  <Link
+                    to="/terms"
+                    target="_blank"
                     className="text-primary hover:underline text-xs mt-1 inline-block"
                   >
                     View Terms & Conditions
-                  </a>
+                  </Link>
                 </div>
               </label>
             </motion.div>
