@@ -20,11 +20,23 @@ const serviceLinks: { label: string; href: string }[] = [
 ];
 
 const navItems = [
-  { label: "Pricing", href: "#pricing", external: false },
+  { label: "Pricing", href: "#pricing", external: false, anchor: true },
   { label: "Resources", href: "https://www.cspzone.com/article", external: true },
   { label: "About", href: "https://www.cspzone.com/about", external: true },
   { label: "Contact", href: "https://www.cspzone.com/contact", external: true },
 ];
+
+export function scrollToPricing(e?: React.MouseEvent) {
+  if (e) e.preventDefault();
+  if (typeof window === "undefined") return;
+  if (window.location.pathname !== "/") {
+    window.location.href = "/#pricing";
+    return;
+  }
+  const el = document.getElementById("pricing");
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  history.replaceState(null, "", "/#pricing");
+}
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
