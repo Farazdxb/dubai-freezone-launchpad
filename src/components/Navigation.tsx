@@ -58,40 +58,47 @@ export function Navigation() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 8 }}
                       transition={{ duration: 0.18 }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[640px] bg-card border border-border rounded-2xl shadow-xl p-6 grid grid-cols-3 gap-6"
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[420px] bg-card border border-border rounded-2xl shadow-xl p-4"
                     >
-                      {Object.entries(services).map(([group, items]) => (
-                        <div key={group}>
-                          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">
-                            {group}
-                          </p>
-                          <ul className="space-y-2">
-                            {items.map((item) => (
-                              <li key={item}>
-                                <Link
-                                  to="#"
-                                  className="text-sm text-foreground/80 hover:text-primary transition-colors"
-                                >
-                                  {item}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
+                      <ul className="space-y-1">
+                        {serviceLinks.map((s) => (
+                          <li key={s.label}>
+                            <a
+                              href={s.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="block px-3 py-2 text-sm text-foreground/80 hover:text-primary hover:bg-secondary rounded-lg transition-colors"
+                            >
+                              {s.label}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
-              {navItems.map((item) => (
-                <Link
-                  key={item.label}
-                  to={item.href}
-                  className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {navItems.map((item) =>
+                item.external ? (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                )
+              )}
             </div>
 
             <div className="hidden lg:flex items-center gap-2">
