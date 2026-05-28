@@ -55,7 +55,7 @@ export function HeroSection() {
               transition={{ duration: 0.5 }}
               className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-foreground/70 mb-5"
             >
-              Every business starts somewhere
+              Start smart, grow faster
             </motion.p>
 
             <motion.h1
@@ -64,9 +64,9 @@ export function HeroSection() {
               transition={{ duration: 0.7, delay: 0.05 }}
               className="serif-display text-[44px] sm:text-6xl lg:text-7xl xl:text-[88px] text-foreground"
             >
-              Start your UAE
+              UAE Business
               <br />
-              business <em className="italic text-primary">here</em>
+              Setup <em className="italic text-primary">Platform</em>
             </motion.h1>
 
             <motion.p
@@ -75,11 +75,12 @@ export function HeroSection() {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="text-base sm:text-lg text-muted-foreground mt-6 max-w-xl mx-auto leading-relaxed"
             >
-              Business license, VAT, corporate tax and accounting - handled by experts,
-              managed from one elegant dashboard.
+              Business license, VAT, corporate tax, and compliance — managed in one powerful platform.
             </motion.p>
 
             <motion.div
+
+
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.25 }}
