@@ -62,7 +62,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.05 }}
-              className="serif-display text-[44px] sm:text-6xl lg:text-7xl xl:text-[88px] text-foreground"
+              className="serif-display text-[40px] sm:text-5xl lg:text-6xl xl:text-7xl text-foreground"
             >
               UAE Business
               <br />
