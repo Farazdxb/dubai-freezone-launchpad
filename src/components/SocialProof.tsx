@@ -61,7 +61,7 @@ export function SocialProof() {
                 key={t.name}
                 className="snap-center shrink-0 w-[85%] bg-card rounded-3xl border border-border p-7"
               >
-                <p className="serif-display text-2xl text-foreground leading-snug mb-6">
+                <p className="text-base text-foreground leading-relaxed mb-6">
                   &ldquo;{t.q}&rdquo;
                 </p>
                 <div className="flex items-center gap-3 pt-5 border-t border-border">
@@ -88,7 +88,7 @@ export function SocialProof() {
               transition={{ duration: 0.5, delay: i * 0.07 }}
               className="bg-card rounded-3xl border border-border p-7 hover:shadow-lg transition-all"
             >
-              <p className="serif-display text-2xl text-foreground leading-snug mb-6">
+              <p className="text-base text-foreground leading-relaxed mb-6">
                 &ldquo;{t.q}&rdquo;
               </p>
               <div className="flex items-center gap-3 pt-5 border-t border-border">
