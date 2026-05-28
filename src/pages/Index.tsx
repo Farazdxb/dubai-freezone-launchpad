@@ -26,8 +26,8 @@ const Index = () => {
         <HowItWorksSection />
         <WhyChooseUsSection />
         <PerksIntegrations />
-        <SocialProof />
         <FreezoneOffersSection />
+        <SocialProof />
         <SupportReassurance />
         <CTASection />
         <BlogSection />
