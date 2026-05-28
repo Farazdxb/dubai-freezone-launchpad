@@ -41,7 +41,7 @@ export function SocialProof() {
               transition={{ duration: 0.4, delay: i * 0.05 }}
               className="text-center"
             >
-              <p className="serif-display text-4xl lg:text-5xl text-primary mb-1">{s.n}</p>
+              <p className="serif-display text-4xl lg:text-5xl text-foreground mb-1">{s.n}</p>
               <p className="text-sm text-muted-foreground">{s.l}</p>
             </motion.div>
           ))}
