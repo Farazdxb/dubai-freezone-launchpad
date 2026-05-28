@@ -55,9 +55,6 @@ export function HeroSection() {
               transition={{ duration: 0.5 }}
               className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-foreground/70 mb-5"
             >
-              Every business starts somewhere
-              className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-foreground/70 mb-5"
-            >
               Start smart, grow faster
             </motion.p>
 
@@ -80,6 +77,9 @@ export function HeroSection() {
             >
               Business license, VAT, corporate tax, and compliance — managed in one powerful platform.
             </motion.p>
+
+            <motion.div
+
 
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
