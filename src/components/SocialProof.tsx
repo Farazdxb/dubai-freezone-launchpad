@@ -28,7 +28,8 @@ const testimonials = [
 export function SocialProof() {
   return (
     <section className="section-padding bg-secondary">
-      <div className="container-wide">
+    <section className="section-padding" style={{ background: "hsl(var(--neutral-700))" }}>
+
         {/* Stats bar */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20 bg-background rounded-3xl border border-border p-8 lg:p-10">
           {stats.map((s, i) => (
