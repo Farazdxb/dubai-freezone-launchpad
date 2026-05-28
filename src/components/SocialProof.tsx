@@ -49,8 +49,9 @@ export function SocialProof() {
 
         <div className="text-center max-w-2xl mx-auto mb-12">
           <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-4">Loved by founders</p>
-          <h2 className="serif-display text-4xl sm:text-5xl text-foreground">
-            Real stories. <em className="italic text-primary">Real results.</em>
+          <h2 className="serif-display text-4xl sm:text-5xl text-white">
+            Real stories. <em className="italic text-primary-glow">Real results.</em>
+
           </h2>
         </div>
 
