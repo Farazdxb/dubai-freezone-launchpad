@@ -11,8 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@fontsource/instrument-serif": "^5.2.8",
-    "@fontsource/inter": "^5.2.8",
+    "@fontsource/mulish": "^5.2.8",
     "@fontsource/sora": "^5.2.8",
     "@hookform/resolvers": "^3.10.0",
     "@radix-ui/react-accordion": "^1.2.11",
