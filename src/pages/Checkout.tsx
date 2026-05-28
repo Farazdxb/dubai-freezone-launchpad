@@ -57,7 +57,7 @@ export default function Checkout() {
             Checkout
           </p>
           <h1 className="serif-display text-4xl sm:text-5xl text-foreground leading-tight">
-            Complete your <em className="italic text-primary">business setup</em>
+            Complete your <em className="italic text-primary">subscription</em>
           </h1>
           <p className="text-muted-foreground mt-4 text-base sm:text-lg">
             Review your package details and proceed with secure payment.
