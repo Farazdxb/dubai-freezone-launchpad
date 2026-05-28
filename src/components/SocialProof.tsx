@@ -27,8 +27,9 @@ const testimonials = [
 
 export function SocialProof() {
   return (
-    <section className="section-padding bg-secondary">
+    <section className="section-padding" style={{ background: "hsl(var(--neutral-700))" }}>
       <div className="container-wide">
+
         {/* Stats bar */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20 bg-background rounded-3xl border border-border p-8 lg:p-10">
           {stats.map((s, i) => (
@@ -48,8 +49,9 @@ export function SocialProof() {
 
         <div className="text-center max-w-2xl mx-auto mb-12">
           <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-4">Loved by founders</p>
-          <h2 className="serif-display text-4xl sm:text-5xl text-foreground">
-            Real stories. <em className="italic text-primary">Real results.</em>
+          <h2 className="serif-display text-4xl sm:text-5xl text-white">
+            Real stories. <em className="italic text-primary-glow">Real results.</em>
+
           </h2>
         </div>
 
