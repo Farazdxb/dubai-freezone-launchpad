@@ -14,10 +14,11 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
-        display: ["Inter", "system-ui", "sans-serif"],
-        serif: ["Instrument Serif", "Georgia", "serif"],
+        sans: ["Mulish", "system-ui", "sans-serif"],
+        display: ["Mulish", "system-ui", "sans-serif"],
+        serif: ["Mulish", "system-ui", "sans-serif"],
       },
+
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
