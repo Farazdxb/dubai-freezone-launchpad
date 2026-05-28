@@ -79,9 +79,9 @@ export default function Checkout() {
                   <Briefcase className="w-5 h-5" />
                 </div>
                 <div className="flex-1 min-w-0">
-          <h1 className="serif-display text-4xl sm:text-5xl text-foreground leading-tight">
-            Complete your <em className="italic text-primary">subscription</em>
-          </h1>
+                  <div className="flex flex-wrap items-center gap-2 mb-1">
+                    <h2 className="text-xl font-semibold text-foreground">
+                      Business License + Visa Package
                     </h2>
                     <Badge variant="secondary" className="rounded-full font-medium">
                       Subscription
