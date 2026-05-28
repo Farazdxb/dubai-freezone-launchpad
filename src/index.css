@@ -108,8 +108,29 @@
   body {
     @apply bg-background text-foreground font-sans antialiased overflow-x-hidden;
     font-feature-settings: "ss01", "cv11";
+    background-image:
+      radial-gradient(ellipse 60% 50% at 15% 0%, hsl(233 100% 55% / 0.07), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 85% 30%, hsl(233 100% 65% / 0.06), transparent 60%),
+      radial-gradient(ellipse 70% 50% at 50% 100%, hsl(233 100% 55% / 0.05), transparent 60%);
+    background-attachment: fixed;
   }
   h1, h2, h3, h4, h5, h6 { @apply font-display tracking-tight; }
+}
+
+@layer components {
+  .glow-section {
+    position: relative;
+    isolation: isolate;
+  }
+  .glow-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 50% 60% at 50% 0%, hsl(233 100% 55% / 0.08), transparent 65%);
+  }
 }
 
 @layer components {
