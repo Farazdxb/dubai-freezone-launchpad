@@ -149,22 +149,22 @@ export default function Checkout() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.1 }}
-              className="rounded-3xl bg-secondary/70 border border-border p-6 sm:p-8"
+              className="rounded-3xl bg-secondary/70 border border-border p-5 sm:p-6"
             >
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-3 mb-3">
                 <div className="w-9 h-9 rounded-xl bg-background text-primary flex items-center justify-center">
                   <Info className="w-4 h-4" />
                 </div>
                 <h3 className="text-lg font-semibold text-foreground">Important information</h3>
               </div>
-              <ul className="space-y-2.5 pl-1">
+              <ul className="space-y-2 pl-1">
                 {importantInfo.map((item, index) => (
                   <li
                     key={index}
-                    className={item.isHeading ? "text-sm font-bold text-foreground mt-3 first:mt-0" : "text-sm text-muted-foreground flex gap-2.5"}
+                    className={item.isHeading ? "text-xs font-bold text-foreground mt-2 first:mt-0" : "text-xs text-muted-foreground flex gap-2.5"}
                   >
                     {!item.isHeading && (
-                      <span className="text-muted-foreground/60 mt-2 w-1 h-1 rounded-full bg-muted-foreground/60 shrink-0" />
+                      <span className="text-muted-foreground/60 mt-1.5 w-1 h-1 rounded-full bg-muted-foreground/60 shrink-0" />
                     )}
                     {item.text}
                   </li>
