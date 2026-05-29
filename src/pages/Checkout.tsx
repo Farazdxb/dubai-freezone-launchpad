@@ -29,11 +29,16 @@ const included = [
 ];
 
 const importantInfo = [
-  "Documents will be requested after payment",
-  "License issuance may take 4–8 working days",
-  "Processing timelines depend on Freezone authority approval",
-  "Subscription packages require commitment completion",
-  "Government approval is subject to authority review",
+  { text: "Documents and required information will be requested after payment.", isHeading: false },
+  { text: "License and visa issuance are subject to approval by the relevant authority.", isHeading: false },
+  { text: "Business License applications typically take 4–8 working days, subject to authority processing times.", isHeading: false },
+  { text: "Business License Packages", isHeading: true },
+  { text: "If you choose an installment plan (4 or 6 months), a minimum commitment period applies as per your selected package.", isHeading: false },
+  { text: "Installment plans cannot be cancelled before the commitment period is completed.", isHeading: false },
+  { text: "Compliance Subscription Packages", isHeading: true },
+  { text: "Compliance subscriptions have no lock-in period and can be cancelled anytime.", isHeading: false },
+  { text: "Business information and supporting documents must be submitted through the client dashboard after subscription activation.", isHeading: false },
+  { text: "Services will commence once the required information is received.", isHeading: false },
 ];
 
 const requiredDocs = [
@@ -41,6 +46,8 @@ const requiredDocs = [
   "Passport Size Photo",
   "Email Address",
   "Mobile Number",
+  "Business License (if opted for Compliance Package)",
+  "Emirates ID (if any)",
 ];
 
 export default function Checkout() {
