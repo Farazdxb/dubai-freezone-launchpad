@@ -192,7 +192,7 @@ export default function Checkout() {
                 ))}
               </ul>
               <p className="text-xs text-muted-foreground mt-5">
-                You can upload documents after payment.
+                You will be asked to upload required documents as per your subscription in the client dashboard.
               </p>
             </motion.div>
 
