@@ -158,10 +158,15 @@ export default function Checkout() {
                 <h3 className="text-lg font-semibold text-foreground">Important information</h3>
               </div>
               <ul className="space-y-2.5 pl-1">
-                {importantInfo.map((item) => (
-                  <li key={item} className="text-sm text-muted-foreground flex gap-2.5">
-                    <span className="text-muted-foreground/60 mt-2 w-1 h-1 rounded-full bg-muted-foreground/60 shrink-0" />
-                    {item}
+                {importantInfo.map((item, index) => (
+                  <li
+                    key={index}
+                    className={item.isHeading ? "text-sm font-bold text-foreground mt-3 first:mt-0" : "text-sm text-muted-foreground flex gap-2.5"}
+                  >
+                    {!item.isHeading && (
+                      <span className="text-muted-foreground/60 mt-2 w-1 h-1 rounded-full bg-muted-foreground/60 shrink-0" />
+                    )}
+                    {item.text}
                   </li>
                 ))}
               </ul>
