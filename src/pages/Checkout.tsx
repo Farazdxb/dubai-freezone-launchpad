@@ -29,11 +29,16 @@ const included = [
 ];
 
 const importantInfo = [
-  "Documents will be requested after payment",
-  "License issuance may take 4–8 working days",
-  "Processing timelines depend on Freezone authority approval",
-  "Subscription packages require commitment completion",
-  "Government approval is subject to authority review",
+  { text: "Documents and required information will be requested after payment.", isHeading: false },
+  { text: "License and visa issuance are subject to approval by the relevant authority.", isHeading: false },
+  { text: "Business License applications typically take 4–8 working days, subject to authority processing times.", isHeading: false },
+  { text: "Business License Packages", isHeading: true },
+  { text: "If you choose an installment plan (4 or 6 months), a minimum commitment period applies as per your selected package.", isHeading: false },
+  { text: "Installment plans cannot be cancelled before the commitment period is completed.", isHeading: false },
+  { text: "Compliance Subscription Packages", isHeading: true },
+  { text: "Compliance subscriptions have no lock-in period and can be cancelled anytime.", isHeading: false },
+  { text: "Business information and supporting documents must be submitted through the client dashboard after subscription activation.", isHeading: false },
+  { text: "Services will commence once the required information is received.", isHeading: false },
 ];
 
 const requiredDocs = [
@@ -41,6 +46,8 @@ const requiredDocs = [
   "Passport Size Photo",
   "Email Address",
   "Mobile Number",
+  "Business License (if opted for Compliance Package)",
+  "Emirates ID (if any)",
 ];
 
 export default function Checkout() {
@@ -151,10 +158,15 @@ export default function Checkout() {
                 <h3 className="text-lg font-semibold text-foreground">Important information</h3>
               </div>
               <ul className="space-y-2.5 pl-1">
-                {importantInfo.map((item) => (
-                  <li key={item} className="text-sm text-muted-foreground flex gap-2.5">
-                    <span className="text-muted-foreground/60 mt-2 w-1 h-1 rounded-full bg-muted-foreground/60 shrink-0" />
-                    {item}
+                {importantInfo.map((item, index) => (
+                  <li
+                    key={index}
+                    className={item.isHeading ? "text-sm font-bold text-foreground mt-3 first:mt-0" : "text-sm text-muted-foreground flex gap-2.5"}
+                  >
+                    {!item.isHeading && (
+                      <span className="text-muted-foreground/60 mt-2 w-1 h-1 rounded-full bg-muted-foreground/60 shrink-0" />
+                    )}
+                    {item.text}
                   </li>
                 ))}
               </ul>
@@ -180,7 +192,7 @@ export default function Checkout() {
                 ))}
               </ul>
               <p className="text-xs text-muted-foreground mt-5">
-                You can upload documents after payment.
+                You will be asked to upload required documents as per your subscription in the client dashboard.
               </p>
             </motion.div>
 
