@@ -61,7 +61,7 @@ const steps = [
 const reviews = [
   {
     quote:
-      "The fastest and most transparent way I've found to register a company in Dubai. No hidden costs, no surprises.",
+      "The fastest and most transparent way I've found to register a company in the UAE. No hidden costs, no surprises.",
     name: "Rahul Kapoor",
     meta: "India · E-commerce Founder",
   },
