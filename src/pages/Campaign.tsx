@@ -173,7 +173,7 @@ export default function Campaign() {
               UAE's #1 Online Business Registration Portal
             </span>
 
-            <h1 className="serif-display mt-6 text-[40px] sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] text-foreground">
+            <h1 className="serif-display mt-6 text-[34px] sm:text-4xl lg:text-5xl xl:text-6xl leading-[1.05] text-foreground">
               Start Your Company in the UAE for{" "}
               <em className="italic text-primary">Just AED 4,320</em>
             </h1>
