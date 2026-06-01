@@ -505,7 +505,7 @@ export default function Campaign() {
               ))}
             </ul>
             <div className="mt-6 text-center">
-              <a href="/terms" className="text-xs text-primary font-medium hover:underline">
+              <a href="https://www.cspzone.com/terms" target="_blank" rel="noreferrer" className="text-xs text-primary font-medium hover:underline">
                 Read Full Terms &amp; Conditions →
               </a>
             </div>
