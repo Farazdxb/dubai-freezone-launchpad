@@ -421,7 +421,7 @@ export default function Campaign() {
             <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-4">How It Works</p>
             <h2 className="serif-display text-4xl sm:text-5xl lg:text-6xl text-foreground">
               3 Simple Steps to Get Your<br />
-              Dubai <em className="italic text-primary">Business License</em>
+              UAE <em className="italic text-primary">Business License</em>
             </h2>
           </div>
 
