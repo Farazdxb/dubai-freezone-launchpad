@@ -17,6 +17,7 @@ import ServicePage from "./pages/ServicePage";
 import Services from "./pages/Services";
 import Checkout from "./pages/Checkout";
 import Terms from "./pages/Terms";
+import Campaign from "./pages/Campaign";
 
 // Admin Pages
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -57,6 +58,7 @@ const App = () => (
           <Route path="/services" element={<Services />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="/campaign" element={<Campaign />} />
           
           {/* Service Pages */}
           <Route path="/dubai/:slug" element={<ServicePage />} />
