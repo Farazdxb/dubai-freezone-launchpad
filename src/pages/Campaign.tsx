@@ -179,7 +179,7 @@ export default function Campaign() {
             </h1>
 
             <p className="mt-6 text-base sm:text-lg text-muted-foreground max-w-xl leading-relaxed">
-              Register your Dubai business 100% online — no hidden fees, no consultancy charges. One flat price. Everything included.
+              Register your UAE business 100% online — no hidden fees, no consultancy charges. One flat price. Everything included.
             </p>
 
             {/* Price row */}
