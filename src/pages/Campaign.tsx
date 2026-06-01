@@ -265,7 +265,7 @@ export default function Campaign() {
             </a>
 
             {/* Customer headshots row */}
-            <div className="mt-6 inline-flex items-center gap-4 bg-background border border-border rounded-2xl px-4 py-3 shadow-sm">
+            <div className="mt-8 flex items-center gap-4 bg-background border border-border rounded-2xl px-4 py-3 shadow-sm w-fit">
               <div className="flex -space-x-2">
                 {[
                   "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&h=120&q=80",
@@ -293,6 +293,7 @@ export default function Campaign() {
                 <span className="text-xs text-muted-foreground mt-0.5">Loved by 3,200+ customers</span>
               </div>
             </div>
+
           </motion.div>
 
           {/* Right — Lead Capture Form */}
@@ -303,20 +304,18 @@ export default function Campaign() {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="relative lg:sticky lg:top-28 lg:max-w-md lg:ml-auto w-full"
           >
-            <div className="absolute -top-3 left-5 z-10">
+            {/* Badges above form (stacked, no overlap) */}
+            <div className="mb-4 flex flex-col items-center gap-2">
               <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary text-primary-foreground text-[11px] font-semibold shadow-md shadow-primary/30">
                 <Clock className="w-3.5 h-3.5" />
                 Free Callback in 10 Minutes
               </span>
-            </div>
-
-            {/* No Consultancy Fee badge above form */}
-            <div className="mb-3 flex justify-center">
               <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent text-primary text-[11px] font-semibold border border-primary/15">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 No Consultancy Fee · No Hidden Charges
               </span>
             </div>
+
 
             <div className="bg-card rounded-3xl border border-border shadow-xl p-5 sm:p-6">
               <h2 className="serif-display text-xl sm:text-2xl text-foreground leading-tight">
