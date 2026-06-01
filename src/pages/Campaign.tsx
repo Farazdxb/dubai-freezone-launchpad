@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import csplogo from "@/assets/csplogo.svg";
 import {
   CheckCircle2,
   ShieldCheck,
@@ -60,7 +61,7 @@ const steps = [
 const reviews = [
   {
     quote:
-      "The fastest and most transparent way I've found to register a company in Dubai. No hidden costs, no surprises.",
+      "The fastest and most transparent way I've found to register a company in the UAE. No hidden costs, no surprises.",
     name: "Rahul Kapoor",
     meta: "India · E-commerce Founder",
   },
@@ -133,13 +134,18 @@ export default function Campaign() {
       {/* SECTION 2 — Navigation */}
       <header className="sticky top-0 z-40 w-full bg-background/85 backdrop-blur-xl border-b border-border">
         <div className="container-wide flex items-center justify-between h-16 sm:h-20">
-          <a href="/" className="serif-display text-2xl sm:text-3xl text-primary font-semibold tracking-tight">
-            CSP<span className="text-foreground">zone</span>
+          <a href="https://www.cspzone.com" className="flex items-center">
+            <img src={csplogo} alt="CSPzone" className="h-8 sm:h-9 w-auto" />
           </a>
-          <div className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary text-xs font-medium text-foreground/80 border border-border">
-            <ShieldCheck className="w-3.5 h-3.5 text-primary" />
-            No Consultancy Fee · No Hidden Charges
-          </div>
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#25D366] hover:bg-[#1faa50] text-white text-xs font-semibold transition-colors"
+          >
+            <MessageCircle className="w-3.5 h-3.5" />
+            Chat on WhatsApp
+          </a>
         </div>
       </header>
 
@@ -173,7 +179,7 @@ export default function Campaign() {
             </h1>
 
             <p className="mt-6 text-base sm:text-lg text-muted-foreground max-w-xl leading-relaxed">
-              Register your Dubai business 100% online — no hidden fees, no consultancy charges. One flat price. Everything included.
+              Register your UAE business 100% online — no hidden fees, no consultancy charges. One flat price. Everything included.
             </p>
 
             {/* Price row */}
@@ -212,9 +218,8 @@ export default function Campaign() {
               </Button>
               <Button
                 size="lg"
-                variant="outline"
                 asChild
-                className="rounded-full px-7 h-12 font-semibold border-[#25D366]/40 text-[#128C7E] hover:bg-[#25D366]/10 hover:border-[#25D366]"
+                className="rounded-full px-7 h-12 font-semibold bg-[#25D366] text-white hover:bg-[#1faa50] shadow-lg shadow-[#25D366]/25"
               >
                 <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
                   <MessageCircle className="w-4 h-4" />
@@ -237,6 +242,57 @@ export default function Campaign() {
                 </span>
               ))}
             </div>
+
+            {/* Trustpilot badge */}
+            <a
+              href="https://www.trustpilot.com/review/cspzone.com"
+              target="_blank"
+              rel="nofollow noopener noreferrer"
+              className="mt-8 inline-flex items-center gap-2 text-sm hover:opacity-80 transition-opacity"
+            >
+              <span className="font-semibold text-foreground underline underline-offset-2">Great</span>
+              <span className="flex items-center gap-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className="w-4 h-4 bg-[#00B67A] flex items-center justify-center">
+                    <Star className="w-2.5 h-2.5 text-white fill-current" />
+                  </span>
+                ))}
+              </span>
+              <span className="flex items-center gap-1 text-foreground font-medium">
+                <Star className="w-3.5 h-3.5 text-[#00B67A] fill-current" />
+                Trustpilot
+              </span>
+            </a>
+
+            {/* Customer headshots row */}
+            <div className="mt-6 inline-flex items-center gap-4 bg-background border border-border rounded-2xl px-4 py-3 shadow-sm">
+              <div className="flex -space-x-2">
+                {[
+                  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&h=120&q=80",
+                  "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=120&h=120&q=80",
+                  "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&h=120&q=80",
+                  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=120&h=120&q=80",
+                ].map((src, i) => (
+                  <img
+                    key={i}
+                    src={src}
+                    alt="Happy customer"
+                    className="w-9 h-9 rounded-full border-2 border-background object-cover"
+                  />
+                ))}
+              </div>
+              <div className="flex flex-col leading-tight">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-sm font-semibold text-foreground">4.9 / 5</span>
+                  <span className="flex items-center gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-3.5 h-3.5 text-[#FF8A3D] fill-current" />
+                    ))}
+                  </span>
+                </div>
+                <span className="text-xs text-muted-foreground mt-0.5">Loved by 3,200+ customers</span>
+              </div>
+            </div>
           </motion.div>
 
           {/* Right — Lead Capture Form */}
@@ -245,37 +301,45 @@ export default function Campaign() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="relative lg:sticky lg:top-28"
+            className="relative lg:sticky lg:top-28 lg:max-w-md lg:ml-auto w-full"
           >
-            <div className="absolute -top-3 left-6 z-10">
+            <div className="absolute -top-3 left-5 z-10">
               <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary text-primary-foreground text-[11px] font-semibold shadow-md shadow-primary/30">
                 <Clock className="w-3.5 h-3.5" />
                 Free Callback in 10 Minutes
               </span>
             </div>
 
-            <div className="bg-card rounded-3xl border border-border shadow-xl p-7 sm:p-9">
-              <h2 className="serif-display text-2xl sm:text-3xl text-foreground leading-tight">
+            {/* No Consultancy Fee badge above form */}
+            <div className="mb-3 flex justify-center">
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent text-primary text-[11px] font-semibold border border-primary/15">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                No Consultancy Fee · No Hidden Charges
+              </span>
+            </div>
+
+            <div className="bg-card rounded-3xl border border-border shadow-xl p-5 sm:p-6">
+              <h2 className="serif-display text-xl sm:text-2xl text-foreground leading-tight">
                 Register Your Business in the UAE <em className="italic text-primary">Today</em>
               </h2>
-              <p className="mt-2 text-sm text-muted-foreground">
+              <p className="mt-1.5 text-xs text-muted-foreground">
                 Fill in your details — our team will contact you in minutes.
               </p>
 
-              <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+              <form onSubmit={handleSubmit} className="mt-5 space-y-3">
                 <div>
-                  <Label htmlFor="name" className="text-xs font-medium text-foreground/70">Full Name</Label>
+                  <Label htmlFor="name" className="text-[11px] font-medium text-foreground/70">Full Name</Label>
                   <Input
                     id="name"
                     required
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     placeholder="John Smith"
-                    className="mt-1.5 h-11 rounded-xl"
+                    className="mt-1 h-10 rounded-lg text-sm"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="phone" className="text-xs font-medium text-foreground/70">Phone / WhatsApp Number</Label>
+                  <Label htmlFor="phone" className="text-[11px] font-medium text-foreground/70">Phone / WhatsApp Number</Label>
                   <Input
                     id="phone"
                     required
@@ -283,11 +347,11 @@ export default function Campaign() {
                     value={form.phone}
                     onChange={(e) => setForm({ ...form, phone: e.target.value })}
                     placeholder="+971 50 000 0000"
-                    className="mt-1.5 h-11 rounded-xl"
+                    className="mt-1 h-10 rounded-lg text-sm"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="email" className="text-xs font-medium text-foreground/70">Email Address</Label>
+                  <Label htmlFor="email" className="text-[11px] font-medium text-foreground/70">Email Address</Label>
                   <Input
                     id="email"
                     required
@@ -295,29 +359,28 @@ export default function Campaign() {
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     placeholder="you@company.com"
-                    className="mt-1.5 h-11 rounded-xl"
+                    className="mt-1 h-10 rounded-lg text-sm"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="activity" className="text-xs font-medium text-foreground/70">Business Activity</Label>
+                  <Label htmlFor="activity" className="text-[11px] font-medium text-foreground/70">Business Activity</Label>
                   <Input
                     id="activity"
                     value={form.activity}
                     onChange={(e) => setForm({ ...form, activity: e.target.value })}
-                    placeholder="e.g. Trading, Consulting, IT Services, Food & Beverage..."
-                    className="mt-1.5 h-11 rounded-xl"
+                    placeholder="e.g. Trading, Consulting, IT Services..."
+                    className="mt-1 h-10 rounded-lg text-sm"
                   />
                 </div>
 
                 <Button
                   type="submit"
-                  size="lg"
-                  className="w-full rounded-xl h-12 font-semibold shadow-lg shadow-primary/25 mt-2"
+                  className="w-full rounded-lg h-11 font-semibold shadow-lg shadow-primary/25 mt-1"
                 >
                   Get My Free Consultation <ArrowRight className="w-4 h-4" />
                 </Button>
 
-                <p className="text-[11px] text-center text-muted-foreground inline-flex items-center justify-center gap-1.5 w-full">
+                <p className="text-[10px] text-center text-muted-foreground inline-flex items-center justify-center gap-1.5 w-full">
                   <Lock className="w-3 h-3" />
                   No spam. Your data is 100% private &amp; secure.
                 </p>
@@ -358,7 +421,7 @@ export default function Campaign() {
             <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-4">How It Works</p>
             <h2 className="serif-display text-4xl sm:text-5xl lg:text-6xl text-foreground">
               3 Simple Steps to Get Your<br />
-              Dubai <em className="italic text-primary">Business License</em>
+              UAE <em className="italic text-primary">Business License</em>
             </h2>
           </div>
 
@@ -442,7 +505,7 @@ export default function Campaign() {
               ))}
             </ul>
             <div className="mt-6 text-center">
-              <a href="/terms" className="text-xs text-primary font-medium hover:underline">
+              <a href="https://www.cspzone.com/terms" target="_blank" rel="noreferrer" className="text-xs text-primary font-medium hover:underline">
                 Read Full Terms &amp; Conditions →
               </a>
             </div>
