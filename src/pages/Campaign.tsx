@@ -218,9 +218,8 @@ export default function Campaign() {
               </Button>
               <Button
                 size="lg"
-                variant="outline"
                 asChild
-                className="rounded-full px-7 h-12 font-semibold border-[#25D366]/40 text-[#128C7E] hover:bg-[#25D366]/10 hover:border-[#25D366]"
+                className="rounded-full px-7 h-12 font-semibold bg-[#25D366] text-white hover:bg-[#1faa50] shadow-lg shadow-[#25D366]/25"
               >
                 <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
                   <MessageCircle className="w-4 h-4" />
