@@ -134,13 +134,18 @@ export default function Campaign() {
       {/* SECTION 2 — Navigation */}
       <header className="sticky top-0 z-40 w-full bg-background/85 backdrop-blur-xl border-b border-border">
         <div className="container-wide flex items-center justify-between h-16 sm:h-20">
-          <a href="/" className="serif-display text-2xl sm:text-3xl text-primary font-semibold tracking-tight">
-            CSP<span className="text-foreground">zone</span>
+          <a href="https://www.cspzone.com" className="flex items-center">
+            <img src={csplogo} alt="CSPzone" className="h-8 sm:h-9 w-auto" />
           </a>
-          <div className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary text-xs font-medium text-foreground/80 border border-border">
-            <ShieldCheck className="w-3.5 h-3.5 text-primary" />
-            No Consultancy Fee · No Hidden Charges
-          </div>
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#25D366] hover:bg-[#1faa50] text-white text-xs font-semibold transition-colors"
+          >
+            <MessageCircle className="w-3.5 h-3.5" />
+            Chat on WhatsApp
+          </a>
         </div>
       </header>
 
