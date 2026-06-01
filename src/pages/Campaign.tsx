@@ -265,7 +265,7 @@ export default function Campaign() {
             </a>
 
             {/* Customer headshots row */}
-            <div className="mt-6 inline-flex items-center gap-4 bg-background border border-border rounded-2xl px-4 py-3 shadow-sm">
+            <div className="mt-8 flex items-center gap-4 bg-background border border-border rounded-2xl px-4 py-3 shadow-sm w-fit">
               <div className="flex -space-x-2">
                 {[
                   "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&h=120&q=80",
@@ -293,6 +293,7 @@ export default function Campaign() {
                 <span className="text-xs text-muted-foreground mt-0.5">Loved by 3,200+ customers</span>
               </div>
             </div>
+
           </motion.div>
 
           {/* Right — Lead Capture Form */}
