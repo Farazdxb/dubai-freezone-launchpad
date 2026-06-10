@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Footer } from "@/components/Footer";
 import csplogo from "@/assets/csplogo.svg";
 import {
   CheckCircle2,
@@ -22,10 +23,11 @@ const WHATSAPP_URL = "https://wa.me/971500000000";
 const PRICE_NEW = "AED 4,320";
 const PRICE_OLD = "AED 4,800";
 const YOUTUBE_VIDEO_ID = "dQw4w9WgXcQ"; // Replace with actual YouTube video ID
+const CUSTOM_THUMBNAIL_URL = ""; // Paste a custom image URL here to override the YouTube thumbnail
 
 function VideoShowcase() {
   const [playing, setPlaying] = useState(false);
-  const thumb = `https://img.youtube.com/vi/${YOUTUBE_VIDEO_ID}/maxresdefault.jpg`;
+  const thumb = CUSTOM_THUMBNAIL_URL || `https://img.youtube.com/vi/${YOUTUBE_VIDEO_ID}/maxresdefault.jpg`;
   return (
     <section className="relative overflow-hidden py-20 lg:py-32 bg-black">
       {/* Ambient glow */}
@@ -169,13 +171,13 @@ const reviews = [
   },
   {
     quote:
-      "Registered my mainland LLC in just 6 days. The team was available on WhatsApp throughout.",
+      "Registered my Freezone ecommerce in just 4 days. Self service portal is really good. Thanks",
     name: "Sara Al-Amri",
     meta: "UAE · Consulting Firm",
   },
   {
     quote:
-      "Other agencies quoted me AED 8,000+. CSPzone delivered everything for AED 4,320. Completely professional.",
+      "The team guided me through every step of the process. From documentation to license approval — seamless and professional.",
     name: "James Mitchell",
     meta: "UK · Tech Startup",
   },
@@ -665,6 +667,9 @@ export default function Campaign() {
       >
         <MessageCircle className="w-6 h-6" />
       </a>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
