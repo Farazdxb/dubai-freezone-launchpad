@@ -20,6 +20,7 @@ import Terms from "./pages/Terms";
 import Campaign from "./pages/Campaign";
 import CampaignBusinessLicenseVisa from "./pages/CampaignBusinessLicenseVisa";
 import CampaignOffshore from "./pages/CampaignOffshore";
+import CampaignEcommerce from "./pages/CampaignEcommerce";
 
 // Admin Pages
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -63,6 +64,7 @@ const App = () => (
           <Route path="/campaign" element={<Campaign />} />
           <Route path="/business-license-visa" element={<CampaignBusinessLicenseVisa />} />
           <Route path="/offshore-company-setup" element={<CampaignOffshore />} />
+          <Route path="/ecommerce-license" element={<CampaignEcommerce />} />
           
           {/* Service Pages */}
           <Route path="/dubai/:slug" element={<ServicePage />} />
