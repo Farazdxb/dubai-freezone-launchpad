@@ -20,6 +20,7 @@ import Terms from "./pages/Terms";
 import Campaign from "./pages/Campaign";
 import CampaignBusinessLicenseVisa from "./pages/CampaignBusinessLicenseVisa";
 import CampaignOffshore from "./pages/CampaignOffshore";
+import CampaignEcommerce from "./pages/CampaignEcommerce";
 
 // Admin Pages
 import AdminLogin from "./pages/admin/AdminLogin";
