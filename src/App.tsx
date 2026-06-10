@@ -18,6 +18,8 @@ import Services from "./pages/Services";
 import Checkout from "./pages/Checkout";
 import Terms from "./pages/Terms";
 import Campaign from "./pages/Campaign";
+import CampaignBusinessLicenseVisa from "./pages/CampaignBusinessLicenseVisa";
+import CampaignOffshore from "./pages/CampaignOffshore";
 
 // Admin Pages
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -59,6 +61,8 @@ const App = () => (
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/campaign" element={<Campaign />} />
+          <Route path="/business-license-visa" element={<CampaignBusinessLicenseVisa />} />
+          <Route path="/offshore-company-setup" element={<CampaignOffshore />} />
           
           {/* Service Pages */}
           <Route path="/dubai/:slug" element={<ServicePage />} />
