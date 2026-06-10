@@ -64,6 +64,7 @@ const App = () => (
           <Route path="/campaign" element={<Campaign />} />
           <Route path="/business-license-visa" element={<CampaignBusinessLicenseVisa />} />
           <Route path="/offshore-company-setup" element={<CampaignOffshore />} />
+          <Route path="/ecommerce-license" element={<CampaignEcommerce />} />
           
           {/* Service Pages */}
           <Route path="/dubai/:slug" element={<ServicePage />} />
