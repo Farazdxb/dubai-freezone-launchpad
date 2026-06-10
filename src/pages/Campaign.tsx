@@ -21,6 +21,108 @@ import { toast } from "@/hooks/use-toast";
 const WHATSAPP_URL = "https://wa.me/971500000000";
 const PRICE_NEW = "AED 4,320";
 const PRICE_OLD = "AED 4,800";
+const YOUTUBE_VIDEO_ID = "dQw4w9WgXcQ"; // Replace with actual YouTube video ID
+
+function VideoShowcase() {
+  const [playing, setPlaying] = useState(false);
+  const thumb = `https://img.youtube.com/vi/${YOUTUBE_VIDEO_ID}/maxresdefault.jpg`;
+  return (
+    <section className="relative overflow-hidden py-20 lg:py-32 bg-black">
+      {/* Ambient glow */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-60"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 50% at 50% 0%, hsl(233 100% 55% / 0.25), transparent 60%), radial-gradient(ellipse 50% 40% at 50% 100%, hsl(233 100% 60% / 0.18), transparent 65%)",
+        }}
+      />
+      <div className="container-wide relative">
+        <div className="text-center max-w-2xl mx-auto mb-12 lg:mb-16">
+          <p className="text-xs uppercase tracking-[0.25em] text-white/60 font-semibold mb-4">
+            See It In Action
+          </p>
+          <h2 className="serif-display text-4xl sm:text-5xl lg:text-6xl text-white">
+            Your UAE company,<br />
+            <em className="italic text-white/80">beautifully simple.</em>
+          </h2>
+          <p className="mt-5 text-white/60 text-base lg:text-lg leading-relaxed">
+            Watch how CSPZone gets you set up in just a few days — zero consultancy fee, zero hidden charges.
+          </p>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mx-auto max-w-5xl"
+        >
+          {/* Glow ring */}
+          <div
+            aria-hidden
+            className="absolute -inset-px rounded-[2rem] opacity-70 blur-2xl"
+            style={{
+              background:
+                "linear-gradient(135deg, hsl(233 100% 55% / 0.45), hsl(233 100% 70% / 0.15) 50%, hsl(233 100% 55% / 0.4))",
+            }}
+          />
+          <div className="relative rounded-[2rem] overflow-hidden ring-1 ring-white/10 shadow-2xl bg-neutral-900">
+            <div className="relative aspect-video w-full">
+              {playing ? (
+                <iframe
+                  className="absolute inset-0 h-full w-full"
+                  src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&rel=0&modestbranding=1`}
+                  title="CSPZone — UAE Company Setup"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setPlaying(true)}
+                  className="group absolute inset-0 h-full w-full focus:outline-none"
+                  aria-label="Play video"
+                >
+                  <img
+                    src={thumb}
+                    alt="CSPZone product walkthrough"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).src = `https://img.youtube.com/vi/${YOUTUBE_VIDEO_ID}/hqdefault.jpg`;
+                    }}
+                  />
+                  {/* Subtle vignette */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-black/30" />
+                  {/* Play button */}
+                  <span className="absolute inset-0 flex items-center justify-center">
+                    <span className="relative flex h-20 w-20 sm:h-24 sm:w-24 lg:h-28 lg:w-28 items-center justify-center">
+                      <span className="absolute inset-0 rounded-full bg-white/15 backdrop-blur-md ring-1 ring-white/30 animate-pulse" />
+                      <span className="absolute inset-2 rounded-full bg-white shadow-[0_10px_40px_-5px_rgba(255,255,255,0.5)] transition-transform duration-300 group-hover:scale-105" />
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="relative h-7 w-7 sm:h-8 sm:w-8 lg:h-10 lg:w-10 translate-x-[2px] text-black"
+                        fill="currentColor"
+                      >
+                        <path d="M8 5.14v13.72a1 1 0 0 0 1.52.86l11.14-6.86a1 1 0 0 0 0-1.72L9.52 4.28A1 1 0 0 0 8 5.14z" />
+                      </svg>
+                    </span>
+                  </span>
+                  {/* Bottom label */}
+                  <span className="absolute bottom-5 left-5 right-5 flex items-center justify-between text-white/80">
+                    <span className="text-xs sm:text-sm tracking-[0.2em] uppercase">Watch the film</span>
+                    <span className="hidden sm:inline text-xs text-white/50">2 min</span>
+                  </span>
+                </button>
+              )}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 
 const includedItems = [
   "Trade License",
