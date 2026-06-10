@@ -451,6 +451,11 @@ export default function Campaign() {
         </div>
       </section>
 
+      {/* SECTION 5.5 — Video Showcase */}
+      <VideoShowcase />
+
+
+
       {/* SECTION 6 — Customer Reviews */}
       <section className="py-20 lg:py-28 bg-secondary">
         <div className="container-wide">
