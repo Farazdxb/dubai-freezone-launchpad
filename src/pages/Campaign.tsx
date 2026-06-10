@@ -657,6 +657,17 @@ export default function Campaign() {
         </div>
       </div>
 
+      {/* Floating WhatsApp bubble on mobile */}
+      <a
+        href={WHATSAPP_URL}
+        target="_blank"
+        rel="noreferrer"
+        className="lg:hidden fixed bottom-24 right-4 z-30 w-14 h-14 rounded-full bg-[#25D366] text-white shadow-xl flex items-center justify-center hover:scale-105 transition-transform"
+        aria-label="Chat on WhatsApp"
+      >
+        <MessageCircle className="w-6 h-6" />
+      </a>
+
       {/* Footer */}
       <Footer />
     </div>
