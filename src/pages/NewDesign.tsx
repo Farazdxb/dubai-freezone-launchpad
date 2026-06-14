@@ -1,65 +1,162 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform, useInView, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
 import {
-  ArrowRight,
-  Sparkles,
-  Zap,
-  Shield,
-  Globe2,
-  Brain,
-  FileCheck2,
-  Bell,
-  ScanLine,
-  Bot,
-  Lock,
-  TrendingUp,
-  Star,
-} from "lucide-react";
+  motion,
+  useScroll,
+  useTransform,
+  useInView,
+  useSpring,
+  useMotionValue,
+  AnimatePresence,
+} from "framer-motion";
+import { Link } from "react-router-dom";
+import { ArrowUpRight, ArrowRight, Plus, Check } from "lucide-react";
 
 /**
- * /new-design — Apple × once-ui inspired premium homepage.
- * Light, generous, animated. Does not replace "/".
+ * /new-design — Editorial premium homepage.
+ * Palette: pure white / soft grey / black, with #1B17FF (logo) as the only accent.
+ * Typography: Instrument Serif (display) + Inter (body).
+ * Motion: gentle, long-tween, no parallax jank.
  */
 
-const SF =
-  '-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif';
-
+const ACCENT = "#1B17FF";
+const INK = "#0A0A0A";
+const MIST = "#B4B7BE";
+const SURFACE = "#F5F5F7";
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-/* ---------------- Top Bar ---------------- */
+/* Inject Instrument Serif + Inter once */
+function useEditorialFonts() {
+  useEffect(() => {
+    const id = "editorial-fonts";
+    if (document.getElementById(id)) return;
+    const link = document.createElement("link");
+    link.id = id;
+    link.rel = "stylesheet";
+    link.href =
+      "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap";
+    document.head.appendChild(link);
+  }, []);
+}
+
+const SERIF: React.CSSProperties = {
+  fontFamily: '"Instrument Serif", "Times New Roman", serif',
+  fontWeight: 400,
+  letterSpacing: "-0.02em",
+};
+const SANS: React.CSSProperties = {
+  fontFamily:
+    'Inter, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif',
+};
+
+/* ---------------- Reveal helper (smooth, single tween) ---------------- */
+function Reveal({
+  children,
+  delay = 0,
+  y = 24,
+  className = "",
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  y?: number;
+  className?: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 1.1, delay, ease: EASE }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/* ---------------- Magnetic button ---------------- */
+function Magnet({
+  children,
+  className = "",
+  to,
+  external,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  to?: string;
+  external?: boolean;
+}) {
+  const ref = useRef<HTMLAnchorElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const sx = useSpring(x, { stiffness: 200, damping: 18, mass: 0.4 });
+  const sy = useSpring(y, { stiffness: 200, damping: 18, mass: 0.4 });
+
+  function onMove(e: React.MouseEvent<HTMLAnchorElement>) {
+    const el = ref.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    x.set((e.clientX - (r.left + r.width / 2)) * 0.2);
+    y.set((e.clientY - (r.top + r.height / 2)) * 0.2);
+  }
+  function reset() {
+    x.set(0);
+    y.set(0);
+  }
+  const Comp: any = external ? "a" : Link;
+  return (
+    <motion.div style={{ x: sx, y: sy, display: "inline-block" }}>
+      <Comp
+        ref={ref as any}
+        to={to}
+        href={external ? to : undefined}
+        onMouseMove={onMove}
+        onMouseLeave={reset}
+        className={className}
+      >
+        {children}
+      </Comp>
+    </motion.div>
+  );
+}
+
+/* ---------------- Top bar ---------------- */
 function TopBar() {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const onS = () => setScrolled(window.scrollY > 12);
+    onS();
+    window.addEventListener("scroll", onS, { passive: true });
+    return () => window.removeEventListener("scroll", onS);
   }, []);
-
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-700 ${
         scrolled
-          ? "backdrop-blur-2xl bg-white/75 border-b border-black/[0.06]"
-          : "backdrop-blur-md bg-white/40 border-b border-transparent"
+          ? "bg-white/85 backdrop-blur-xl border-b border-black/[0.05]"
+          : "bg-transparent border-b border-transparent"
       }`}
-      style={{ fontFamily: SF }}
+      style={SANS}
     >
-      <div className="max-w-[1100px] mx-auto px-6 h-12 flex items-center justify-between text-[13px] text-[#1d1d1f]">
-        <Link to="/" className="font-semibold tracking-tight text-[15px]">
-          CSP<span className="text-[#0071e3]">zone</span>
+      <div className="max-w-[1240px] mx-auto px-6 lg:px-10 h-16 flex items-center justify-between text-[13px]">
+        <Link to="/" className="flex items-baseline gap-1.5 font-semibold tracking-tight text-[15px]" style={{ color: INK }}>
+          <span style={{ ...SERIF, fontSize: 22, lineHeight: 1 }}>Csp</span>
+          <span style={{ color: ACCENT }}>zone</span>
+          <span className="ml-1 inline-block w-1.5 h-1.5 rounded-full" style={{ background: ACCENT }} />
         </Link>
-        <nav className="hidden md:flex items-center gap-8 opacity-90">
-          {["Licenses", "Freezones", "Visas", "AI Compliance", "Pricing"].map((l) => (
-            <a key={l} href="#" className="hover:text-[#0071e3] transition-colors">
+        <nav className="hidden md:flex items-center gap-9 text-[#3a3a3c]">
+          {["Index", "Licenses", "Compliance", "Pricing", "Journal"].map((l) => (
+            <a key={l} href="#" className="hover:text-black transition-colors relative group">
               {l}
+              <span className="absolute -bottom-1 left-0 right-0 h-px origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" style={{ background: ACCENT }} />
             </a>
           ))}
         </nav>
         <Link
           to="/campaign"
-          className="rounded-full bg-[#1d1d1f] text-white px-4 py-1.5 hover:bg-[#0071e3] transition-colors"
+          className="rounded-full px-4 py-2 text-white transition-all hover:opacity-90"
+          style={{ background: INK }}
         >
           Get started
         </Link>
@@ -68,134 +165,159 @@ function TopBar() {
   );
 }
 
-/* ---------------- Animated Word Cycle ---------------- */
-function CycleWord({ words }: { words: string[] }) {
-  const [i, setI] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setI((p) => (p + 1) % words.length), 2400);
-    return () => clearInterval(t);
-  }, [words.length]);
-  return (
-    <span className="relative inline-block align-baseline">
-      <AnimatePresence mode="wait">
-        <motion.span
-          key={words[i]}
-          initial={{ y: "100%", opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: "-100%", opacity: 0 }}
-          transition={{ duration: 0.55, ease: EASE }}
-          className="inline-block bg-gradient-to-r from-[#0071e3] via-[#6c5cff] to-[#ff3ea5] bg-clip-text text-transparent"
-        >
-          {words[i]}
-        </motion.span>
-      </AnimatePresence>
-    </span>
-  );
-}
-
-/* ---------------- Hero ---------------- */
+/* ---------------- HERO ---------------- */
 function Hero() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], [0, 160]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
-  const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
-
   return (
-    <section ref={ref} className="relative pt-28 pb-12 text-center overflow-hidden" style={{ fontFamily: SF }}>
-      {/* gradient mesh background */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[1200px] h-[800px] rounded-full blur-3xl opacity-60"
-             style={{ background: "radial-gradient(closest-side, #c9defc 0%, transparent 70%)" }} />
-        <div className="absolute top-20 -left-40 w-[600px] h-[600px] rounded-full blur-3xl opacity-50"
-             style={{ background: "radial-gradient(closest-side, #ffd6ec 0%, transparent 70%)" }} />
-        <div className="absolute top-40 -right-40 w-[600px] h-[600px] rounded-full blur-3xl opacity-50"
-             style={{ background: "radial-gradient(closest-side, #d8d0ff 0%, transparent 70%)" }} />
+    <section className="relative pt-36 pb-24 lg:pt-48 lg:pb-32 overflow-hidden" style={SANS}>
+      {/* Subtle radial wash */}
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10"
+        style={{
+          background:
+            "radial-gradient(1200px 600px at 50% -10%, rgba(27,23,255,0.06), transparent 60%), radial-gradient(800px 500px at 90% 10%, rgba(0,0,0,0.04), transparent 60%)",
+        }}
+      />
+      <div className="max-w-[1240px] mx-auto px-6 lg:px-10">
+        {/* Eyebrow */}
+        <Reveal>
+          <div className="flex items-center gap-3 text-[12px] uppercase tracking-[0.22em]" style={{ color: MIST }}>
+            <span className="w-8 h-px" style={{ background: MIST }} />
+            <span>Index — 01 / Business Setup, UAE</span>
+          </div>
+        </Reveal>
+
+        {/* Headline */}
+        <Reveal delay={0.05}>
+          <h1
+            className="mt-8 text-[56px] sm:text-[88px] lg:text-[128px] leading-[0.95]"
+            style={{ ...SERIF, color: INK }}
+          >
+            Start a company,
+            <br />
+            <span className="italic" style={{ color: ACCENT }}>
+              quietly
+            </span>{" "}
+            extraordinary.
+          </h1>
+        </Reveal>
+
+        <div className="mt-12 grid lg:grid-cols-12 gap-10 items-end">
+          <Reveal delay={0.15} className="lg:col-span-6">
+            <p className="text-[18px] leading-relaxed max-w-xl" style={{ color: "#3a3a3c" }}>
+              A self-service portal to launch and operate your UAE business — across every freezone, mainland and offshore. Zero consultancy fees. Issued in days, not months.
+            </p>
+            <div className="mt-8 flex items-center gap-5 flex-wrap">
+              <Magnet
+                to="/campaign"
+                className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-[15px] text-white shadow-[0_12px_30px_-12px_rgba(27,23,255,0.45)] transition-colors"
+                {...({ style: { background: ACCENT } } as any)}
+              >
+                Get my license
+                <ArrowUpRight className="w-4 h-4" />
+              </Magnet>
+              <a href="#story" className="text-[14px] underline underline-offset-4 decoration-[1.5px] hover:opacity-60 transition-opacity" style={{ color: INK }}>
+                How it works
+              </a>
+            </div>
+          </Reveal>
+
+          {/* Numbered meta column */}
+          <div className="lg:col-span-6 grid grid-cols-3 gap-6 text-[12px]" style={{ color: INK }}>
+            {[
+              ["01", "From", "AED 4,320"],
+              ["02", "Issued in", "3–5 days"],
+              ["03", "Covers", "All UAE"],
+            ].map(([num, k, v], i) => (
+              <Reveal key={num} delay={0.25 + i * 0.08}>
+                <div className="border-t border-black/15 pt-4">
+                  <p className="text-[11px] tracking-[0.2em]" style={{ color: MIST }}>{num}</p>
+                  <p className="mt-3 text-[11px] uppercase tracking-[0.18em]" style={{ color: MIST }}>{k}</p>
+                  <p className="mt-1 text-[20px]" style={SERIF}>{v}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+
+        {/* Hero artwork: layered cards */}
+        <Reveal delay={0.35} y={40}>
+          <div className="relative mt-20 lg:mt-28">
+            <div className="aspect-[16/8] rounded-[28px] overflow-hidden bg-[#EFF1F5] relative">
+              <img
+                src="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=2200&q=85"
+                alt="Dubai skyline"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.25) 100%)" }} />
+              <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between text-white" style={SANS}>
+                <p className="text-[12px] uppercase tracking-[0.2em] opacity-80">A film by CSPzone — Dubai, 2026</p>
+                <p className="text-[12px] opacity-80">© Index 01</p>
+              </div>
+            </div>
+
+            {/* Floating receipt card */}
+            <motion.div
+              initial={{ opacity: 0, y: 30, rotate: -2 }}
+              whileInView={{ opacity: 1, y: 0, rotate: -3 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, delay: 0.5, ease: EASE }}
+              className="hidden md:block absolute -bottom-10 -left-4 lg:left-10 w-[280px] rounded-2xl bg-white p-5 shadow-[0_30px_60px_-25px_rgba(0,0,0,0.25)] border border-black/[0.04]"
+              style={SANS}
+            >
+              <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.18em]" style={{ color: MIST }}>
+                <span>License issued</span>
+                <span style={{ color: ACCENT }}>● live</span>
+              </div>
+              <p className="mt-3 text-[22px]" style={SERIF}>IFZA — Trade License</p>
+              <p className="text-[12px]" style={{ color: "#6e6e73" }}>Reference TR-2026-08841</p>
+              <div className="mt-4 pt-4 border-t border-black/[0.06] flex items-end justify-between">
+                <span className="text-[12px]" style={{ color: "#6e6e73" }}>Time to issue</span>
+                <span className="text-[24px]" style={SERIF}>4 days</span>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30, rotate: 3 }}
+              whileInView={{ opacity: 1, y: 0, rotate: 2 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, delay: 0.65, ease: EASE }}
+              className="hidden md:block absolute -bottom-6 -right-4 lg:right-10 w-[260px] rounded-2xl p-5 text-white border border-white/10"
+              style={{ background: INK, ...SANS }}
+            >
+              <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] opacity-70">
+                <span className="w-1.5 h-1.5 rounded-full" style={{ background: ACCENT }} />
+                AI Compliance
+              </div>
+              <p className="mt-3 text-[20px]" style={SERIF}>“VAT filing due in 9 days. Drafted.”</p>
+              <p className="mt-3 text-[12px] opacity-70">Auto-prepared. One tap to approve.</p>
+            </motion.div>
+          </div>
+        </Reveal>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, ease: EASE }}
-        className="px-5"
-      >
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="inline-flex items-center gap-2 rounded-full bg-white/70 backdrop-blur border border-black/[0.06] px-3.5 py-1.5 text-[12px] text-[#1d1d1f] shadow-sm"
-        >
-          <Sparkles className="w-3.5 h-3.5 text-[#0071e3]" />
-          <span>Introducing AI-powered compliance</span>
-          <ArrowRight className="w-3.5 h-3.5 opacity-50" />
-        </motion.div>
-
-        <h1 className="mt-6 text-[44px] sm:text-[68px] lg:text-[88px] font-semibold tracking-[-0.045em] leading-[1.02] text-[#1d1d1f]">
-          Your UAE company.
-          <br />
-          <CycleWord words={["Effortless.", "Intelligent.", "Compliant.", "Beautiful."]} />
-        </h1>
-        <p className="mt-6 text-[18px] sm:text-[21px] text-[#1d1d1f]/75 max-w-2xl mx-auto leading-relaxed">
-          From <span className="font-semibold text-[#1d1d1f]">AED 4,320</span>. Zero consultancy fees.
-          <br className="hidden sm:block" />
-          Designed to feel as effortless as the products we love.
-        </p>
-
-        <div className="mt-8 flex items-center justify-center gap-3 flex-wrap">
-          <Link
-            to="/campaign"
-            className="group inline-flex items-center gap-1.5 bg-[#1d1d1f] hover:bg-[#0071e3] text-white rounded-full px-6 py-3 text-[15px] transition-all duration-300 shadow-lg hover:shadow-[0_20px_40px_-10px_rgba(0,113,227,0.4)]"
-          >
-            Get my license
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-          </Link>
-          <a
-            href="#ai"
-            className="inline-flex items-center gap-1.5 bg-white/70 backdrop-blur border border-black/[0.08] hover:border-black/20 text-[#1d1d1f] rounded-full px-6 py-3 text-[15px] transition-all"
-          >
-            See AI in action
-          </a>
-        </div>
-      </motion.div>
-
-      <motion.div
-        style={{ y, scale, opacity }}
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.2, delay: 0.3, ease: EASE }}
-        className="mt-16 sm:mt-24 px-5"
-      >
-        <div className="mx-auto max-w-5xl aspect-[16/10] rounded-[28px] overflow-hidden shadow-[0_40px_100px_-30px_rgba(0,0,0,0.3)] relative">
-          <img
-            src="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=2000&q=85"
-            alt="Dubai skyline"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-        </div>
-      </motion.div>
     </section>
   );
 }
 
-/* ---------------- Logo Marquee ---------------- */
-function LogoMarquee() {
-  const logos = ["IFZA", "MEYDAN", "DMCC", "RAKEZ", "SHAMS", "SPC", "JAFZA", "ADGM"];
+/* ---------------- Marquee logos ---------------- */
+function LogoStrip() {
+  const logos = ["IFZA", "MEYDAN", "DMCC", "RAKEZ", "SHAMS", "SPC", "JAFZA", "ADGM", "DAFZA"];
   return (
-    <section className="py-16 sm:py-20 border-y border-black/[0.06] bg-white" style={{ fontFamily: SF }}>
-      <p className="text-center text-[13px] uppercase tracking-[0.2em] text-[#86868b]">
-        Trusted across 40+ UAE freezones
-      </p>
-      <div className="mt-8 relative overflow-hidden">
-        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10" />
-        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10" />
+    <section className="py-20 border-y border-black/[0.06] bg-white overflow-hidden" style={SANS}>
+      <div className="max-w-[1240px] mx-auto px-6 lg:px-10 flex items-center justify-between flex-wrap gap-6 text-[11px] uppercase tracking-[0.22em]" style={{ color: MIST }}>
+        <span>— Trusted across 40+ UAE freezones</span>
+        <span>2026 / Index</span>
+      </div>
+      <div className="mt-10 relative">
+        <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-white to-transparent z-10" />
+        <div className="absolute inset-y-0 right-0 w-28 bg-gradient-to-l from-white to-transparent z-10" />
         <motion.div
-          className="flex gap-16 whitespace-nowrap"
+          className="flex gap-20 whitespace-nowrap"
           animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 30, ease: "linear", repeat: Infinity }}
+          transition={{ duration: 40, ease: "linear", repeat: Infinity }}
         >
           {[...logos, ...logos, ...logos].map((l, i) => (
-            <span key={i} className="text-[28px] font-semibold tracking-tight text-[#1d1d1f]/40">
+            <span key={i} className="text-[34px] tracking-tight" style={{ ...SERIF, color: "#cfd1d6" }}>
               {l}
             </span>
           ))}
@@ -205,372 +327,324 @@ function LogoMarquee() {
   );
 }
 
-/* ---------------- AI Compliance Hero Section ---------------- */
-function AISection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-20%" });
-
-  const items = [
-    { icon: ScanLine, title: "Document scanning", body: "AI parses contracts, IDs, and licenses in seconds." },
-    { icon: Bell, title: "Renewal alerts", body: "Predictive reminders before deadlines hit." },
-    { icon: FileCheck2, title: "Auto VAT filing", body: "AI prepares filings and flags inconsistencies." },
-    { icon: Lock, title: "Risk monitoring", body: "Continuous scanning of compliance posture." },
+/* ---------------- Sticky storytelling: 4 steps with one pinned visual ---------------- */
+function Story() {
+  const steps = [
+    { n: "01", t: "Choose", d: "Pick a freezone, package or visa — guided by our self-service flow." },
+    { n: "02", t: "Submit", d: "Upload IDs and details once. No paperwork chases, no back and forth." },
+    { n: "03", t: "Approve", d: "We coordinate with the freezone authority on your behalf in real time." },
+    { n: "04", t: "Operate", d: "Receive your license, visa and Emirates ID — all in your dashboard." },
   ];
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+  const active = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], [0, 1, 2, 3, 3]);
+  const [i, setI] = useState(0);
+  useEffect(() => active.on("change", (v) => setI(Math.min(3, Math.round(v)))), [active]);
 
   return (
-    <section
-      id="ai"
-      ref={ref}
-      className="relative py-28 sm:py-40 px-5 overflow-hidden bg-[#050507] text-white"
-      style={{ fontFamily: SF }}
-    >
-      {/* glow */}
-      <div className="absolute inset-0 -z-0">
-        <div
-          className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] rounded-full blur-3xl opacity-30"
-          style={{
-            background:
-              "conic-gradient(from 0deg, #0071e3, #6c5cff, #ff3ea5, #0071e3)",
-          }}
-        />
-        <div
-          className="absolute inset-0 opacity-[0.07]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-            maskImage: "radial-gradient(ellipse at center, black 30%, transparent 70%)",
-          }}
-        />
-      </div>
-
-      <div className="relative max-w-[1100px] mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.9, ease: EASE }}
-          className="text-center max-w-3xl mx-auto"
-        >
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 backdrop-blur px-3.5 py-1.5 text-[12px]">
-            <Brain className="w-3.5 h-3.5 text-[#7aa8ff]" />
-            AI-powered
-          </span>
-          <h2 className="mt-6 text-[40px] sm:text-[56px] lg:text-[72px] font-semibold tracking-[-0.04em] leading-[1.05]">
-            Compliance, on
-            <br />
-            <span className="bg-gradient-to-r from-[#7aa8ff] via-[#b39dff] to-[#ff8fc8] bg-clip-text text-transparent">
-              autopilot.
-            </span>
-          </h2>
-          <p className="mt-6 text-[18px] sm:text-[20px] text-white/70 leading-relaxed">
-            Our AI watches your filings, renewals, and tax deadlines — so you don't have to. Set it once. Stay compliant forever.
-          </p>
-        </motion.div>
-
-        {/* Central AI orb */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={inView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 1.2, delay: 0.3, ease: EASE }}
-          className="relative mx-auto mt-16 w-full max-w-2xl aspect-square sm:aspect-[2/1]"
-        >
-          <div className="absolute inset-0 flex items-center justify-center">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 40, ease: "linear", repeat: Infinity }}
-              className="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full border border-white/10"
-            />
-            <motion.div
-              animate={{ rotate: -360 }}
-              transition={{ duration: 50, ease: "linear", repeat: Infinity }}
-              className="absolute w-[22rem] h-[22rem] sm:w-[28rem] sm:h-[28rem] rounded-full border border-white/5"
-            />
-            <motion.div
-              animate={{ scale: [1, 1.05, 1], opacity: [0.9, 1, 0.9] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="relative w-44 h-44 sm:w-56 sm:h-56 rounded-full flex items-center justify-center"
-              style={{
-                background:
-                  "radial-gradient(circle at 30% 30%, #ffffff 0%, #b6c8ff 25%, #6c5cff 55%, #1a1144 100%)",
-                boxShadow: "0 0 80px rgba(108,92,255,0.5), inset 0 0 40px rgba(255,255,255,0.2)",
-              }}
-            >
-              <Bot className="w-16 h-16 text-white drop-shadow-lg" strokeWidth={1.4} />
-            </motion.div>
-          </div>
-        </motion.div>
-
-        {/* Feature grid */}
-        <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {items.map((it, i) => {
-            const Icon = it.icon;
-            return (
+    <section id="story" ref={ref} className="relative bg-white" style={SANS}>
+      <div className="max-w-[1240px] mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-12">
+        {/* Pinned visual */}
+        <div className="lg:col-span-6 lg:sticky lg:top-24 self-start h-[80vh] hidden lg:flex items-center">
+          <div className="w-full aspect-[4/5] rounded-[28px] overflow-hidden relative" style={{ background: SURFACE }}>
+            <AnimatePresence mode="wait">
               <motion.div
-                key={it.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.7, delay: 0.4 + i * 0.08, ease: EASE }}
-                className="group relative rounded-2xl p-6 bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm hover:bg-white/[0.07] transition-all duration-500 hover:-translate-y-1"
+                key={i}
+                initial={{ opacity: 0, scale: 1.02 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.99 }}
+                transition={{ duration: 0.9, ease: EASE }}
+                className="absolute inset-0"
               >
-                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                     style={{ background: "radial-gradient(circle at 50% 0%, rgba(122,168,255,0.15), transparent 60%)" }} />
-                <Icon className="relative w-7 h-7 text-[#7aa8ff]" strokeWidth={1.5} />
-                <h3 className="relative mt-5 text-[17px] font-semibold">{it.title}</h3>
-                <p className="relative mt-1.5 text-[14px] text-white/60 leading-relaxed">{it.body}</p>
+                <img
+                  src={
+                    [
+                      "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1400&q=85",
+                      "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1400&q=85",
+                      "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1400&q=85",
+                      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1400&q=85",
+                    ][i]
+                  }
+                  alt=""
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.35))" }} />
+                <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between text-white">
+                  <p className="text-[12px] uppercase tracking-[0.2em] opacity-80">Step {steps[i].n}</p>
+                  <p className="text-[28px]" style={SERIF}>{steps[i].t}</p>
+                </div>
               </motion.div>
-            );
-          })}
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Steps */}
+        <div className="lg:col-span-6 py-24 lg:py-40">
+          <Reveal>
+            <p className="text-[11px] uppercase tracking-[0.22em]" style={{ color: MIST }}>— Index 02 / How it works</p>
+            <h2 className="mt-6 text-[44px] sm:text-[64px] leading-[1]" style={{ ...SERIF, color: INK }}>
+              Four steps. <span className="italic" style={{ color: ACCENT }}>No friction.</span>
+            </h2>
+          </Reveal>
+
+          <div className="mt-16 space-y-12">
+            {steps.map((s, idx) => (
+              <Reveal key={s.n} delay={idx * 0.05}>
+                <div className="grid grid-cols-12 gap-4 border-t border-black/[0.08] pt-6">
+                  <div className="col-span-2 text-[12px] tracking-[0.2em]" style={{ color: MIST }}>{s.n}</div>
+                  <div className="col-span-10">
+                    <h3 className="text-[32px]" style={SERIF}>{s.t}</h3>
+                    <p className="mt-2 text-[16px] leading-relaxed max-w-md" style={{ color: "#3a3a3c" }}>{s.d}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-/* ---------------- Stats Counter ---------------- */
-function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true });
-  const mv = useMotionValue(0);
-  const spring = useSpring(mv, { duration: 1800, bounce: 0 });
-  const [val, setVal] = useState(0);
-
+/* ---------------- AI section (dark, editorial) ---------------- */
+function AISection() {
+  const lines = [
+    "Renewal due — DED Trade License — drafted.",
+    "VAT Q3 filing prepared. 12 entries reconciled.",
+    "Emirates ID for shareholder ready to download.",
+    "Annual audit pack — packaged.",
+  ];
+  const [i, setI] = useState(0);
   useEffect(() => {
-    if (inView) mv.set(to);
-  }, [inView, to, mv]);
-  useEffect(() => spring.on("change", (v) => setVal(v)), [spring]);
+    const t = setInterval(() => setI((p) => (p + 1) % lines.length), 2600);
+    return () => clearInterval(t);
+  }, []);
 
   return (
-    <span ref={ref}>
-      {Math.round(val).toLocaleString()}
-      {suffix}
-    </span>
-  );
-}
-
-function Stats() {
-  const stats = [
-    { v: 3200, s: "+", label: "Licenses issued" },
-    { v: 40, s: "+", label: "UAE freezones" },
-    { v: 5, s: " days", label: "Average turnaround" },
-    { v: 99, s: "%", label: "Compliance rate" },
-  ];
-  return (
-    <section className="py-24 sm:py-32 px-5 bg-white" style={{ fontFamily: SF }}>
-      <div className="max-w-[1100px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-6">
-        {stats.map((s, i) => (
-          <motion.div
-            key={s.label}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: i * 0.08, ease: EASE }}
-            className="text-center"
-          >
-            <p className="text-[44px] sm:text-[60px] font-semibold tracking-[-0.04em] text-[#1d1d1f] tabular-nums">
-              <Counter to={s.v} suffix={s.s} />
+    <section className="py-32 lg:py-44 px-6 lg:px-10 text-white relative overflow-hidden" style={{ background: INK, ...SANS }}>
+      {/* Soft accent wash */}
+      <div className="absolute inset-0 -z-0 opacity-30"
+           style={{ background: "radial-gradient(700px 400px at 20% 10%, rgba(27,23,255,0.6), transparent 60%), radial-gradient(600px 300px at 90% 100%, rgba(27,23,255,0.35), transparent 60%)" }} />
+      <div className="relative max-w-[1240px] mx-auto grid lg:grid-cols-12 gap-12 items-center">
+        <div className="lg:col-span-6">
+          <Reveal>
+            <p className="text-[11px] uppercase tracking-[0.22em] opacity-60">— Index 03 / AI Compliance</p>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="mt-6 text-[48px] sm:text-[72px] lg:text-[88px] leading-[0.98]" style={SERIF}>
+              Compliance that
+              <br />
+              <span className="italic" style={{ color: "#9c98ff" }}>watches itself.</span>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.12}>
+            <p className="mt-7 text-[17px] leading-relaxed opacity-75 max-w-lg">
+              We pair our portal with an AI co-pilot that monitors renewals, VAT, audit pack and corporate tax. It quietly prepares — you simply approve.
             </p>
-            <p className="mt-2 text-[14px] text-[#86868b] uppercase tracking-wider">{s.label}</p>
-          </motion.div>
-        ))}
+          </Reveal>
+          <Reveal delay={0.18}>
+            <div className="mt-10 grid grid-cols-2 gap-y-5 gap-x-8 max-w-md">
+              {[
+                "Renewal predictions",
+                "Auto VAT drafts",
+                "Audit pack assembly",
+                "Risk monitoring",
+              ].map((f) => (
+                <div key={f} className="flex items-center gap-2.5 text-[14px]">
+                  <Check className="w-4 h-4" style={{ color: "#9c98ff" }} />
+                  <span className="opacity-90">{f}</span>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+
+        {/* AI feed card */}
+        <Reveal delay={0.2} y={40} className="lg:col-span-6">
+          <div className="relative rounded-[24px] p-6 sm:p-8 border border-white/10 backdrop-blur-md" style={{ background: "rgba(255,255,255,0.04)" }}>
+            <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.2em] opacity-60">
+              <span>CSPzone · AI Co-pilot</span>
+              <span className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#9c98ff" }} />
+                live
+              </span>
+            </div>
+
+            <div className="mt-6 space-y-3">
+              {lines.map((l, idx) => {
+                const state = idx === i ? "active" : idx < i ? "done" : "queue";
+                return (
+                  <motion.div
+                    key={l}
+                    animate={{
+                      opacity: state === "queue" ? 0.35 : 1,
+                      x: 0,
+                    }}
+                    transition={{ duration: 0.8, ease: EASE }}
+                    className="flex items-center gap-3 rounded-xl px-4 py-3.5 border"
+                    style={{
+                      background: state === "active" ? "rgba(156,152,255,0.08)" : "rgba(255,255,255,0.02)",
+                      borderColor: state === "active" ? "rgba(156,152,255,0.35)" : "rgba(255,255,255,0.06)",
+                    }}
+                  >
+                    <span
+                      className="w-5 h-5 rounded-full flex items-center justify-center text-[10px]"
+                      style={{
+                        background: state === "done" ? "#9c98ff" : "transparent",
+                        border: state === "done" ? "none" : "1px solid rgba(255,255,255,0.25)",
+                        color: state === "done" ? INK : "white",
+                      }}
+                    >
+                      {state === "done" ? <Check className="w-3 h-3" /> : idx + 1}
+                    </span>
+                    <span className="text-[15px]">{l}</span>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            <div className="mt-7 pt-5 border-t border-white/10 flex items-end justify-between">
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.2em] opacity-60">Hours saved this month</p>
+                <p className="mt-1 text-[40px]" style={SERIF}>34<span className="opacity-50 text-[24px]"> h</span></p>
+              </div>
+              <Magnet
+                to="/campaign"
+                className="inline-flex items-center gap-2 rounded-full bg-white text-[13px] px-4 py-2 transition-opacity hover:opacity-90"
+                {...({ style: { color: INK } } as any)}
+              >
+                Try the co-pilot <ArrowUpRight className="w-3.5 h-3.5" />
+              </Magnet>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
 }
 
-/* ---------------- Big editorial section ---------------- */
-interface BigSectionProps {
-  eyebrow: string;
-  title: React.ReactNode;
-  subtitle?: string;
-  bg?: string;
-  textColor?: string;
-  eyebrowColor?: string;
-  image?: string;
-  reverse?: boolean;
-  cta?: { label: string; to: string };
-}
-
-function BigSection({
-  eyebrow,
-  title,
-  subtitle,
-  bg = "#fbfbfd",
-  textColor = "#1d1d1f",
-  eyebrowColor = "#0071e3",
-  image,
-  reverse,
-  cta,
-}: BigSectionProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-15%" });
-
+/* ---------------- Big editorial split ---------------- */
+function Manifesto() {
   return (
-    <section className="py-24 sm:py-32 lg:py-40 px-5" style={{ background: bg, fontFamily: SF, color: textColor }}>
-      <div
-        ref={ref}
-        className={`max-w-[1100px] mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-center ${
-          reverse ? "lg:[&>*:first-child]:order-2" : ""
-        }`}
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.9, ease: EASE }}
-        >
-          <p className="text-[14px] sm:text-[15px] font-semibold tracking-tight" style={{ color: eyebrowColor }}>
-            {eyebrow}
-          </p>
-          <h2 className="mt-3 text-[36px] sm:text-[48px] lg:text-[60px] font-semibold tracking-[-0.035em] leading-[1.05]">
-            {title}
+    <section className="py-32 lg:py-44 px-6 lg:px-10 bg-white" style={SANS}>
+      <div className="max-w-[1240px] mx-auto">
+        <Reveal>
+          <p className="text-[11px] uppercase tracking-[0.22em]" style={{ color: MIST }}>— Index 04 / Manifesto</p>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <h2 className="mt-8 text-[40px] sm:text-[64px] lg:text-[84px] leading-[1.02] max-w-5xl" style={{ ...SERIF, color: INK }}>
+            We believe paperwork should
+            <span className="italic" style={{ color: ACCENT }}> disappear</span> — so founders can
+            <span className="italic"> focus on the work that matters.</span>
           </h2>
-          {subtitle && (
-            <p className="mt-5 text-[18px] sm:text-[20px] opacity-75 leading-relaxed max-w-xl">{subtitle}</p>
-          )}
-          {cta && (
-            <Link
-              to={cta.to}
-              className="mt-7 inline-flex items-center gap-1 text-[17px] hover:underline"
-              style={{ color: eyebrowColor }}
-            >
-              {cta.label} <ArrowRight className="w-4 h-4" />
-            </Link>
-          )}
-        </motion.div>
+        </Reveal>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.94 }}
-          animate={inView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 1, ease: EASE, delay: 0.1 }}
-          className="rounded-[28px] overflow-hidden aspect-[4/3] bg-gradient-to-br from-[#f5f5f7] to-[#e8e8ed] shadow-[0_30px_80px_-25px_rgba(0,0,0,0.25)]"
-        >
-          {image && <img src={image} alt="" className="w-full h-full object-cover" />}
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- Bento Feature Grid ---------------- */
-function FeatureBento() {
-  return (
-    <section className="py-24 sm:py-32 lg:py-40 px-5 bg-[#fbfbfd]" style={{ fontFamily: SF }}>
-      <div className="max-w-[1100px] mx-auto">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="text-[36px] sm:text-[48px] lg:text-[60px] font-semibold tracking-[-0.035em] leading-[1.05] text-[#1d1d1f] text-center max-w-3xl mx-auto"
-        >
-          Built on the things <span className="text-[#86868b]">that matter most.</span>
-        </motion.h2>
-
-        <div className="mt-16 grid grid-cols-1 sm:grid-cols-6 gap-4 sm:gap-5">
-          {/* Big card */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: EASE }}
-            className="sm:col-span-4 sm:row-span-2 rounded-[24px] p-10 bg-gradient-to-br from-[#0071e3] to-[#6c5cff] text-white min-h-[420px] flex flex-col justify-between relative overflow-hidden"
-          >
-            <div className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-white/10 blur-3xl" />
-            <Zap className="w-9 h-9" strokeWidth={1.5} />
-            <div className="relative">
-              <h3 className="text-[30px] sm:text-[36px] font-semibold tracking-[-0.02em] leading-tight">
-                License in 3–5 days.
-              </h3>
-              <p className="mt-3 text-[16px] text-white/80 max-w-md">
-                Submit once. Our team and AI handle the rest end-to-end across any UAE freezone.
-              </p>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
-            className="sm:col-span-2 rounded-[24px] p-7 bg-white border border-black/[0.06] min-h-[200px] flex flex-col justify-between hover:-translate-y-1 transition-transform duration-500"
-          >
-            <Shield className="w-7 h-7 text-[#0071e3]" strokeWidth={1.5} />
-            <div>
-              <h3 className="text-[20px] font-semibold tracking-tight text-[#1d1d1f]">Transparent.</h3>
-              <p className="mt-1.5 text-[14px] text-[#1d1d1f]/65">No hidden fees, ever.</p>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: EASE, delay: 0.15 }}
-            className="sm:col-span-2 rounded-[24px] p-7 bg-[#1d1d1f] text-white min-h-[200px] flex flex-col justify-between hover:-translate-y-1 transition-transform duration-500"
-          >
-            <Globe2 className="w-7 h-7 text-[#7aa8ff]" strokeWidth={1.5} />
-            <div>
-              <h3 className="text-[20px] font-semibold tracking-tight">All UAE.</h3>
-              <p className="mt-1.5 text-[14px] text-white/65">Mainland, Freezone, Offshore.</p>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: EASE, delay: 0.2 }}
-            className="sm:col-span-3 rounded-[24px] p-7 bg-white border border-black/[0.06] min-h-[220px] flex flex-col justify-between hover:-translate-y-1 transition-transform duration-500"
-          >
-            <TrendingUp className="w-7 h-7 text-[#0071e3]" strokeWidth={1.5} />
-            <div>
-              <h3 className="text-[22px] font-semibold tracking-tight text-[#1d1d1f]">Live dashboard.</h3>
-              <p className="mt-1.5 text-[14px] text-[#1d1d1f]/65">
-                Track every application, document, and renewal in real time.
-              </p>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: EASE, delay: 0.25 }}
-            className="sm:col-span-3 rounded-[24px] p-7 bg-gradient-to-br from-[#fff7ed] to-[#ffe9d6] min-h-[220px] flex flex-col justify-between hover:-translate-y-1 transition-transform duration-500"
-          >
-            <Sparkles className="w-7 h-7 text-[#ea580c]" strokeWidth={1.5} />
-            <div>
-              <h3 className="text-[22px] font-semibold tracking-tight text-[#1d1d1f]">Designed beautifully.</h3>
-              <p className="mt-1.5 text-[14px] text-[#1d1d1f]/65">
-                Software that feels as good as the products you love.
-              </p>
-            </div>
-          </motion.div>
+        <div className="mt-20 grid lg:grid-cols-3 gap-10">
+          {[
+            { k: "Transparency", d: "What you see is exactly what you pay. No retainers. No hidden fees." },
+            { k: "Velocity", d: "License in 3–5 working days. Submit once, we handle the rest." },
+            { k: "Intelligence", d: "AI co-pilot tracks deadlines, drafts filings, prevents penalties." },
+          ].map((p, i) => (
+            <Reveal key={p.k} delay={i * 0.08}>
+              <div className="border-t border-black/[0.1] pt-6">
+                <p className="text-[11px] uppercase tracking-[0.22em]" style={{ color: MIST }}>0{i + 1}</p>
+                <h3 className="mt-4 text-[32px]" style={SERIF}>{p.k}</h3>
+                <p className="mt-3 text-[15px] leading-relaxed" style={{ color: "#3a3a3c" }}>{p.d}</p>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
-/* ---------------- Testimonials ---------------- */
-function Testimonials() {
-  const reviews = [
-    { name: "Rahul K.", role: "Founder, Shopify Seller", text: "Got my e-commerce license in 4 days. Self-service portal is incredible." },
-    { name: "Sara A.", role: "Investor", text: "Compliance reminders alone are worth the price. Zero stress." },
-    { name: "James M.", role: "Consultant", text: "The cleanest portal I've used in the UAE. Pure clarity." },
-    { name: "Priya S.", role: "Founder, Tech", text: "The AI flagged a renewal I'd forgotten about. Saved me a penalty." },
-    { name: "Omar H.", role: "Trader", text: "From signup to license — under a week. Just works." },
+/* ---------------- Pricing ---------------- */
+function Pricing() {
+  const tiers = [
+    { name: "Freezone", price: "4,320", desc: "Trade license, ready in 5 days.", to: "/campaign" },
+    { name: "License + Visa", price: "9,720", desc: "Investor visa & Emirates ID included.", to: "/business-license-visa", featured: true },
+    { name: "Offshore", price: "7,999", desc: "Holding companies & global structures.", to: "/offshore-company-setup" },
   ];
   return (
-    <section className="py-24 sm:py-32 bg-white overflow-hidden" style={{ fontFamily: SF }}>
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
-        className="text-[36px] sm:text-[48px] lg:text-[60px] font-semibold tracking-[-0.035em] leading-[1.05] text-[#1d1d1f] text-center px-5"
-      >
-        Loved by founders <span className="text-[#86868b]">across the UAE.</span>
-      </motion.h2>
+    <section className="py-32 lg:py-44 px-6 lg:px-10" style={{ background: SURFACE, ...SANS }}>
+      <div className="max-w-[1240px] mx-auto">
+        <div className="flex items-end justify-between flex-wrap gap-6">
+          <div>
+            <Reveal>
+              <p className="text-[11px] uppercase tracking-[0.22em]" style={{ color: MIST }}>— Index 05 / Pricing</p>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h2 className="mt-6 text-[44px] sm:text-[68px] leading-[1]" style={{ ...SERIF, color: INK }}>
+                Pick the one <span className="italic" style={{ color: ACCENT }}>that fits.</span>
+              </h2>
+            </Reveal>
+          </div>
+        </div>
+
+        <div className="mt-16 grid md:grid-cols-3 gap-4">
+          {tiers.map((t, i) => (
+            <Reveal key={t.name} delay={i * 0.08}>
+              <div
+                className={`group relative h-full rounded-[24px] p-8 transition-all duration-700 hover:-translate-y-1 ${
+                  t.featured
+                    ? "text-white"
+                    : "bg-white border border-black/[0.05] hover:shadow-[0_30px_60px_-30px_rgba(0,0,0,0.15)]"
+                }`}
+                style={t.featured ? { background: INK } : undefined}
+              >
+                {t.featured && (
+                  <span className="absolute -top-2.5 left-8 rounded-full text-[10px] tracking-[0.2em] uppercase px-2.5 py-1 text-white" style={{ background: ACCENT }}>
+                    Popular
+                  </span>
+                )}
+                <p className="text-[11px] uppercase tracking-[0.22em]" style={{ color: t.featured ? "#9c98ff" : MIST }}>0{i + 1}</p>
+                <h3 className="mt-4 text-[36px]" style={SERIF}>{t.name}</h3>
+                <p className="mt-2 text-[14px]" style={{ color: t.featured ? "rgba(255,255,255,0.7)" : "#6e6e73" }}>{t.desc}</p>
+
+                <div className="mt-10 flex items-baseline gap-1.5">
+                  <span className="text-[14px] opacity-60">AED</span>
+                  <span className="text-[52px] leading-none" style={SERIF}>{t.price}</span>
+                </div>
+
+                <Link
+                  to={t.to}
+                  className={`mt-10 inline-flex items-center justify-between w-full rounded-full px-5 py-3 text-[14px] transition-all ${
+                    t.featured ? "bg-white text-black hover:opacity-90" : "border border-black/[0.1] hover:border-black"
+                  }`}
+                >
+                  Get started <ArrowUpRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- Testimonials marquee ---------------- */
+function Voices() {
+  const items = [
+    { t: "Got my e-commerce license in 4 days. Self-service portal is incredible.", n: "Rahul K.", r: "Shopify seller" },
+    { t: "The co-pilot flagged a renewal I'd forgotten about. Saved me a fine.", n: "Priya S.", r: "Founder, Tech" },
+    { t: "From signup to license — under a week. It just works.", n: "Omar H.", r: "Trader" },
+    { t: "The cleanest portal I've used in the UAE. Pure clarity.", n: "James M.", r: "Consultant" },
+    { t: "Compliance reminders alone are worth the price. Zero stress.", n: "Sara A.", r: "Investor" },
+  ];
+  return (
+    <section className="py-32 bg-white overflow-hidden" style={SANS}>
+      <div className="max-w-[1240px] mx-auto px-6 lg:px-10">
+        <Reveal>
+          <p className="text-[11px] uppercase tracking-[0.22em]" style={{ color: MIST }}>— Index 06 / Voices</p>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <h2 className="mt-6 text-[44px] sm:text-[64px] leading-[1] max-w-3xl" style={{ ...SERIF, color: INK }}>
+            Loved by founders across the <span className="italic" style={{ color: ACCENT }}>Emirates.</span>
+          </h2>
+        </Reveal>
+      </div>
 
       <div className="mt-16 relative">
         <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10" />
@@ -578,86 +652,18 @@ function Testimonials() {
         <motion.div
           className="flex gap-5"
           animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 35, ease: "linear", repeat: Infinity }}
+          transition={{ duration: 50, ease: "linear", repeat: Infinity }}
         >
-          {[...reviews, ...reviews].map((r, i) => (
-            <div
-              key={i}
-              className="shrink-0 w-[340px] rounded-[22px] p-7 bg-[#f5f5f7] border border-black/[0.04]"
-            >
-              <div className="flex gap-0.5 text-[#0071e3]">
-                {Array.from({ length: 5 }).map((_, j) => (
-                  <Star key={j} className="w-4 h-4 fill-current" />
-                ))}
-              </div>
-              <p className="mt-4 text-[16px] text-[#1d1d1f] leading-relaxed">"{r.text}"</p>
-              <div className="mt-5">
-                <p className="text-[14px] font-semibold text-[#1d1d1f]">{r.name}</p>
-                <p className="text-[12px] text-[#86868b]">{r.role}</p>
+          {[...items, ...items].map((q, i) => (
+            <div key={i} className="shrink-0 w-[380px] rounded-[22px] p-7 border border-black/[0.06]" style={{ background: SURFACE }}>
+              <p className="text-[20px] leading-snug" style={{ ...SERIF, color: INK }}>“{q.t}”</p>
+              <div className="mt-6 pt-5 border-t border-black/[0.08] flex items-center justify-between text-[12px]">
+                <span style={{ color: INK }}>{q.n}</span>
+                <span style={{ color: MIST }}>{q.r}</span>
               </div>
             </div>
           ))}
         </motion.div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- Pricing ---------------- */
-function PricingStrip() {
-  const tiers = [
-    { name: "Freezone", price: "4,320", desc: "Trade license. Ready in 5 days." },
-    { name: "License + Visa", price: "9,720", desc: "Includes investor visa & Emirates ID.", featured: true },
-    { name: "Offshore", price: "7,999", desc: "Holding companies & global structures." },
-  ];
-
-  return (
-    <section className="py-24 sm:py-32 lg:py-40 px-5 bg-[#fbfbfd]" style={{ fontFamily: SF }}>
-      <div className="max-w-[1100px] mx-auto text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="text-[36px] sm:text-[48px] lg:text-[60px] font-semibold tracking-[-0.035em] leading-[1.05] text-[#1d1d1f]"
-        >
-          Pick the one <span className="text-[#86868b]">that's right for you.</span>
-        </motion.h2>
-        <div className="mt-16 grid md:grid-cols-3 gap-5">
-          {tiers.map((t, i) => (
-            <motion.div
-              key={t.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: i * 0.1, ease: EASE }}
-              className={`relative rounded-[24px] p-10 text-left transition-all duration-500 hover:-translate-y-1 ${
-                t.featured
-                  ? "bg-[#1d1d1f] text-white shadow-[0_30px_80px_-20px_rgba(0,0,0,0.4)]"
-                  : "bg-white border border-black/[0.06] hover:shadow-[0_24px_60px_-20px_rgba(0,0,0,0.18)]"
-              }`}
-            >
-              {t.featured && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#0071e3] text-white text-[11px] font-semibold px-3 py-1 uppercase tracking-wider">
-                  Most popular
-                </span>
-              )}
-              <p className={`text-[14px] font-semibold ${t.featured ? "text-[#7aa8ff]" : "text-[#0071e3]"}`}>
-                {t.name}
-              </p>
-              <p className="mt-3 text-[40px] font-semibold tracking-[-0.03em]">AED {t.price}</p>
-              <p className={`mt-2 text-[15px] ${t.featured ? "text-white/70" : "text-[#1d1d1f]/70"}`}>{t.desc}</p>
-              <Link
-                to="/campaign"
-                className={`mt-8 inline-flex items-center gap-1 text-[15px] hover:underline ${
-                  t.featured ? "text-white" : "text-[#0071e3]"
-                }`}
-              >
-                Get started <ArrowRight className="w-4 h-4" />
-              </Link>
-            </motion.div>
-          ))}
-        </div>
       </div>
     </section>
   );
@@ -667,43 +673,39 @@ function PricingStrip() {
 function FAQ() {
   const faqs = [
     { q: "How long does it take to get my license?", a: "Most freezone licenses are issued in 3–5 working days after payment and document submission." },
-    { q: "Are there any hidden fees?", a: "No. Our pricing is fully transparent. The amount you see is exactly what you pay." },
-    { q: "Can I get a visa with my license?", a: "Yes — the License + Visa package includes investor visa, Emirates ID, and medical." },
-    { q: "What is AI-powered compliance?", a: "Our AI monitors deadlines, renewals, VAT filings and flags risks before they become penalties." },
-    { q: "Which freezones do you support?", a: "All major UAE freezones including IFZA, Meydan, DMCC, RAKEZ, SHAMS, JAFZA, ADGM and more." },
+    { q: "Are there hidden fees?", a: "No. The amount you see is the amount you pay. Government fees are itemised separately and disclosed upfront." },
+    { q: "Can I add a visa later?", a: "Yes. You can upgrade to the License + Visa package at any time from your dashboard." },
+    { q: "What does the AI co-pilot do?", a: "It monitors renewals, prepares VAT and audit drafts, and flags risks — quietly, in the background." },
+    { q: "Which freezones do you support?", a: "All major UAE freezones including IFZA, Meydan, DMCC, RAKEZ, SHAMS, JAFZA, ADGM, DAFZA and more." },
   ];
   const [open, setOpen] = useState<number | null>(0);
-
   return (
-    <section className="py-24 sm:py-32 px-5 bg-white" style={{ fontFamily: SF }}>
-      <div className="max-w-3xl mx-auto">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="text-[36px] sm:text-[48px] font-semibold tracking-[-0.035em] leading-[1.05] text-[#1d1d1f] text-center"
-        >
-          Questions, <span className="text-[#86868b]">answered.</span>
-        </motion.h2>
-        <div className="mt-14 divide-y divide-black/[0.08] border-y border-black/[0.08]">
+    <section className="py-32 px-6 lg:px-10 bg-white" style={SANS}>
+      <div className="max-w-[980px] mx-auto grid lg:grid-cols-12 gap-12">
+        <div className="lg:col-span-4">
+          <Reveal>
+            <p className="text-[11px] uppercase tracking-[0.22em]" style={{ color: MIST }}>— Index 07 / FAQ</p>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="mt-6 text-[40px] sm:text-[52px] leading-[1]" style={{ ...SERIF, color: INK }}>
+              Questions, <span className="italic" style={{ color: ACCENT }}>answered.</span>
+            </h2>
+          </Reveal>
+        </div>
+        <div className="lg:col-span-8 divide-y divide-black/[0.08] border-y border-black/[0.08]">
           {faqs.map((f, i) => {
             const isOpen = open === i;
             return (
-              <button
-                key={i}
-                onClick={() => setOpen(isOpen ? null : i)}
-                className="w-full text-left py-6 group"
-              >
-                <div className="flex items-center justify-between gap-4">
-                  <span className="text-[18px] font-medium text-[#1d1d1f]">{f.q}</span>
-                  <span
-                    className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-[#1d1d1f] border border-black/10 transition-transform duration-300 ${
-                      isOpen ? "rotate-45" : ""
-                    }`}
+              <button key={i} onClick={() => setOpen(isOpen ? null : i)} className="w-full text-left py-6">
+                <div className="flex items-start justify-between gap-6">
+                  <span className="text-[20px]" style={{ ...SERIF, color: INK }}>{f.q}</span>
+                  <motion.span
+                    animate={{ rotate: isOpen ? 45 : 0 }}
+                    transition={{ duration: 0.5, ease: EASE }}
+                    className="shrink-0 w-8 h-8 rounded-full border border-black/15 flex items-center justify-center"
                   >
-                    +
-                  </span>
+                    <Plus className="w-3.5 h-3.5" />
+                  </motion.span>
                 </div>
                 <AnimatePresence initial={false}>
                   {isOpen && (
@@ -711,10 +713,10 @@ function FAQ() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: EASE }}
+                      transition={{ duration: 0.55, ease: EASE }}
                       className="overflow-hidden"
                     >
-                      <p className="pt-3 text-[16px] text-[#1d1d1f]/70 leading-relaxed">{f.a}</p>
+                      <p className="pt-4 text-[15px] leading-relaxed max-w-xl" style={{ color: "#3a3a3c" }}>{f.a}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -728,51 +730,47 @@ function FAQ() {
 }
 
 /* ---------------- Closing CTA ---------------- */
-function ClosingCTA() {
+function Closing() {
   return (
-    <section className="relative py-32 sm:py-44 px-5 text-center overflow-hidden bg-white" style={{ fontFamily: SF }}>
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0"
-             style={{ background: "radial-gradient(ellipse at center, #eef3ff 0%, transparent 60%)" }} />
+    <section className="relative py-40 lg:py-56 px-6 lg:px-10 overflow-hidden text-white" style={{ background: INK, ...SANS }}>
+      <div aria-hidden className="absolute inset-0 opacity-50"
+           style={{ background: "radial-gradient(800px 500px at 50% 100%, rgba(27,23,255,0.45), transparent 60%)" }} />
+      <div className="relative max-w-[1240px] mx-auto text-center">
+        <Reveal>
+          <p className="text-[11px] uppercase tracking-[0.22em] opacity-60">— Index 08 / Begin</p>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <h2 className="mt-8 text-[56px] sm:text-[96px] lg:text-[136px] leading-[0.95]" style={SERIF}>
+            Your company.<br />
+            <span className="italic" style={{ color: "#9c98ff" }}>In a few clicks.</span>
+          </h2>
+        </Reveal>
+        <Reveal delay={0.15}>
+          <div className="mt-12">
+            <Magnet
+              to="/campaign"
+              className="inline-flex items-center gap-2 rounded-full bg-white text-[15px] px-8 py-4 hover:opacity-90 transition-opacity"
+              {...({ style: { color: INK } } as any)}
+            >
+              Start now <ArrowRight className="w-4 h-4" />
+            </Magnet>
+          </div>
+        </Reveal>
       </div>
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.9, ease: EASE }}
-        className="max-w-3xl mx-auto"
-      >
-        <h2 className="text-[44px] sm:text-[68px] lg:text-[88px] font-semibold tracking-[-0.045em] leading-[1.02] text-[#1d1d1f]">
-          Your company.
-          <br />
-          <span className="bg-gradient-to-r from-[#0071e3] via-[#6c5cff] to-[#ff3ea5] bg-clip-text text-transparent">
-            In a few clicks.
-          </span>
-        </h2>
-        <Link
-          to="/campaign"
-          className="mt-10 inline-flex items-center gap-1.5 bg-[#1d1d1f] hover:bg-[#0071e3] text-white rounded-full px-8 py-4 text-[17px] transition-all shadow-lg hover:shadow-[0_20px_40px_-10px_rgba(0,113,227,0.4)]"
-        >
-          Start now <ArrowRight className="w-4 h-4" />
-        </Link>
-      </motion.div>
     </section>
   );
 }
 
 /* ---------------- Footer ---------------- */
-function MiniFooter() {
+function Footer() {
   return (
-    <footer
-      className="bg-[#f5f5f7] text-[#6e6e73] text-[12px] py-10 px-5 border-t border-black/[0.06]"
-      style={{ fontFamily: SF }}
-    >
-      <div className="max-w-[1100px] mx-auto flex flex-col sm:flex-row justify-between gap-3">
-        <p>Copyright © {new Date().getFullYear()} CSPzone. All rights reserved.</p>
-        <div className="flex gap-5">
-          <Link to="/terms" className="hover:underline">Terms</Link>
-          <a href="#" className="hover:underline">Privacy</a>
-          <a href="#" className="hover:underline">Contact</a>
+    <footer className="py-12 px-6 lg:px-10 bg-white border-t border-black/[0.06]" style={SANS}>
+      <div className="max-w-[1240px] mx-auto flex flex-col sm:flex-row justify-between gap-4 text-[12px]" style={{ color: "#6e6e73" }}>
+        <p>© {new Date().getFullYear()} CSPzone. All rights reserved.</p>
+        <div className="flex gap-6">
+          <Link to="/terms" className="hover:text-black transition-colors">Terms</Link>
+          <a href="#" className="hover:text-black transition-colors">Privacy</a>
+          <a href="#" className="hover:text-black transition-colors">Contact</a>
         </div>
       </div>
     </footer>
@@ -780,50 +778,25 @@ function MiniFooter() {
 }
 
 export default function NewDesign() {
+  useEditorialFonts();
   useEffect(() => {
-    document.title = "CSPzone — UAE Business Setup, Effortlessly";
+    document.title = "CSPzone — UAE Business Setup, Quietly Extraordinary";
   }, []);
-
   return (
-    <div className="min-h-screen bg-white text-[#1d1d1f]" style={{ fontFamily: SF }}>
+    <div className="min-h-screen bg-white" style={{ color: INK, ...SANS }}>
       <TopBar />
-      <main className="pt-12">
+      <main>
         <Hero />
-        <LogoMarquee />
+        <LogoStrip />
+        <Story />
         <AISection />
-        <Stats />
-        <BigSection
-          eyebrow="Mainland"
-          title={<>Set up where <span className="text-[#86868b]">opportunity lives.</span></>}
-          subtitle="Operate freely across the UAE with a Mainland trade license. No restrictions, full ownership."
-          image="https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=1600&q=85"
-          cta={{ label: "Explore Mainland", to: "/campaign" }}
-        />
-        <BigSection
-          bg="#0a0a0c"
-          textColor="#ffffff"
-          eyebrowColor="#7aa8ff"
-          eyebrow="Freezone"
-          title={<>100% ownership. <span className="text-white/60">Zero compromise.</span></>}
-          subtitle="Choose from 40+ UAE freezones with full repatriation of profits and tax benefits."
-          image="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1600&q=85"
-          cta={{ label: "Explore Freezones", to: "/ecommerce-license" }}
-          reverse
-        />
-        <BigSection
-          eyebrow="Visas"
-          title={<>Residency, <span className="text-[#86868b]">made simple.</span></>}
-          subtitle="Investor visa, Emirates ID, and medical — handled end to end. Stay focused on your business."
-          image="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1600&q=85"
-          cta={{ label: "Add a visa", to: "/business-license-visa" }}
-        />
-        <FeatureBento />
-        <Testimonials />
-        <PricingStrip />
+        <Manifesto />
+        <Pricing />
+        <Voices />
         <FAQ />
-        <ClosingCTA />
+        <Closing />
       </main>
-      <MiniFooter />
+      <Footer />
     </div>
   );
 }
