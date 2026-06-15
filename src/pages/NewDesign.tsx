@@ -19,6 +19,8 @@ import cspLogo from "@/assets/csplogo.svg";
 import imgRegister from "@/assets/nd-register.jpg";
 import imgComply from "@/assets/nd-comply.jpg";
 import imgGrow from "@/assets/nd-grow.jpg";
+import imgFounder from "@/assets/nd-hero-founder.jpg";
+import imgStorefront from "@/assets/nd-hero-storefront.jpg";
 
 /* ────────────────────────────────────────────────────────────
    /new-design — Fiverr-inspired, refined
