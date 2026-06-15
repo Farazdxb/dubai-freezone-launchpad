@@ -36,13 +36,15 @@ const useFonts = () => {
     l.id = id;
     l.rel = "stylesheet";
     l.href =
-      "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap";
+      "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap";
     document.head.appendChild(l);
   }, []);
 };
 
 const ease = [0.22, 1, 0.36, 1] as const;
-const FONT = "'Manrope', sans-serif";
+const FONT = "'Inter', sans-serif";
+const SERIF = "'Instrument Serif', serif";
+const CREAM = "#F5F1EA";
 
 const Reveal = ({
   children,
