@@ -178,10 +178,10 @@ const Hero = () => (
           Start your UAE company with transparent packages, real-time tracking, and founder support from application to license.
         </p>
         <div className="mt-10 flex flex-wrap items-center gap-3">
-          <Link to="/checkout" className="inline-flex h-13 items-center gap-2 rounded-full px-7 py-4 text-[16px] font-semibold text-white transition hover:-translate-y-0.5" style={{ background: INK }}>
+          <Link to="/checkout" className="inline-flex min-h-[52px] items-center gap-2 rounded-full px-7 py-4 text-[16px] font-semibold text-white transition hover:-translate-y-0.5" style={{ background: INK }}>
             Get Started for Free <ArrowRight className="h-4 w-4" />
           </Link>
-          <Link to="/services" className="inline-flex h-13 items-center gap-2 rounded-full bg-white px-6 py-4 text-[16px] font-semibold transition hover:-translate-y-0.5" style={{ color: INK, boxShadow: `inset 0 0 0 1px ${LINE}` }}>
+          <Link to="/services" className="inline-flex min-h-[52px] items-center gap-2 rounded-full bg-white px-6 py-4 text-[16px] font-semibold transition hover:-translate-y-0.5" style={{ color: INK, boxShadow: `inset 0 0 0 1px ${LINE}` }}>
             See packages
           </Link>
         </div>
@@ -298,8 +298,8 @@ const Steps = () => {
         </div>
         <Reveal delay={0.14}>
           <div className="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link to="/services" className="inline-flex h-13 items-center justify-center rounded-full bg-white px-7 py-4 text-[15px] font-bold" style={{ color: INK }}>Browse all features</Link>
-            <Link to="/checkout" className="inline-flex h-13 items-center justify-center gap-2 rounded-full px-7 py-4 text-[15px] font-bold text-white" style={{ background: BRAND }}>Get Started for Free <ArrowRight className="h-4 w-4" /></Link>
+            <Link to="/services" className="inline-flex min-h-[52px] items-center justify-center rounded-full bg-white px-7 py-4 text-[15px] font-bold" style={{ color: INK }}>Browse all features</Link>
+            <Link to="/checkout" className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full px-7 py-4 text-[15px] font-bold text-white" style={{ background: BRAND }}>Get Started for Free <ArrowRight className="h-4 w-4" /></Link>
           </div>
         </Reveal>
       </div>
