@@ -287,7 +287,7 @@ const Pillars = () => (
             className="text-[40px] sm:text-[56px] leading-[1.02] tracking-[-0.035em] font-extrabold text-black"
             style={{ fontFamily: FONT }}
           >
-            One platform. <span style={{ color: BRAND }}>Three milestones.</span>
+            One platform. <span className="italic font-normal" style={{ color: BRAND, fontFamily: SERIF }}>Three milestones.</span>
           </h2>
         </Reveal>
       </div>
@@ -308,7 +308,7 @@ const Pillars = () => (
                   style={{ fontFamily: FONT }}
                 >
                   {p.title}{" "}
-                  <span style={{ color: BRAND }}>{p.titleAccent}</span>
+                  <span className="italic font-normal" style={{ color: BRAND, fontFamily: SERIF }}>{p.titleAccent}</span>
                 </h3>
                 <p className="mt-4 text-[14.5px] text-neutral-600 leading-relaxed max-w-[34ch] mx-auto">
                   {p.body}
@@ -548,7 +548,7 @@ const HowItWorks = () => (
           className="text-[40px] sm:text-[56px] leading-[1.02] tracking-[-0.03em] font-extrabold text-black max-w-3xl"
           style={{ fontFamily: FONT }}
         >
-          From idea to <span style={{ color: BRAND }}>issued license</span> in four steps.
+          From idea to <span className="italic font-normal" style={{ color: BRAND, fontFamily: SERIF }}>issued license</span> in four steps.
         </h2>
       </Reveal>
 
@@ -626,7 +626,7 @@ const Pricing = () => (
             className="text-[40px] sm:text-[56px] leading-[1.02] tracking-[-0.03em] font-extrabold text-black"
             style={{ fontFamily: FONT }}
           >
-            Transparent pricing. <span style={{ color: BRAND }}>Zero surprises.</span>
+            Transparent pricing. <span className="italic font-normal" style={{ color: BRAND, fontFamily: SERIF }}>Zero surprises.</span>
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
@@ -715,7 +715,7 @@ const Testimonials = () => (
           className="text-[40px] sm:text-[56px] leading-[1.02] tracking-[-0.03em] font-extrabold text-black max-w-3xl mb-14"
           style={{ fontFamily: FONT }}
         >
-          Founders who chose <span style={{ color: BRAND }}>the simpler way.</span>
+          Founders who chose <span className="italic font-normal" style={{ color: BRAND, fontFamily: SERIF }}>the simpler way.</span>
         </h2>
       </Reveal>
       <div className="grid md:grid-cols-3 gap-5">
@@ -758,7 +758,7 @@ const FAQ = () => {
             className="text-[40px] sm:text-[56px] leading-[1.02] tracking-[-0.03em] font-extrabold text-black mb-14 text-center"
             style={{ fontFamily: FONT }}
           >
-            Questions, <span style={{ color: BRAND }}>answered.</span>
+            Questions, <span className="italic font-normal" style={{ color: BRAND, fontFamily: SERIF }}>answered.</span>
           </h2>
         </Reveal>
         <div className="space-y-3">
@@ -922,7 +922,7 @@ const NewDesign = () => {
         <DeepDive
           id="formation"
           eyebrow="Register · Formation"
-          title={<>Your license, <span style={{ color: BRAND }}>in days — not months.</span></>}
+          title={<>Your license, <span className="italic font-normal" style={{ color: BRAND, fontFamily: SERIF }}>in days — not months.</span></>}
           body="Skip the agents, the back-and-forth and the surprise invoices. Pick a freezone, share a few details, and we handle every step end-to-end."
           bullets={[
             "All major UAE freezones + mainland",
@@ -969,7 +969,7 @@ const NewDesign = () => {
         <DeepDive
           id="compliance"
           eyebrow="Comply · Autopilot"
-          title={<>Never miss a <span style={{ color: BRAND }}>single deadline.</span></>}
+          title={<>Never miss a <span className="italic font-normal" style={{ color: BRAND, fontFamily: SERIF }}>single deadline.</span></>}
           body="License renewals, VAT, corporate tax, visa expiries — all tracked, all on time. We file what we can file. You're notified about everything else."
           bullets={[
             "License & visa renewal tracking",
@@ -1011,7 +1011,7 @@ const NewDesign = () => {
         <DeepDive
           id="manage"
           eyebrow="Grow · AI Suite"
-          title={<>An AI co-pilot for the <span style={{ color: BRAND }}>boring stuff.</span></>}
+          title={<>An AI co-pilot for the <span className="italic font-normal" style={{ color: BRAND, fontFamily: SERIF }}>boring stuff.</span></>}
           body="Invoicing, bookkeeping, cashflow, expenses — ask in plain English, get answers, signed PDFs and filed reports. The way a finance team should feel."
           bullets={[
             "AI-powered bookkeeping & categorization",
