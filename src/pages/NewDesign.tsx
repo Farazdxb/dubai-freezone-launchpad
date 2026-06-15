@@ -171,7 +171,10 @@ const Hero = () => (
           <ChevronRight className="h-4 w-4" style={{ color: BRAND }} />
         </div>
 
-        <h1 className="mt-9 max-w-[620px] text-[46px] font-semibold leading-[1.1] sm:text-[62px] lg:text-[72px] xl:text-[78px]" style={{ color: INK }}>
+        <h1
+          className="mt-9 max-w-[620px] font-semibold"
+          style={{ color: INK, fontSize: "clamp(52px, 4.9vw, 78px)", lineHeight: 1.07, letterSpacing: "0" }}
+        >
           Your go-to app<br />for launching<br />your <span className="font-normal italic" style={{ color: BRAND, fontFamily: SERIF }}>freezone</span>
         </h1>
         <p className="mt-7 max-w-[560px] text-[18px] leading-[1.58]" style={{ color: GRAPHITE }}>
@@ -202,7 +205,7 @@ const Hero = () => (
               <span key={index} className="flex-1 rounded-md" style={{ height: `${height}%`, background: index === 4 ? BRAND : "#C9D1FF" }} />
             ))}
           </div>
-          <div className="mt-3 grid grid-cols-5 text-center text-[9px]" style={{ color: "#8A8F9D" }}>
+          <div className="mt-3 flex items-center justify-between gap-2 text-[9px]" style={{ color: "#8A8F9D" }}>
             <span>Apply</span><span>KYC</span><span>Pay</span><span>Review</span><span>Issue</span>
           </div>
         </div>
