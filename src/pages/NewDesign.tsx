@@ -171,8 +171,8 @@ const Hero = () => (
           <ChevronRight className="h-4 w-4" style={{ color: BRAND }} />
         </div>
 
-        <h1 className="mt-9 max-w-[620px] text-[52px] font-semibold leading-[1.07] sm:text-[68px] lg:text-[78px]" style={{ color: INK }}>
-          Your go-to app for launching your <span className="font-normal italic" style={{ color: BRAND, fontFamily: SERIF }}>freezone</span>
+        <h1 className="mt-9 max-w-[620px] text-[46px] font-semibold leading-[1.1] sm:text-[62px] lg:text-[72px] xl:text-[78px]" style={{ color: INK }}>
+          Your go-to app<br />for launching<br />your <span className="font-normal italic" style={{ color: BRAND, fontFamily: SERIF }}>freezone</span>
         </h1>
         <p className="mt-7 max-w-[560px] text-[18px] leading-[1.58]" style={{ color: GRAPHITE }}>
           Start your UAE company with transparent packages, real-time tracking, and founder support from application to license.
@@ -202,7 +202,7 @@ const Hero = () => (
               <span key={index} className="flex-1 rounded-md" style={{ height: `${height}%`, background: index === 4 ? BRAND : "#C9D1FF" }} />
             ))}
           </div>
-          <div className="mt-3 flex justify-between text-[10px]" style={{ color: "#8A8F9D" }}>
+          <div className="mt-3 grid grid-cols-5 text-center text-[9px]" style={{ color: "#8A8F9D" }}>
             <span>Apply</span><span>KYC</span><span>Pay</span><span>Review</span><span>Issue</span>
           </div>
         </div>
