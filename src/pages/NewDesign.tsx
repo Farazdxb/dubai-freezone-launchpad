@@ -19,6 +19,8 @@ import cspLogo from "@/assets/csplogo.svg";
 import imgRegister from "@/assets/nd-register.jpg";
 import imgComply from "@/assets/nd-comply.jpg";
 import imgGrow from "@/assets/nd-grow.jpg";
+import imgFounder from "@/assets/nd-hero-founder.jpg";
+import imgStorefront from "@/assets/nd-hero-storefront.jpg";
 
 /* ────────────────────────────────────────────────────────────
    /new-design — Fiverr-inspired, refined
@@ -36,13 +38,15 @@ const useFonts = () => {
     l.id = id;
     l.rel = "stylesheet";
     l.href =
-      "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap";
+      "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap";
     document.head.appendChild(l);
   }, []);
 };
 
 const ease = [0.22, 1, 0.36, 1] as const;
-const FONT = "'Manrope', sans-serif";
+const FONT = "'Inter', sans-serif";
+const SERIF = "'Instrument Serif', serif";
+const CREAM = "#F5F1EA";
 
 const Reveal = ({
   children,
@@ -112,143 +116,107 @@ const Nav = () => {
   );
 };
 
-/* ─── HERO (Apple-style: centered, oversized, clean) ─────── */
+/* ─── HERO (Tailor Brands-style) ──────────────────────────── */
 const Hero = () => {
   const { scrollY } = useScroll();
-  const heroY = useTransform(scrollY, [0, 600], [0, -40]);
+  const yL = useTransform(scrollY, [0, 600], [0, -50]);
+  const yR = useTransform(scrollY, [0, 600], [0, -25]);
   return (
-    <section className="relative pt-32 lg:pt-44 pb-12 lg:pb-20 overflow-hidden">
-      <div className="max-w-[1200px] mx-auto px-6 lg:px-10 text-center">
-        <Reveal>
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-black/10 bg-white text-[12px] font-medium text-neutral-700 mb-8">
-            <span className="w-1.5 h-1.5 rounded-full" style={{ background: BRAND }} />
-            New · AI-powered compliance is live
-          </div>
-        </Reveal>
-        <Reveal delay={0.05}>
-          <h1
-            className="text-[44px] sm:text-[72px] lg:text-[104px] leading-[0.98] tracking-[-0.045em] font-extrabold text-black max-w-[1100px] mx-auto"
-            style={{ fontFamily: FONT }}
-          >
-            Your UAE business.
-            <br />
-            <span style={{ color: BRAND }}>Beautifully simple.</span>
-          </h1>
-        </Reveal>
-        <Reveal delay={0.15}>
-          <p className="mt-7 max-w-xl mx-auto text-[18px] leading-relaxed text-neutral-500">
-            Freezone formation, compliance autopilot, and AI accounting —
-            zero consultancy fees, 100% transparent pricing.
-          </p>
-        </Reveal>
-        <Reveal delay={0.22}>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <a
-              href="#pricing"
-              className="group inline-flex items-center gap-2 rounded-full px-8 py-4 text-[15px] font-semibold text-white hover:opacity-90 transition"
-              style={{ background: INK }}
-            >
-              Get started
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition" />
-            </a>
-            <a
-              href="#pricing"
-              className="inline-flex items-center gap-2 text-[15px] font-semibold text-black hover:opacity-70 transition"
-            >
-              See packages <ArrowRight className="w-4 h-4" />
-            </a>
-          </div>
-        </Reveal>
-        <Reveal delay={0.3}>
-          <div className="mt-10 flex items-center justify-center gap-5 text-[13px] text-neutral-500">
-            <div className="flex items-center gap-1">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-3.5 h-3.5 fill-black text-black" />
-              ))}
-              <span className="ml-1.5 font-medium text-neutral-700">4.9</span>
-            </div>
-            <span className="w-1 h-1 rounded-full bg-neutral-300" />
-            <span>License in 3–5 days</span>
-            <span className="w-1 h-1 rounded-full bg-neutral-300" />
-            <span>All 7 emirates</span>
-          </div>
-        </Reveal>
-
-        {/* Hero product visual — single, centered, Apple-style */}
-        <Reveal delay={0.35}>
+    <section
+      className="relative pt-32 lg:pt-40 pb-20 lg:pb-28 overflow-hidden"
+      style={{ background: CREAM }}
+    >
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          {/* Left photo */}
           <motion.div
-            style={{ y: heroY }}
-            className="mt-16 lg:mt-24 mx-auto max-w-[1080px]"
+            style={{ y: yL }}
+            className="hidden lg:block lg:col-span-3"
           >
-            <div
-              className="relative rounded-[32px] overflow-hidden border border-black/[0.06]"
-              style={{
-                background:
-                  "linear-gradient(180deg, #f5f6f8 0%, #ebedf1 100%)",
-              }}
-            >
-              <div className="aspect-[16/10] p-8 sm:p-14 flex items-center justify-center">
-                <div className="w-full max-w-[760px] rounded-2xl bg-white shadow-[0_30px_80px_-30px_rgba(0,0,0,0.25)] overflow-hidden">
-                  <div className="flex items-center gap-1.5 px-4 py-3 border-b border-black/5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
-                    <span className="ml-3 text-[11px] text-neutral-400">app.cspzone.com</span>
-                  </div>
-                  <div className="p-6 sm:p-8 text-left">
-                    <div className="text-[12px] text-neutral-500 mb-1">Good morning, Aisha</div>
-                    <div
-                      className="text-[22px] sm:text-[28px] font-bold tracking-tight text-black mb-6"
-                      style={{ fontFamily: FONT }}
-                    >
-                      Everything's on track.
-                    </div>
-                    <div className="grid grid-cols-3 gap-3 mb-6">
-                      {[
-                        { l: "License", v: "Active", c: BRAND },
-                        { l: "VAT Q2", v: "Filed", c: "#0E7C3A" },
-                        { l: "Visas", v: "3 active", c: "#0B0B0B" },
-                      ].map((m) => (
-                        <div key={m.l} className="rounded-2xl bg-neutral-50 p-4">
-                          <div className="text-[11px] text-neutral-500 mb-1">{m.l}</div>
-                          <div className="text-[15px] font-semibold" style={{ color: m.c }}>
-                            {m.v}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="space-y-2.5">
-                      {[
-                        { t: "Trade license renewal", d: "84 days" },
-                        { t: "Corporate tax return", d: "120 days" },
-                      ].map((r, i) => (
-                        <motion.div
-                          key={i}
-                          initial={{ opacity: 0, x: 10 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.4 + i * 0.1, duration: 0.5, ease }}
-                          className="flex items-center justify-between rounded-xl border border-black/5 px-4 py-3"
-                        >
-                          <div className="flex items-center gap-3">
-                            <div
-                              className="w-7 h-7 rounded-lg flex items-center justify-center"
-                              style={{ background: `${BRAND}14`, color: BRAND }}
-                            >
-                              <Check className="w-3.5 h-3.5" strokeWidth={3} />
-                            </div>
-                            <span className="text-[13.5px] text-neutral-800">{r.t}</span>
-                          </div>
-                          <span className="text-[12px] text-neutral-500">{r.d}</span>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
+            <Reveal y={40}>
+              <div className="rounded-[28px] overflow-hidden aspect-[3/4] -rotate-2">
+                <img
+                  src={imgFounder}
+                  alt="UAE founder"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </Reveal>
+          </motion.div>
+
+          {/* Center copy */}
+          <div className="lg:col-span-6 text-center">
+            <Reveal>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-black/10 bg-white/80 backdrop-blur text-[12px] font-medium text-neutral-700 mb-7">
+                <span className="w-1.5 h-1.5 rounded-full" style={{ background: BRAND }} />
+                Zero consultancy fee · All 7 emirates
+              </div>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h1
+                className="text-[52px] sm:text-[80px] lg:text-[104px] leading-[0.96] tracking-[-0.02em] font-medium text-black"
+                style={{ fontFamily: SERIF }}
+              >
+                Launch your
+                <br />
+                UAE business,{" "}
+                <span className="italic" style={{ color: BRAND }}>
+                  effortlessly.
+                </span>
+              </h1>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <p className="mt-7 max-w-md mx-auto text-[16px] leading-relaxed text-neutral-600">
+                Freezone formation, compliance autopilot and AI accounting —
+                in one transparent platform.
+              </p>
+            </Reveal>
+            <Reveal delay={0.22}>
+              <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+                <a
+                  href="#pricing"
+                  className="group inline-flex items-center gap-2 rounded-full px-8 py-4 text-[15px] font-semibold text-white hover:opacity-90 transition"
+                  style={{ background: INK }}
+                >
+                  Start your company
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition" />
+                </a>
+                <a
+                  href="#pricing"
+                  className="inline-flex items-center gap-2 text-[15px] font-semibold text-black underline underline-offset-4 decoration-1 hover:opacity-70 transition"
+                >
+                  See packages
+                </a>
+              </div>
+            </Reveal>
+            <Reveal delay={0.3}>
+              <div className="mt-10 flex items-center justify-center gap-4 text-[13px] text-neutral-500">
+                <div className="flex items-center gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-3.5 h-3.5 fill-black text-black" />
+                  ))}
+                  <span className="ml-1.5 font-medium text-neutral-700">4.9 · 500+ founders</span>
                 </div>
               </div>
-            </div>
+            </Reveal>
+          </div>
+
+          {/* Right photo */}
+          <motion.div
+            style={{ y: yR }}
+            className="hidden lg:block lg:col-span-3"
+          >
+            <Reveal y={40} delay={0.1}>
+              <div className="rounded-[28px] overflow-hidden aspect-[3/4] rotate-2 mt-12">
+                <img
+                  src={imgStorefront}
+                  alt="UAE boutique"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </Reveal>
           </motion.div>
-        </Reveal>
+        </div>
       </div>
     </section>
   );
@@ -319,7 +287,7 @@ const Pillars = () => (
             className="text-[40px] sm:text-[56px] leading-[1.02] tracking-[-0.035em] font-extrabold text-black"
             style={{ fontFamily: FONT }}
           >
-            One platform. <span style={{ color: BRAND }}>Three milestones.</span>
+            One platform. <span className="italic font-normal" style={{ color: BRAND, fontFamily: SERIF }}>Three milestones.</span>
           </h2>
         </Reveal>
       </div>
@@ -340,7 +308,7 @@ const Pillars = () => (
                   style={{ fontFamily: FONT }}
                 >
                   {p.title}{" "}
-                  <span style={{ color: BRAND }}>{p.titleAccent}</span>
+                  <span className="italic font-normal" style={{ color: BRAND, fontFamily: SERIF }}>{p.titleAccent}</span>
                 </h3>
                 <p className="mt-4 text-[14.5px] text-neutral-600 leading-relaxed max-w-[34ch] mx-auto">
                   {p.body}
@@ -580,7 +548,7 @@ const HowItWorks = () => (
           className="text-[40px] sm:text-[56px] leading-[1.02] tracking-[-0.03em] font-extrabold text-black max-w-3xl"
           style={{ fontFamily: FONT }}
         >
-          From idea to <span style={{ color: BRAND }}>issued license</span> in four steps.
+          From idea to <span className="italic font-normal" style={{ color: BRAND, fontFamily: SERIF }}>issued license</span> in four steps.
         </h2>
       </Reveal>
 
@@ -658,7 +626,7 @@ const Pricing = () => (
             className="text-[40px] sm:text-[56px] leading-[1.02] tracking-[-0.03em] font-extrabold text-black"
             style={{ fontFamily: FONT }}
           >
-            Transparent pricing. <span style={{ color: BRAND }}>Zero surprises.</span>
+            Transparent pricing. <span className="italic font-normal" style={{ color: BRAND, fontFamily: SERIF }}>Zero surprises.</span>
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
@@ -747,7 +715,7 @@ const Testimonials = () => (
           className="text-[40px] sm:text-[56px] leading-[1.02] tracking-[-0.03em] font-extrabold text-black max-w-3xl mb-14"
           style={{ fontFamily: FONT }}
         >
-          Founders who chose <span style={{ color: BRAND }}>the simpler way.</span>
+          Founders who chose <span className="italic font-normal" style={{ color: BRAND, fontFamily: SERIF }}>the simpler way.</span>
         </h2>
       </Reveal>
       <div className="grid md:grid-cols-3 gap-5">
@@ -790,7 +758,7 @@ const FAQ = () => {
             className="text-[40px] sm:text-[56px] leading-[1.02] tracking-[-0.03em] font-extrabold text-black mb-14 text-center"
             style={{ fontFamily: FONT }}
           >
-            Questions, <span style={{ color: BRAND }}>answered.</span>
+            Questions, <span className="italic font-normal" style={{ color: BRAND, fontFamily: SERIF }}>answered.</span>
           </h2>
         </Reveal>
         <div className="space-y-3">
@@ -954,7 +922,7 @@ const NewDesign = () => {
         <DeepDive
           id="formation"
           eyebrow="Register · Formation"
-          title={<>Your license, <span style={{ color: BRAND }}>in days — not months.</span></>}
+          title={<>Your license, <span className="italic font-normal" style={{ color: BRAND, fontFamily: SERIF }}>in days — not months.</span></>}
           body="Skip the agents, the back-and-forth and the surprise invoices. Pick a freezone, share a few details, and we handle every step end-to-end."
           bullets={[
             "All major UAE freezones + mainland",
@@ -1001,7 +969,7 @@ const NewDesign = () => {
         <DeepDive
           id="compliance"
           eyebrow="Comply · Autopilot"
-          title={<>Never miss a <span style={{ color: BRAND }}>single deadline.</span></>}
+          title={<>Never miss a <span className="italic font-normal" style={{ color: BRAND, fontFamily: SERIF }}>single deadline.</span></>}
           body="License renewals, VAT, corporate tax, visa expiries — all tracked, all on time. We file what we can file. You're notified about everything else."
           bullets={[
             "License & visa renewal tracking",
@@ -1043,7 +1011,7 @@ const NewDesign = () => {
         <DeepDive
           id="manage"
           eyebrow="Grow · AI Suite"
-          title={<>An AI co-pilot for the <span style={{ color: BRAND }}>boring stuff.</span></>}
+          title={<>An AI co-pilot for the <span className="italic font-normal" style={{ color: BRAND, fontFamily: SERIF }}>boring stuff.</span></>}
           body="Invoicing, bookkeeping, cashflow, expenses — ask in plain English, get answers, signed PDFs and filed reports. The way a finance team should feel."
           bullets={[
             "AI-powered bookkeeping & categorization",
