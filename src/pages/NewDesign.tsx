@@ -429,7 +429,7 @@ const Pricing = () => {
                 <h3 className="text-[22px] font-bold">{plan.name}</h3>
                 <div className="mt-6 flex items-end gap-1"><span className="text-[54px] font-bold leading-none">{plan.price}</span><span className="pb-2 text-[15px] opacity-60">/mth</span></div>
                 <p className="mt-3 text-[15px] leading-[1.55] opacity-70">{plan.tagline}</p>
-                <Link to="/checkout" className="mt-7 inline-flex h-13 items-center justify-center rounded-full px-5 py-4 text-[15px] font-bold" style={{ background: plan.featured ? BRAND : "white", color: plan.featured ? "white" : INK }}>Free-14 Day Trial</Link>
+                <Link to="/checkout" className="mt-7 inline-flex min-h-[52px] items-center justify-center rounded-full px-5 py-4 text-[15px] font-bold" style={{ background: plan.featured ? BRAND : "white", color: plan.featured ? "white" : INK }}>Free-14 Day Trial</Link>
                 <ul className="mt-8 space-y-4">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex gap-3 text-[14px] leading-[1.45]"><Check className="mt-0.5 h-4 w-4 shrink-0" style={{ color: BRAND }} /><span className="opacity-85">{feature}</span></li>
@@ -572,7 +572,7 @@ const FinalCTA = () => (
           <h2 className="mx-auto mt-4 max-w-[820px] text-[42px] font-semibold leading-[1.05] sm:text-[64px]">Ready to simplify your <span className="font-normal italic" style={{ color: "#C6CBFF", fontFamily: SERIF }}>business setup?</span></h2>
           <p className="mx-auto mt-5 max-w-[520px] text-[16px] leading-[1.65] text-white/70">Start your UAE company with transparent pricing, digital tracking, and support when it matters.</p>
           <form onSubmit={(event) => event.preventDefault()} className="mx-auto mt-9 flex max-w-[520px] flex-col gap-2 rounded-full bg-white/10 p-2 backdrop-blur sm:flex-row">
-            <input type="email" placeholder="Enter your email" className="h-13 flex-1 bg-transparent px-5 py-4 text-[15px] text-white outline-none placeholder:text-white/50" />
+            <input type="email" placeholder="Enter your email" className="min-h-[52px] flex-1 bg-transparent px-5 py-4 text-[15px] text-white outline-none placeholder:text-white/50" />
             <button type="submit" className="inline-flex items-center justify-center gap-2 rounded-full px-7 py-4 text-[15px] font-bold text-white" style={{ background: BRAND }}>Get started <ArrowRight className="h-4 w-4" /></button>
           </form>
         </div>
