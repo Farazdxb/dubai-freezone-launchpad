@@ -282,81 +282,81 @@ const pillars = [
   {
     id: "formation",
     eyebrow: "Register",
-    title: "Start your company",
-    body: "Pick a freezone, get your trade license and visas — fast.",
-    icon: Building2,
-    bg: "bg-[#0B0B0B] text-white",
+    title: "Your license,",
+    titleAccent: "in days.",
+    body: "Pick a freezone — we file every document and deliver your license in 3–5 days.",
     img: imgRegister,
   },
   {
     id: "compliance",
     eyebrow: "Comply",
-    title: "Stay compliant",
-    body: "Never miss a renewal, VAT filing or corporate tax deadline.",
-    icon: ShieldCheck,
-    bg: "bg-[#EFF1F5] text-black",
+    title: "Compliance,",
+    titleAccent: "always on.",
+    body: "Renewals, VAT, corporate tax — all tracked, all on time. Quietly handled.",
     img: imgComply,
   },
   {
     id: "manage",
     eyebrow: "Grow",
-    title: "Run with AI",
-    body: "Invoicing, bookkeeping and an AI co-pilot that just answers.",
-    icon: Sparkles,
-    bg: "bg-white text-black border border-black/10",
+    title: "An AI co-pilot",
+    titleAccent: "for the boring stuff.",
+    body: "Invoicing, bookkeeping, cashflow — ask in plain English, get a real answer.",
     img: imgGrow,
   },
 ];
 
 const Pillars = () => (
-  <section className="py-24 lg:py-36">
+  <section className="py-24 lg:py-32">
     <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-      <div className="flex items-end justify-between flex-wrap gap-6 mb-14">
+      <div className="text-center max-w-3xl mx-auto mb-14">
         <Reveal>
+          <div className="text-[12px] uppercase tracking-[0.2em] text-neutral-500 mb-4">
+            The platform
+          </div>
+        </Reveal>
+        <Reveal delay={0.05}>
           <h2
-            className="text-[40px] sm:text-[56px] leading-[1.02] tracking-[-0.03em] font-extrabold text-black max-w-2xl"
+            className="text-[40px] sm:text-[56px] leading-[1.02] tracking-[-0.035em] font-extrabold text-black"
             style={{ fontFamily: FONT }}
           >
             One platform. <span style={{ color: BRAND }}>Three milestones.</span>
           </h2>
         </Reveal>
-        <Reveal delay={0.1}>
-          <p className="text-neutral-500 max-w-sm text-[15px]">
-            Whether you're registering today or scaling your tenth license — we move with you.
-          </p>
-        </Reveal>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-5">
+      <div className="grid md:grid-cols-3 gap-4">
         {pillars.map((p, i) => (
           <Reveal key={p.id} delay={i * 0.08}>
             <a
               href={`#${p.id}`}
-              className={`group block rounded-[28px] p-5 h-full transition-transform duration-500 hover:-translate-y-1 ${p.bg}`}
+              className="group block rounded-[28px] overflow-hidden h-full bg-[#f5f5f7] hover:bg-[#eef0f3] transition-colors duration-500"
             >
-              <div className="h-56 rounded-2xl mb-7 overflow-hidden relative">
+              <div className="px-8 pt-10 pb-2 text-center">
+                <div className="text-[12px] uppercase tracking-[0.22em] text-neutral-500 mb-3">
+                  {p.eyebrow}
+                </div>
+                <h3
+                  className="text-[26px] sm:text-[30px] leading-[1.1] tracking-[-0.025em] font-bold text-black"
+                  style={{ fontFamily: FONT }}
+                >
+                  {p.title}{" "}
+                  <span style={{ color: BRAND }}>{p.titleAccent}</span>
+                </h3>
+                <p className="mt-4 text-[14.5px] text-neutral-600 leading-relaxed max-w-[34ch] mx-auto">
+                  {p.body}
+                </p>
+                <div className="mt-5 inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-black">
+                  Learn more
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition" />
+                </div>
+              </div>
+              <div className="mt-6 aspect-[5/4] overflow-hidden">
                 <img
                   src={p.img}
                   alt={p.title}
                   loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-[900ms] ease-out"
                 />
-              </div>
-              <div className="px-2 pb-2">
-                <div className="text-[11px] uppercase tracking-[0.2em] opacity-60 mb-3">
-                  {p.eyebrow}
-                </div>
-                <h3
-                  className="text-[24px] font-bold tracking-tight mb-2"
-                  style={{ fontFamily: FONT }}
-                >
-                  {p.title}
-                </h3>
-                <p className="text-[14.5px] opacity-75 leading-relaxed mb-6">{p.body}</p>
-                <div className="inline-flex items-center gap-1.5 text-[14px] font-semibold">
-                  Learn more
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
-                </div>
               </div>
             </a>
           </Reveal>
@@ -365,6 +365,7 @@ const Pillars = () => (
     </div>
   </section>
 );
+
 
 /* ─── DUAL CARD (inspired by attachment 3) ──────────────── */
 const DualCard = () => {
