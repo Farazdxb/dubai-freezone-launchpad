@@ -9,22 +9,20 @@ import {
   Sparkles,
   FileText,
   Bell,
-  Receipt,
   Bot,
-  Globe,
   Clock,
   Star,
   ChevronDown,
-  Zap,
-  Users,
-  TrendingUp,
+  CheckCircle2,
 } from "lucide-react";
+import cspLogo from "@/assets/csplogo.svg";
+import imgRegister from "@/assets/nd-register.jpg";
+import imgComply from "@/assets/nd-comply.jpg";
+import imgGrow from "@/assets/nd-grow.jpg";
 
 /* ────────────────────────────────────────────────────────────
-   Fiverr-inspired redesign for /new-design
-   Brand palette: white / black / soft grey + brand accent (#1B17FF)
-   Display font: "Macan"-like geometric sans (use Inter Tight)
-   Editorial accent: Instrument Serif italic
+   /new-design — Fiverr-inspired, refined
+   Font: Manrope (project default). Brand accent: #1B17FF
 ──────────────────────────────────────────────────────────── */
 
 const BRAND = "#1B17FF";
@@ -38,12 +36,13 @@ const useFonts = () => {
     l.id = id;
     l.rel = "stylesheet";
     l.href =
-      "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap";
+      "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap";
     document.head.appendChild(l);
   }, []);
 };
 
 const ease = [0.22, 1, 0.36, 1] as const;
+const FONT = "'Manrope', sans-serif";
 
 const Reveal = ({
   children,
@@ -78,19 +77,16 @@ const Nav = () => {
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-white/85 backdrop-blur-xl border-b border-black/5" : "bg-transparent"
+        scrolled
+          ? "bg-white/85 backdrop-blur-xl border-b border-black/5"
+          : "bg-transparent"
       }`}
     >
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
-        <Link to="/new-design" className="flex items-center gap-2">
-          <span
-            className="text-2xl font-extrabold tracking-tight"
-            style={{ fontFamily: "'Inter Tight', sans-serif", color: INK }}
-          >
-            csp<span style={{ color: BRAND }}>.</span>
-          </span>
+        <Link to="/new-design" className="flex items-center">
+          <img src={cspLogo} alt="CSPzone" className="h-7 w-auto" />
         </Link>
-        <nav className="hidden md:flex items-center gap-8 text-[15px] text-neutral-700">
+        <nav className="hidden md:flex items-center gap-8 text-[14.5px] text-neutral-700">
           <a href="#formation" className="hover:text-black transition">Formation</a>
           <a href="#compliance" className="hover:text-black transition">Compliance</a>
           <a href="#manage" className="hover:text-black transition">Manage</a>
@@ -99,7 +95,7 @@ const Nav = () => {
         <div className="flex items-center gap-3">
           <Link
             to="/login"
-            className="hidden sm:inline-flex text-[15px] text-neutral-700 hover:text-black"
+            className="hidden sm:inline-flex text-[14.5px] text-neutral-700 hover:text-black"
           >
             Login
           </Link>
@@ -133,21 +129,16 @@ const Hero = () => {
             </Reveal>
             <Reveal delay={0.05}>
               <h1
-                className="text-[44px] sm:text-[64px] lg:text-[88px] leading-[0.95] tracking-[-0.03em] font-semibold text-black"
-                style={{ fontFamily: "'Inter Tight', sans-serif" }}
+                className="text-[44px] sm:text-[64px] lg:text-[84px] leading-[1.02] tracking-[-0.035em] font-extrabold text-black"
+                style={{ fontFamily: FONT }}
               >
                 Launch, run &amp; grow{" "}
-                <span
-                  className="italic font-normal"
-                  style={{ fontFamily: "'Instrument Serif', serif", color: BRAND }}
-                >
-                  your UAE business
-                </span>{" "}
+                <span style={{ color: BRAND }}>your UAE business</span>{" "}
                 from one place.
               </h1>
             </Reveal>
             <Reveal delay={0.15}>
-              <p className="mt-7 max-w-xl text-[18px] leading-relaxed text-neutral-600">
+              <p className="mt-7 max-w-xl text-[17px] leading-relaxed text-neutral-600">
                 Freezone formation, compliance autopilot, and AI-powered accounting —
                 with zero consultancy fees and 100% transparent pricing.
               </p>
@@ -190,19 +181,13 @@ const Hero = () => {
           <motion.div style={{ y }} className="lg:col-span-5 relative">
             <div
               className="relative rounded-[28px] p-8 overflow-hidden"
-              style={{
-                background:
-                  "linear-gradient(160deg, #0B0B0B 0%, #1a1a1a 100%)",
-              }}
+              style={{ background: "linear-gradient(160deg, #0B0B0B 0%, #1a1a1a 100%)" }}
             >
               <div className="text-white/60 text-[11px] uppercase tracking-[0.18em] mb-4">
                 Compliance dashboard
               </div>
               <div className="text-white text-[22px] font-semibold leading-snug mb-6">
-                Your business,{" "}
-                <span style={{ fontFamily: "'Instrument Serif', serif", color: "#fff" }} className="italic font-normal">
-                  on autopilot.
-                </span>
+                Your business, on autopilot.
               </div>
               <div className="space-y-3">
                 {[
@@ -239,7 +224,6 @@ const Hero = () => {
               </div>
             </div>
 
-            {/* floating badge */}
             <motion.div
               initial={{ opacity: 0, y: 20, rotate: -4 }}
               whileInView={{ opacity: 1, y: 0, rotate: -4 }}
@@ -269,10 +253,7 @@ const TrustBar = () => (
       ].map((s, i) => (
         <Reveal key={i} delay={i * 0.05}>
           <div>
-            <div
-              className="text-[28px] font-semibold tracking-tight text-black"
-              style={{ fontFamily: "'Inter Tight', sans-serif" }}
-            >
+            <div className="text-[28px] font-extrabold tracking-tight text-black" style={{ fontFamily: FONT }}>
               {s.v}
             </div>
             <div className="text-[13px] text-neutral-500 mt-1">{s.l}</div>
@@ -283,7 +264,7 @@ const TrustBar = () => (
   </section>
 );
 
-/* ─── THREE PILLARS ───────────────────────────────────────── */
+/* ─── THREE PILLARS (with real images) ───────────────────── */
 const pillars = [
   {
     id: "formation",
@@ -292,7 +273,7 @@ const pillars = [
     body: "Pick a freezone, get your trade license and visas — fast.",
     icon: Building2,
     bg: "bg-[#0B0B0B] text-white",
-    img: "linear-gradient(135deg,#1B17FF 0%,#5b58ff 100%)",
+    img: imgRegister,
   },
   {
     id: "compliance",
@@ -301,7 +282,7 @@ const pillars = [
     body: "Never miss a renewal, VAT filing or corporate tax deadline.",
     icon: ShieldCheck,
     bg: "bg-[#EFF1F5] text-black",
-    img: "linear-gradient(135deg,#dadcf5 0%,#b9bcef 100%)",
+    img: imgComply,
   },
   {
     id: "manage",
@@ -310,7 +291,7 @@ const pillars = [
     body: "Invoicing, bookkeeping and an AI co-pilot that just answers.",
     icon: Sparkles,
     bg: "bg-white text-black border border-black/10",
-    img: "linear-gradient(135deg,#0B0B0B 0%,#3b3b3b 100%)",
+    img: imgGrow,
   },
 ];
 
@@ -320,13 +301,10 @@ const Pillars = () => (
       <div className="flex items-end justify-between flex-wrap gap-6 mb-14">
         <Reveal>
           <h2
-            className="text-[40px] sm:text-[56px] leading-[1.02] tracking-[-0.03em] font-semibold text-black max-w-2xl"
-            style={{ fontFamily: "'Inter Tight', sans-serif" }}
+            className="text-[40px] sm:text-[56px] leading-[1.02] tracking-[-0.03em] font-extrabold text-black max-w-2xl"
+            style={{ fontFamily: FONT }}
           >
-            One platform.{" "}
-            <span className="italic font-normal" style={{ fontFamily: "'Instrument Serif', serif" }}>
-              Three milestones.
-            </span>
+            One platform. <span style={{ color: BRAND }}>Three milestones.</span>
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
@@ -341,27 +319,31 @@ const Pillars = () => (
           <Reveal key={p.id} delay={i * 0.08}>
             <a
               href={`#${p.id}`}
-              className={`group block rounded-[28px] p-7 h-full transition-transform duration-500 hover:-translate-y-1 ${p.bg}`}
+              className={`group block rounded-[28px] p-5 h-full transition-transform duration-500 hover:-translate-y-1 ${p.bg}`}
             >
-              <div
-                className="h-48 rounded-2xl mb-7 flex items-center justify-center overflow-hidden relative"
-                style={{ background: p.img }}
-              >
-                <p.icon className="w-14 h-14 text-white/95" strokeWidth={1.4} />
+              <div className="h-56 rounded-2xl mb-7 overflow-hidden relative">
+                <img
+                  src={p.img}
+                  alt={p.title}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
               </div>
-              <div className="text-[12px] uppercase tracking-[0.18em] opacity-60 mb-3">
-                {p.eyebrow}
-              </div>
-              <h3
-                className="text-[26px] font-semibold tracking-tight mb-2"
-                style={{ fontFamily: "'Inter Tight', sans-serif" }}
-              >
-                {p.title}
-              </h3>
-              <p className="text-[15px] opacity-75 leading-relaxed mb-6">{p.body}</p>
-              <div className="inline-flex items-center gap-1.5 text-[14px] font-semibold">
-                Learn more
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
+              <div className="px-2 pb-2">
+                <div className="text-[11px] uppercase tracking-[0.2em] opacity-60 mb-3">
+                  {p.eyebrow}
+                </div>
+                <h3
+                  className="text-[24px] font-bold tracking-tight mb-2"
+                  style={{ fontFamily: FONT }}
+                >
+                  {p.title}
+                </h3>
+                <p className="text-[14.5px] opacity-75 leading-relaxed mb-6">{p.body}</p>
+                <div className="inline-flex items-center gap-1.5 text-[14px] font-semibold">
+                  Learn more
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
+                </div>
               </div>
             </a>
           </Reveal>
@@ -370,6 +352,115 @@ const Pillars = () => (
     </div>
   </section>
 );
+
+/* ─── DUAL CARD (inspired by attachment 3) ──────────────── */
+const DualCard = () => {
+  const [tab, setTab] = useState<"reviews" | "solve" | "prevent">("reviews");
+  return (
+    <section className="py-12 lg:py-20">
+      <div className="px-6 lg:px-10">
+        <div className="max-w-[1200px] mx-auto rounded-[32px] bg-white border border-black/5 shadow-[0_40px_120px_-40px_rgba(0,0,0,0.15)] p-8 sm:p-12">
+          <div className="flex items-start justify-between flex-wrap gap-6 mb-10">
+            <Reveal>
+              <h3
+                className="text-[28px] sm:text-[40px] leading-[1.05] tracking-[-0.025em] font-extrabold text-neutral-400 max-w-xl"
+                style={{ fontFamily: FONT }}
+              >
+                Smarter systems spot risk —{" "}
+                <span className="text-black">and solve it.</span>
+              </h3>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div className="inline-flex items-center gap-1 bg-neutral-100 rounded-full p-1">
+                {(["reviews", "solve", "prevent"] as const).map((t) => (
+                  <button
+                    key={t}
+                    onClick={() => setTab(t)}
+                    className={`px-4 py-1.5 rounded-full text-[13px] font-medium capitalize transition ${
+                      tab === t
+                        ? "bg-white text-black shadow-sm"
+                        : "text-neutral-500 hover:text-black"
+                    }`}
+                  >
+                    {tab === t && (
+                      <span
+                        className="inline-block w-1.5 h-1.5 rounded-full mr-1.5"
+                        style={{ background: BRAND }}
+                      />
+                    )}
+                    {t}
+                  </button>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-5">
+            <Reveal>
+              <div className="rounded-3xl border border-black/10 p-7 h-full bg-white">
+                <h4 className="text-[20px] font-bold text-black mb-3" style={{ fontFamily: FONT }}>
+                  License renewal flagged (45 days)
+                </h4>
+                <p className="text-[14px] text-neutral-600 leading-relaxed mb-6">
+                  Your IFZA trade license is approaching renewal. Our AI prepared
+                  documents and pre-filled the renewal application.
+                </p>
+                <div className="flex flex-wrap gap-2 mb-8">
+                  <span className="text-[12px] px-3 py-1 rounded-full bg-neutral-100 text-neutral-700">
+                    IFZA · 2024
+                  </span>
+                  <span
+                    className="text-[12px] px-3 py-1 rounded-full"
+                    style={{ background: "#E8FBEE", color: "#0E7C3A" }}
+                  >
+                    Auto-prepared
+                  </span>
+                  <span className="text-[12px] px-3 py-1 rounded-full bg-neutral-100 text-neutral-700">
+                    renewal
+                  </span>
+                </div>
+                <div className="flex items-center justify-between pt-4 border-t border-black/5">
+                  <span className="text-[13px] text-neutral-500">
+                    <span className="font-semibold text-black">(12)</span> deadlines tracked
+                  </span>
+                  <a href="#" className="text-[13px] font-semibold underline text-black">
+                    Read more
+                  </a>
+                </div>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.08}>
+              <div className="rounded-3xl p-7 h-full bg-[#0B0B0B] text-white flex flex-col">
+                <h4 className="text-[20px] font-bold mb-3" style={{ fontFamily: FONT }}>
+                  Secure & compliant filing
+                </h4>
+                <p className="text-[14px] text-white/65 leading-relaxed mb-6">
+                  Every renewal is double-checked by a human PRO before submission.
+                  Government portals updated in real time.
+                </p>
+                <div className="mt-auto pt-6 border-t border-white/10 flex items-center justify-between">
+                  <span
+                    className="inline-flex items-center gap-1.5 text-[12px] font-medium px-3 py-1.5 rounded-full"
+                    style={{ background: "rgba(52,211,153,0.15)", color: "#34D399" }}
+                  >
+                    <CheckCircle2 className="w-3.5 h-3.5" /> Filed
+                  </span>
+                  <a
+                    href="#"
+                    className="inline-flex items-center gap-1.5 bg-white text-black rounded-full px-4 py-2 text-[13px] font-semibold hover:bg-white/90 transition"
+                  >
+                    View timeline <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 /* ─── DEEP DIVE BLOCK ─────────────────────────────────────── */
 const DeepDive = ({
@@ -415,14 +506,14 @@ const DeepDive = ({
             </Reveal>
             <Reveal delay={0.05}>
               <h3
-                className="text-[36px] sm:text-[52px] leading-[1.02] tracking-[-0.03em] font-semibold"
-                style={{ fontFamily: "'Inter Tight', sans-serif" }}
+                className="text-[36px] sm:text-[52px] leading-[1.02] tracking-[-0.03em] font-extrabold"
+                style={{ fontFamily: FONT }}
               >
                 {title}
               </h3>
             </Reveal>
             <Reveal delay={0.12}>
-              <p className="mt-6 text-[17px] leading-relaxed opacity-75 max-w-lg">{body}</p>
+              <p className="mt-6 text-[16.5px] leading-relaxed opacity-75 max-w-lg">{body}</p>
             </Reveal>
             <Reveal delay={0.18}>
               <ul className="mt-8 space-y-3">
@@ -472,14 +563,10 @@ const HowItWorks = () => (
     <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
       <Reveal>
         <h2
-          className="text-[40px] sm:text-[56px] leading-[1.02] tracking-[-0.03em] font-semibold text-black max-w-3xl"
-          style={{ fontFamily: "'Inter Tight', sans-serif" }}
+          className="text-[40px] sm:text-[56px] leading-[1.02] tracking-[-0.03em] font-extrabold text-black max-w-3xl"
+          style={{ fontFamily: FONT }}
         >
-          From idea to{" "}
-          <span className="italic font-normal" style={{ fontFamily: "'Instrument Serif', serif" }}>
-            issued license
-          </span>{" "}
-          in four steps.
+          From idea to <span style={{ color: BRAND }}>issued license</span> in four steps.
         </h2>
       </Reveal>
 
@@ -487,16 +574,10 @@ const HowItWorks = () => (
         {steps.map((s, i) => (
           <Reveal key={s.n} delay={i * 0.08}>
             <div className="rounded-3xl border border-black/10 bg-white p-7 h-full hover:border-black/30 transition">
-              <div
-                className="text-[14px] font-semibold mb-10"
-                style={{ color: BRAND, fontFamily: "'Inter Tight', sans-serif" }}
-              >
+              <div className="text-[14px] font-bold mb-10" style={{ color: BRAND, fontFamily: FONT }}>
                 {s.n}
               </div>
-              <h4
-                className="text-[20px] font-semibold text-black mb-2 tracking-tight"
-                style={{ fontFamily: "'Inter Tight', sans-serif" }}
-              >
+              <h4 className="text-[20px] font-bold text-black mb-2 tracking-tight" style={{ fontFamily: FONT }}>
                 {s.t}
               </h4>
               <p className="text-[14px] text-neutral-600 leading-relaxed">{s.d}</p>
@@ -560,13 +641,10 @@ const Pricing = () => (
       <div className="text-center max-w-2xl mx-auto mb-14">
         <Reveal>
           <h2
-            className="text-[40px] sm:text-[56px] leading-[1.02] tracking-[-0.03em] font-semibold text-black"
-            style={{ fontFamily: "'Inter Tight', sans-serif" }}
+            className="text-[40px] sm:text-[56px] leading-[1.02] tracking-[-0.03em] font-extrabold text-black"
+            style={{ fontFamily: FONT }}
           >
-            Transparent pricing.{" "}
-            <span className="italic font-normal" style={{ fontFamily: "'Instrument Serif', serif" }}>
-              Zero surprises.
-            </span>
+            Transparent pricing. <span style={{ color: BRAND }}>Zero surprises.</span>
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
@@ -587,10 +665,7 @@ const Pricing = () => (
               }`}
             >
               <div className="flex items-center justify-between mb-2">
-                <h4
-                  className="text-[22px] font-semibold tracking-tight"
-                  style={{ fontFamily: "'Inter Tight', sans-serif" }}
-                >
+                <h4 className="text-[22px] font-bold tracking-tight" style={{ fontFamily: FONT }}>
                   {t.name}
                 </h4>
                 {t.featured && (
@@ -606,10 +681,7 @@ const Pricing = () => (
                 {t.desc}
               </p>
               <div className="mb-7">
-                <span
-                  className="text-[44px] font-semibold tracking-tight"
-                  style={{ fontFamily: "'Inter Tight', sans-serif" }}
-                >
+                <span className="text-[44px] font-extrabold tracking-tight" style={{ fontFamily: FONT }}>
                   {t.price}
                 </span>
                 <span className={`ml-2 text-[13px] ${t.featured ? "text-white/60" : "text-neutral-500"}`}>
@@ -648,21 +720,9 @@ const Pricing = () => (
 
 /* ─── TESTIMONIALS ────────────────────────────────────────── */
 const quotes = [
-  {
-    q: "From signup to trade license in 4 days. The compliance autopilot alone is worth it.",
-    n: "Aisha Rahman",
-    r: "Founder, Lumen Studio",
-  },
-  {
-    q: "We replaced our accountant, PRO and consultant — and pay less than we used to for one.",
-    n: "Marc Devereaux",
-    r: "CEO, Halo Trading FZE",
-  },
-  {
-    q: "Honest pricing in this industry is rare. CSP just shows you the numbers and gets it done.",
-    n: "Priya Nair",
-    r: "Director, Northwind Logistics",
-  },
+  { q: "From signup to trade license in 4 days. The compliance autopilot alone is worth it.", n: "Aisha Rahman", r: "Founder, Lumen Studio" },
+  { q: "We replaced our accountant, PRO and consultant — and pay less than we used to for one.", n: "Marc Devereaux", r: "CEO, Halo Trading FZE" },
+  { q: "Honest pricing in this industry is rare. CSP just shows you the numbers and gets it done.", n: "Priya Nair", r: "Director, Northwind Logistics" },
 ];
 
 const Testimonials = () => (
@@ -670,13 +730,10 @@ const Testimonials = () => (
     <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
       <Reveal>
         <h2
-          className="text-[40px] sm:text-[56px] leading-[1.02] tracking-[-0.03em] font-semibold text-black max-w-3xl mb-14"
-          style={{ fontFamily: "'Inter Tight', sans-serif" }}
+          className="text-[40px] sm:text-[56px] leading-[1.02] tracking-[-0.03em] font-extrabold text-black max-w-3xl mb-14"
+          style={{ fontFamily: FONT }}
         >
-          Founders who chose{" "}
-          <span className="italic font-normal" style={{ fontFamily: "'Instrument Serif', serif" }}>
-            the simpler way.
-          </span>
+          Founders who chose <span style={{ color: BRAND }}>the simpler way.</span>
         </h2>
       </Reveal>
       <div className="grid md:grid-cols-3 gap-5">
@@ -703,22 +760,10 @@ const Testimonials = () => (
 
 /* ─── FAQ ─────────────────────────────────────────────────── */
 const faqs = [
-  {
-    q: "How long does it take to get a UAE trade license?",
-    a: "Most freezone licenses are issued in 3–5 working days once we have your documents. We'll tell you upfront based on your activity and freezone.",
-  },
-  {
-    q: "Do you charge consultancy fees?",
-    a: "No. We make money from clear, fixed packages — not hidden mark-ups. The price you see is the price you pay.",
-  },
-  {
-    q: "Which freezones do you cover?",
-    a: "All major UAE freezones — IFZA, SHAMS, Meydan, RAKEZ, DMCC, DUQE and more — plus mainland setups.",
-  },
-  {
-    q: "What happens after I get my license?",
-    a: "You move to our compliance autopilot: renewals, VAT, corporate tax and bookkeeping — handled, with deadlines tracked by AI.",
-  },
+  { q: "How long does it take to get a UAE trade license?", a: "Most freezone licenses are issued in 3–5 working days once we have your documents. We'll tell you upfront based on your activity and freezone." },
+  { q: "Do you charge consultancy fees?", a: "No. We make money from clear, fixed packages — not hidden mark-ups. The price you see is the price you pay." },
+  { q: "Which freezones do you cover?", a: "All major UAE freezones — IFZA, SHAMS, Meydan, RAKEZ, DMCC, DUQE and more — plus mainland setups." },
+  { q: "What happens after I get my license?", a: "You move to our compliance autopilot: renewals, VAT, corporate tax and bookkeeping — handled, with deadlines tracked by AI." },
 ];
 
 const FAQ = () => {
@@ -728,13 +773,10 @@ const FAQ = () => {
       <div className="max-w-[900px] mx-auto px-6 lg:px-10">
         <Reveal>
           <h2
-            className="text-[40px] sm:text-[56px] leading-[1.02] tracking-[-0.03em] font-semibold text-black mb-14 text-center"
-            style={{ fontFamily: "'Inter Tight', sans-serif" }}
+            className="text-[40px] sm:text-[56px] leading-[1.02] tracking-[-0.03em] font-extrabold text-black mb-14 text-center"
+            style={{ fontFamily: FONT }}
           >
-            Questions,{" "}
-            <span className="italic font-normal" style={{ fontFamily: "'Instrument Serif', serif" }}>
-              answered.
-            </span>
+            Questions, <span style={{ color: BRAND }}>answered.</span>
           </h2>
         </Reveal>
         <div className="space-y-3">
@@ -745,10 +787,7 @@ const FAQ = () => {
                 className="w-full text-left rounded-2xl bg-white border border-black/10 p-6 hover:border-black/30 transition"
               >
                 <div className="flex items-center justify-between gap-6">
-                  <span
-                    className="text-[17px] font-semibold text-black"
-                    style={{ fontFamily: "'Inter Tight', sans-serif" }}
-                  >
+                  <span className="text-[17px] font-semibold text-black" style={{ fontFamily: FONT }}>
                     {f.q}
                   </span>
                   <ChevronDown
@@ -774,96 +813,103 @@ const FAQ = () => {
   );
 };
 
-/* ─── FINAL CTA ───────────────────────────────────────────── */
-const FinalCTA = () => (
-  <section className="px-6 lg:px-10 py-16 lg:py-24">
-    <div
-      className="max-w-[1400px] mx-auto rounded-[36px] p-12 sm:p-20 lg:p-28 text-center relative overflow-hidden"
-      style={{ background: INK }}
-    >
+/* ─── FOOTER + FINAL CTA (attachment 4 style) ─────────────── */
+const FooterBlock = () => (
+  <section className="px-6 lg:px-10 pt-16 pb-6 relative">
+    {/* Black CTA panel with soft gradient fade */}
+    <div className="max-w-[1400px] mx-auto rounded-[36px] overflow-hidden relative">
       <div
-        className="absolute inset-0 opacity-30"
+        className="relative px-8 py-24 sm:py-32 lg:py-44 text-center"
         style={{
           background:
-            "radial-gradient(circle at 30% 20%, rgba(27,23,255,0.5), transparent 50%), radial-gradient(circle at 70% 80%, rgba(91,88,255,0.35), transparent 55%)",
+            "radial-gradient(120% 80% at 50% 0%, #1a1a1a 0%, #0B0B0B 50%, #050505 100%)",
         }}
-      />
-      <div className="relative">
+      >
         <Reveal>
           <h2
-            className="text-[44px] sm:text-[72px] lg:text-[96px] leading-[0.98] tracking-[-0.03em] font-semibold text-white max-w-4xl mx-auto"
-            style={{ fontFamily: "'Inter Tight', sans-serif" }}
+            className="text-[40px] sm:text-[64px] lg:text-[80px] leading-[1.02] tracking-[-0.03em] font-extrabold text-white max-w-3xl mx-auto"
+            style={{ fontFamily: FONT }}
           >
-            Start your UAE business{" "}
-            <span className="italic font-normal" style={{ fontFamily: "'Instrument Serif', serif" }}>
-              today.
-            </span>
+            Start your UAE business today.
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
-          <p className="mt-7 text-[18px] text-white/70 max-w-xl mx-auto">
-            500+ founders already chose the transparent route. Your license is a few clicks away.
+          <p className="mt-6 text-[16px] text-white/65 max-w-lg mx-auto">
+            CSPzone makes it effortless to launch, comply and grow — everything you need in one place.
           </p>
         </Reveal>
         <Reveal delay={0.18}>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <a
-              href="#pricing"
-              className="inline-flex items-center gap-2 rounded-full px-8 py-4 text-[15px] font-semibold bg-white text-black hover:bg-white/90 transition"
-            >
-              Get started <ArrowRight className="w-4 h-4" />
-            </a>
-            <a
-              href="#pricing"
-              className="inline-flex items-center gap-2 rounded-full px-8 py-4 text-[15px] font-semibold border border-white/25 text-white hover:bg-white/10 transition"
-            >
-              Talk to us
-            </a>
-          </div>
+          <a
+            href="#pricing"
+            className="mt-9 inline-flex items-center gap-2 rounded-full px-7 py-4 text-[15px] font-semibold bg-white text-black hover:bg-white/90 transition"
+          >
+            Get started <ArrowRight className="w-4 h-4" />
+          </a>
         </Reveal>
+        {/* bottom fade */}
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-white pointer-events-none" />
+      </div>
+    </div>
+
+    {/* Footer card */}
+    <div className="max-w-[1400px] mx-auto -mt-10 relative">
+      <div className="rounded-[28px] bg-white border border-black/5 p-8 sm:p-12 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.15)]">
+        <div className="grid md:grid-cols-12 gap-10">
+          <div className="md:col-span-4">
+            <img src={cspLogo} alt="CSPzone" className="h-7 w-auto mb-5" />
+            <p className="text-[13.5px] text-neutral-500 leading-relaxed max-w-xs">
+              CSPzone helps founders launch and run UAE businesses — formation,
+              compliance and AI accounting, all in one place.
+            </p>
+          </div>
+          {[
+            { h: "Product", l: ["Formation", "Compliance", "AI Assistant", "Pricing"] },
+            { h: "Resources", l: ["Documentation", "Guides", "Blog", "Support"] },
+            { h: "Company", l: ["About", "Careers", "Contact", "Partners"] },
+          ].map((c) => (
+            <div key={c.h} className="md:col-span-2.5 md:[grid-column:span_2.66]">
+              <div className="text-[13px] font-semibold text-black mb-4">{c.h}</div>
+              <ul className="space-y-2.5 text-[13px] text-neutral-500">
+                {c.l.map((i) => (
+                  <li key={i}>
+                    <a href="#" className="hover:text-black transition">
+                      {i}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div className="mt-10 pt-6 border-t border-black/5 flex flex-wrap items-center justify-between gap-3 text-[12px] text-neutral-500">
+          <span>© {new Date().getFullYear()} CSPzone. All rights reserved.</span>
+          <div className="flex items-center gap-5">
+            <a href="#" className="hover:text-black transition">Terms of Service</a>
+            <a href="#" className="hover:text-black transition">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+
+      {/* Giant ghost wordmark */}
+      <div className="overflow-hidden mt-6 select-none pointer-events-none">
+        <div
+          className="text-center font-extrabold tracking-[-0.05em] leading-none whitespace-nowrap"
+          style={{
+            fontFamily: FONT,
+            fontSize: "clamp(80px, 18vw, 280px)",
+            color: "transparent",
+            WebkitTextStroke: "1px rgba(0,0,0,0.08)",
+            background:
+              "linear-gradient(to bottom, rgba(0,0,0,0.06), rgba(0,0,0,0))",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+          }}
+        >
+          CSPzone
+        </div>
       </div>
     </div>
   </section>
-);
-
-/* ─── FOOTER ──────────────────────────────────────────────── */
-const Footer = () => (
-  <footer className="border-t border-black/5 py-14">
-    <div className="max-w-[1400px] mx-auto px-6 lg:px-10 grid md:grid-cols-4 gap-10">
-      <div>
-        <div
-          className="text-2xl font-extrabold tracking-tight mb-3"
-          style={{ fontFamily: "'Inter Tight', sans-serif", color: INK }}
-        >
-          csp<span style={{ color: BRAND }}>.</span>
-        </div>
-        <p className="text-[13px] text-neutral-500 max-w-xs leading-relaxed">
-          The transparent way to launch and run a UAE business.
-        </p>
-      </div>
-      {[
-        { h: "Product", l: ["Formation", "Compliance", "AI Assistant", "Pricing"] },
-        { h: "Company", l: ["About", "Blog", "Careers", "Contact"] },
-        { h: "Legal", l: ["Terms", "Privacy", "Refunds"] },
-      ].map((c) => (
-        <div key={c.h}>
-          <div className="text-[13px] font-semibold text-black mb-4">{c.h}</div>
-          <ul className="space-y-2.5 text-[13px] text-neutral-500">
-            {c.l.map((i) => (
-              <li key={i}>
-                <a href="#" className="hover:text-black transition">
-                  {i}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </div>
-    <div className="max-w-[1400px] mx-auto px-6 lg:px-10 mt-12 pt-6 border-t border-black/5 text-[12px] text-neutral-500">
-      © {new Date().getFullYear()} CSPzone. All rights reserved.
-    </div>
-  </footer>
 );
 
 /* ─── MOBILE STICKY CTA ───────────────────────────────────── */
@@ -883,27 +929,18 @@ const MobileCTA = () => (
 const NewDesign = () => {
   useFonts();
   return (
-    <div
-      className="min-h-screen bg-white text-black"
-      style={{ fontFamily: "'Inter', sans-serif" }}
-    >
+    <div className="min-h-screen bg-white text-black" style={{ fontFamily: FONT }}>
       <Nav />
       <main className="pt-0">
         <Hero />
         <TrustBar />
         <Pillars />
+        <DualCard />
 
         <DeepDive
           id="formation"
           eyebrow="Register · Formation"
-          title={
-            <>
-              Your license,{" "}
-              <span className="italic font-normal" style={{ fontFamily: "'Instrument Serif', serif" }}>
-                in days — not months.
-              </span>
-            </>
-          }
+          title={<>Your license, <span style={{ color: BRAND }}>in days — not months.</span></>}
           body="Skip the agents, the back-and-forth and the surprise invoices. Pick a freezone, share a few details, and we handle every step end-to-end."
           bullets={[
             "All major UAE freezones + mainland",
@@ -950,14 +987,7 @@ const NewDesign = () => {
         <DeepDive
           id="compliance"
           eyebrow="Comply · Autopilot"
-          title={
-            <>
-              Never miss a{" "}
-              <span className="italic font-normal" style={{ fontFamily: "'Instrument Serif', serif" }}>
-                single deadline.
-              </span>
-            </>
-          }
+          title={<>Never miss a <span style={{ color: BRAND }}>single deadline.</span></>}
           body="License renewals, VAT, corporate tax, visa expiries — all tracked, all on time. We file what we can file. You're notified about everything else."
           bullets={[
             "License & visa renewal tracking",
@@ -971,8 +1001,7 @@ const NewDesign = () => {
           visual={
             <div className="relative aspect-[5/4] rounded-3xl bg-[#111] border border-white/10 p-8 overflow-hidden">
               <div className="flex items-center gap-2 text-white/60 text-[12px] mb-6">
-                <Bell className="w-3.5 h-3.5" />
-                Upcoming
+                <Bell className="w-3.5 h-3.5" /> Upcoming
               </div>
               <div className="space-y-3">
                 {[
@@ -1000,14 +1029,7 @@ const NewDesign = () => {
         <DeepDive
           id="manage"
           eyebrow="Grow · AI Suite"
-          title={
-            <>
-              An AI co-pilot for the{" "}
-              <span className="italic font-normal" style={{ fontFamily: "'Instrument Serif', serif" }}>
-                boring stuff.
-              </span>
-            </>
-          }
+          title={<>An AI co-pilot for the <span style={{ color: BRAND }}>boring stuff.</span></>}
           body="Invoicing, bookkeeping, cashflow, expenses — ask in plain English, get answers, signed PDFs and filed reports. The way a finance team should feel."
           bullets={[
             "AI-powered bookkeeping & categorization",
@@ -1048,8 +1070,7 @@ const NewDesign = () => {
         <Pricing />
         <Testimonials />
         <FAQ />
-        <FinalCTA />
-        <Footer />
+        <FooterBlock />
       </main>
       <MobileCTA />
     </div>
