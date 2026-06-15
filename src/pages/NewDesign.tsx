@@ -221,10 +221,10 @@ const LogoBar = () => {
     <section className="overflow-hidden px-5 pb-24 sm:px-8 lg:px-10" style={{ background: MIST }}>
       <div className="mx-auto grid max-w-[1280px] items-center gap-10 md:grid-cols-[1fr_2.6fr]">
         <p className="max-w-[260px] text-[18px] leading-[1.45]" style={{ color: "#7A808C" }}>Trusted by fast-growing founders across the UAE</p>
-        <div className="nd-mask overflow-hidden">
-          <div className="nd-marquee flex w-max items-center gap-14 pr-14">
-            {[...logos, ...logos, ...logos].map((logo, index) => (
-              <span key={`${logo}-${index}`} className="text-[25px] font-extrabold tracking-tight opacity-40 grayscale" style={{ color: INK }}>{logo}</span>
+        <div className="nd-mask overflow-hidden py-2">
+          <div className="nd-marquee flex w-max items-center gap-16 pr-16">
+            {[...logos, ...logos].map((logo, index) => (
+              <span key={`${logo}-${index}`} className="min-w-[110px] text-center text-[24px] font-extrabold opacity-35 grayscale" style={{ color: INK }}>{logo}</span>
             ))}
           </div>
         </div>
